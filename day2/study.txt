@@ -55,7 +55,7 @@
         <link rel="stylesheet" href="相对路径">
         eg: <link rel="stylesheet" href="./test01.css">
 
-    4. 优先关系:
+    4. 优先关系:(选择器的优先级可以参考css的三大特性.md文件)
         内联 > 内部文件 > 外部文件
         无论哪种方式，如果内部出现两种同样式更改，取最新的
         如:
