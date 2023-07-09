@@ -1,0 +1,71 @@
+一. 推送GitHub仓库
+    1. 初始化仓库
+    git init # 有副作用
+
+    2. 查看git状态
+    git status # 无副作用，可以随意执行
+
+    3. 挑选文件进入暂存区
+    git add [filename]
+
+    4. 生成副本
+    git commit -, "描述信息"
+
+    5. 推送远端
+    像创建GitHub仓库，保证仓库干净和协议时https
+    然后复制命令
+
+    git remote add origin [repo url]
+
+    6. 执行推送
+    git push origin master
+
+    可能出现vscode需要登录验证的过程
+
+
+二. 写css的方式
+    选择器分为：标签选择器，类选择器，id选择器
+    标签选择器:
+        div {
+                color: blue;
+            }
+
+    类选择器(以.开头)
+        .cold {
+            color: blue;
+        }
+        
+    id选择器(以#开头)
+        #hot {
+            color: red;
+        }
+
+    1. 内联(一般不用)
+        将css样式写在标签上，如 <div style="color: blue">内容</div>
+    2. 内部文件
+        即在head部分使用选择器修改样式
+    3. 外部文件
+        将样式修改部分(即选择器部分代码)放置于其他文件(.css文件)中
+        需要在head部分进行连接:
+        <link rel="stylesheet" href="相对路径">
+        eg: <link rel="stylesheet" href="./test01.css">
+
+    4. 优先关系:
+        内联 > 内部文件 > 外部文件
+        无论哪种方式，如果内部出现两种同样式更改，取最新的
+        如:
+        .cold {
+            color: blue;
+            color: black;
+        }
+        最终以black呈现
+
+        如果要使得某一个不变动，可以添加!important使得优先级最高
+        注意不要滥用，如果都有important，以最新的为主
+        如:
+        .cold {
+            color: blue !important;
+            color: black;
+        }
+        最终以blue呈现
+

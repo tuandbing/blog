@@ -5,27 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <style>
+        使用选择器
+        .cold {
+            color: blue;
+        }
+        
+        #hot {
+            color: red;
+        }
+    </style> -->
+
+
+    <!-- 连接css文件 -->
+    <link rel="stylesheet" href="./test01.css">
 </head>
 
 <body>
-    <div>登录</div>
-    <div>用户名:<input/></div>
-    <div>密码:<input/></div>
+    <!-- 第一种css方式,即内联样式 -->
+    <!-- <div style="color: blue;font-size: 40px;font-weight: bold;">
+        今天学css
+    </div> -->
 
-    <div>
-        <select>
-            <option>老师</option>
-            <option>学生</option>
-            <option>其他</option>
-        </select>
+    <div class="cold">
+        学习前端,好冷
     </div>
-    <div>
-        学生 <input type="radio" name="job" value="学生"> 教师 <input type="radio" name="job" value="教师"> 其他 <input type="radio" name="job" value="其他">
+    <div class="red">
+        学习前端,好热
     </div>
-    <div>
-        <button>登录</button>
-    </div>
-
 </body>
 
 </html>
