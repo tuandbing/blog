@@ -19,4 +19,4 @@ git remote add origin [repo url]
 6. 执行推送
 git push origin master
 
-7. 可能出现vscode需要登录验证的过程
+可能出现vscode需要登录验证的过程
