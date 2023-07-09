@@ -1,0 +1,22 @@
+1. 初始化仓库
+git init # 有副作用
+
+2. 查看git状态
+git status # 无副作用，可以随意执行
+
+3. 挑选文件进入暂存区
+git add [filename]
+
+4. 生成副本
+git commit -, "描述信息"
+
+5. 推送远端
+像创建GitHub仓库，保证仓库干净和协议时https
+然后复制命令
+
+git remote add origin [repo url]
+
+6. 执行推送
+git push origin master
+
+7. 可能出现vscode需要登录验证的过程
