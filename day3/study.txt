@@ -1,0 +1,25 @@
+sass学习文档: https://sass.bootcss.com/guide.html
+stylus学习：https://www.stylus-lang.cn/
+
+全局安装npm install sass -g(命令行中输入)
+
+sass -> 环境变量 ->  脚本 -> 执行程序
+
+    如果没有加"-g"则安装到本地
+    则使用时需要使用npx，如：npx sass --version
+    注意使用的时候需要在同一目录
+
+npm 重要的命令:
+    npm install     可以带参数 --save-dev   或者 --save
+    npm uninstall
+    1. 安装本地依赖
+        npm install --save [pkg_name]
+    2. 安装cli(命令行)
+        npm install -g [pkg_name]
+    3. 当使用pkg管理拉取初始化依赖
+        npm install
+        1) 看package.json
+        2) 执行npm install
+
+sass 将源文件转换为目标文件css
+编程方式，用自己的程序将scss文件转化为css文件
