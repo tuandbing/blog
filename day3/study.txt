@@ -37,3 +37,37 @@ scss掌握：
     3. sass(node包)可编程方式实现编译
     4. 外部文件 index.html引入css
     5. 可以学习less/stylus，但是scss够用了
+
+
+浮动学习可参考：浮动.md
+或者参考文档：https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Floats
+
+媒体查询(如果只是修改字体颜色或者大小之类可以使用，对于大场景可以换一个css)：
+    即自适应。根据屏幕大小调整css
+    指定宽度：
+        <style>
+        @media screen and (width: 600px) {
+            .flow {
+                color: red
+            }
+        }
+    </style>
+    限定最大宽度(同理可以实现最小宽度)：
+    <style>
+        @media screen and (max-width: 600px) {
+            .flow {
+                color: red
+            }
+        }
+    </style>
+
+动画参考文档:  https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_animations/Using_CSS_animations
+或者：https://www.runoob.com/cssref/css-animatable.html
+动画的几种形式：
+    1. 关键帧 + animation
+        自定义 @keyframes
+        @keyframes name{
+            0%:
+            25%:
+            ...
+        }
