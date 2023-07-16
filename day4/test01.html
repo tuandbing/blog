@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ol li:nth-child(even) {
+            color: aqua;
+        }
+        
+        ol li:nth-child(2n+1) {
+            color: red;
+        }
+        
+        div::before {
+            content: '';
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        hello world
+    </div>
+    <ol>
+        <li>
+            第一个孩子
+        </li>
+        <li>
+            第二个孩子
+        </li>
+        <li>
+            第三个孩子
+        </li>
+        <li>
+            第四个孩子
+        </li>
+        <li>
+            第五个孩子
+        </li>
+        <li>
+            第六个孩子
+        </li>
+    </ol>
+</body>
+
+</html>
