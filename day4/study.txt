@@ -1,0 +1,11 @@
+编程字体：
+    https://github.com/adobe-fonts/source-code-pro.git
+
+    1. 下载字体
+    2. 安装字体
+    3. vscode设置中搜索字体，将 "Source Code Pro"添加到字体行的最前面
+    
+js:
+    严格模式:
+    在js最前面写:    "use strict";
+    
