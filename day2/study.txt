@@ -22,6 +22,8 @@
 
     可能出现vscode需要登录验证的过程
 
+    7. 如果出现SSL验证
+	git config --global http.sslVerify "false"
 
 二. 写css的方式(该部分内容可观看CSS基础选择器.md文件以及CSS的引入.md文件)
     选择器分为：标签选择器，类选择器，id选择器, 通配符选择器
