@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 800px;
+            height: 300px;
+            display: flex;
+            background-color: pink;
+            justify-content: space-around;
+            /* 默认的主轴是x轴 排列方式为row，y轴就是测轴 */
+            /* 元素跟着主轴来排列的 */
+            /* flex-direction: row-reverse; */
+            /* 我们可以将主轴设置为y轴 */
+            /* flex-direction: column; */
+            justify-content: center;
+        }
+        
+        span {
+            width: 150px;
+            height: 100px;
+            background-color: purple;
+            /* flex: 1; */
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+</body>
+
+</html>
