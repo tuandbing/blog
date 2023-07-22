@@ -1,0 +1,138 @@
+<!-- 波纹练习 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .map {
+            width: 500px;
+            height: 500px;
+            position: relative;
+        }
+        
+        .city {
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            position: absolute;
+            margin: 100px 300px;
+        }
+        
+        .dotted {
+            position: absolute;
+            height: 8px;
+            width: 8px;
+            top: 296px;
+            left: 246px;
+            background-color: #09f;
+            border-radius: 50%;
+        }
+        
+        div[class^="pulse"] {
+            position: absolute;
+            height: 8px;
+            width: 8px;
+            top: 300px;
+            left: 250px;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px #09f;
+            animation: pulse 1.2s linear infinite;
+            border-radius: 50%;
+        }
+        
+        @keyframes pulse {
+            70% {
+                width: 70px;
+                height: 70px;
+                opacity: 1;
+            }
+            100% {
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+            }
+        }
+        
+        div .pulse2 {
+            animation-delay: 0.4s;
+        }
+        
+        div .pulse3 {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map">
+        <div class="city">
+            <div class="dotted"></div>
+            <div class="pulse1"></div>
+            <div class="pulse2"></div>
+            <div class="pulse3"></div>
+        </div>
+    </div>
+</body>
+
+</html> -->
+
+
+<!-- 背对背旋转 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            perspective: 500px;
+            transform-style: preserve-3d;
+            transition: all 2s;
+        }
+        
+        .front,
+        .back {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            text-align: center;
+            color: white;
+            border-radius: 50%;
+            font-size: 30px;
+            line-height: 300px;
+            backface-visibility: hidden;
+            animation: do 2s linear infinite;
+        }
+        
+        .box:hover {
+            transform: rotateY(180deg);
+        }
+        
+        .front {
+            background-color: purple;
+            z-index: 1;
+        }
+        
+        .back {
+            background-color: aqua;
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="front">馒头要学习</div>
+        <div class="back">学个der啊</div>
+    </div>
+</body>
+
+</html>
