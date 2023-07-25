@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div id="time">2023-7-25</div>
+    <script>
+        var timer = document.getElementById('time');
+        console.log(timer);
+        console.dir(timer); //打印返回的对象，更好的查看里面的属性和方法
+    </script> -->
+
+    <ul>
+        <li>馒头</li>
+        <li>花生</li>
+        <li>包子</li>
+        <li>汽水</li>
+        <li>蜂蜜</li>
+    </ul>
+    <ul id="mantou">
+        <li>馒头</li>
+        <li>花生</li>
+        <li>包子</li>
+        <li>汽水</li>
+        <li>蜂蜜</li>
+    </ul>
+    <script>
+        // 返回的是获取过来元素对象的集合，以伪数组的形式存储的
+        var lis = document.getElementsByTagName('li');
+        console.log(lis);
+        console.log(lis[0]);
+        // 可以采取遍历的方式一次打印里面的元素对象
+        for (var i = 0; i < lis.length; i++) {
+            console.log(lis[i]);
+        }
+        // 如果有多个该标签，可以使用element.getElementsByTagName()得到这个元素里面的某些标签
+        var nav = document.getElementById('mantou');
+        var navlis = nav.getElementsByTagName('li');
+        console.log(navlis);
+    </script>
+</body>
+
+</html>
