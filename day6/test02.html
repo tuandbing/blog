@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+    <button>按钮四</button>
+    <button>按钮五</button>
+
+    <script>
+        // 1. 获取所有按钮元素,注意btn是一个伪数组
+        var btn = document.getElementsByTagName('button');
+        for (var i = 0; i < btn.length; i++) {
+            btn[i].onclick = function() {
+                // 先用遍历的方法将所有元素的颜色去掉
+                for (var j = 0; j < btn.length; j++) {
+                    btn[j].style.backgroundColor = '';
+                }
+                // 修改点击的元素的颜色
+                this.style.backgroundColor = 'pink'
+            }
+        }
+    </script>
+</body>
+
+</html>
