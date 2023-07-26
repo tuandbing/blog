@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* img {
+            width: 500px;
+            height: 400px;
+        } */
+        
+        div {
+            width: 300px;
+            height: 300px;
+            background-color: #09f;
+        }
+        
+        .change {
+            background-color: pink;
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <button id="but">唐伯虎</button>
+    <script>
+        var but = document.getElementById('but');
+        but.onclick = function() {
+            alert('点秋香');
+        }
+    </script> -->
+    <!-- <div>
+        馒头
+    </div>
+    <script>
+        var fun = document.querySelector('div');
+        fun.onclick = function() {
+            alert('我被选中了');
+        }
+    </script> -->
+
+    <!-- <button>不要点我</button>
+    <div>馒头</div>
+    <script>
+        var but = document.querySelector('button');
+        var di = document.querySelector('div');
+        but.onclick = function() {
+            di.innerText = '让你别点';
+        }
+    </script> -->
+
+    <!-- <button id="mt">馒头</button>
+    <button id="bz">包子</button>
+    <br>
+    <img src="https://img0.baidu.com/it/u=2909490359,3502855558&fm=253&fmt=auto&app=138&f=JPEG?w=495&h=500" title="馒头">
+    <script>
+        var mt = document.getElementById('mt');
+        var bz = document.getElementById('bz');
+        var img = document.querySelector('img');
+        mt.onclick = function() {
+            img.src = 'https://img0.baidu.com/it/u=2909490359,3502855558&fm=253&fmt=auto&app=138&f=JPEG?w=495&h=500'
+            img.title = '馒头';
+        }
+        bz.onclick = function() {
+            img.src = 'https://img0.baidu.com/it/u=4026703502,1693417988&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666'
+            img.title = '包子';
+        }
+    </script> -->
+
+    <!-- <input type="password" name="" id="pas">
+    <button>
+        查看密码
+    </button>
+    <script>
+        var pas = document.getElementById('pas');
+        var but = document.querySelector('button');
+        but.onclick = function() {
+            if (but.innerText === '查看密码') {
+                pas.type = 'text';
+                but.innerText = '隐藏密码';
+            } else {
+                pas.type = 'password';
+                but.innerText = '查看密码'
+            }
+        }
+    </script> -->
+    <div></div>
+    <script>
+        var di = document.querySelector('div');
+        di.onclick = function() {
+            this.className = 'change';
+        }
+    </script>
+</body>
+
+</html>
