@@ -20,3 +20,23 @@ console.log(array.includes(2));
 
 // 将数组中的元素拼接起来可以使用join方法，中间添加参数为分隔符，不需要可以使用''
 console.log(array.join(':'));
+
+const url = 'https://search.bilibili.com/all?keyword=mantou&from_source=webtop_search&spm_id_from=333.1007&search_source=5'
+console.log(url.split('?'));
+
+const string1 = url.split('?')[1];
+console.log(string1);
+
+console.log(string1.split('&'));
+
+const array2 = string1.split('&');
+console.log(array[0]);
+
+const length = array2.length;
+const obj = {};
+
+
+for (var i = 0; i < length; i++) {
+    obj[array2[i].split('=')[0]] = array2[i].split('=')[1];
+}
+console.log(obj);
