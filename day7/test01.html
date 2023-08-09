@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .father {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+        
+        .son {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            left: 50px;
+            top: 50px;
+        } */
+        
+        img {
+            position: absolute;
+            top: 2px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <img src="test.png" alt="">
+    <!-- <div class="father">
+        <div class="son" id="son">son盒子</div>
+    </div>
+
+    <script>
+        var son = document.querySelector('.son');
+        var father = document.querySelector('.father');
+        // 捕获阶段
+        // son.addEventListener('click', function() {
+        //     alert('son');
+        // }, true);
+        // father.addEventListener('click', function() {
+        //     alert('father');
+        // }, true);
+
+        // 冒泡阶段
+        // son.addEventListener('click', function() {
+        //     alert('son');
+        // });
+        // father.addEventListener('click', function() {
+        //     alert('father');
+        // });
+    </script> -->
+    <script>
+        var pic = document.querySelector('img');
+        document.addEventListener('mousemove', function(e) {
+            var x = e.pageX;
+            var y = e.pageY;
+            pic.style.left = x - 77.5 + 'px';
+            pic.style.top = y - 75 + 'px';
+        })
+    </script>
+</body>
+
+</html>

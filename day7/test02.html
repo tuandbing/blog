@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* div {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        } */
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <button>发送</button>
+    <script>
+        // window.addEventListener('load', function() {
+        //     var div = document.querySelector('div');
+        //     window.addEventListener('resize', function() {
+        //         if (window.innerWidth <= 800) {
+        //             div.style.display = 'none';
+        //         } else {
+        //             div.style.display = 'block';
+        //         }
+        //     });
+        // });
+        var btn = document.querySelector('button');
+        var time = 3;
+        btn.addEventListener('click', function() {
+            btn.disabled = true;
+            var timer = setInterval(function() {
+                if (time == 0) {
+                    clearInterval(timer);
+                    btn.innerHTML = '发送';
+                    btn.disabled = false;
+                    time = 3;
+                } else {
+                    btn.innerHTML = '还剩下' + time + '秒';
+                    time--;
+                }
+            }, 1000);
+        })
+    </script>
+</body>
+
+</html>
