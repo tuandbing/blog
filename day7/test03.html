@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text {
+            position: relative;
+            margin-left: 45%;
+            text-decoration: none;
+        }
+        
+        .box {
+            background-color: aqua;
+            width: 400px;
+            height: 400px;
+            margin-top: 100px;
+            margin-left: 35%;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="text" href="">点击登录</a>
+    <div class="box">
+    </div>
+    <script>
+        var text = document.querySelector('.text');
+        var box = document.querySelector('.box');
+        text.addEventListener('click', function(e) {
+            e.preventDefault();
+            word1.style.display = 'block';
+            box.style.display = 'block';
+        })
+    </script>
+</body>
+
+</html>

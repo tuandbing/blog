@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .father {
+            width: 200px;
+            height: 200px;
+            margin: 300px;
+            background-color: blue;
+            /* position: relative; */
+        }
+        
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 100px;
+            background-color: aqua;
+        }
+        
+        .son {
+            width: 100px;
+            height: 100px;
+            margin: 45px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+
+    <div class="box"></div>
+    <script>
+        var father = document.querySelector('.father');
+        var son = document.querySelector('.son');
+        // 如果父级元素没有定位，就会以body为准，结果是345
+        // 如果父级元素带了定位，结果就是45
+        console.log(son.offsetLeft);
+        // 注意这个是包含 padding border width一起的，但是不包括margin
+        console.log(son.offsetWidth);
+        // 返回带有定位的父级元素，否则返回的是body
+        console.log(son.offsetParent);
+        console.log(son.parentNode); // 返回最近的一级父元素，不管有没有定位
+
+        var box = document.querySelector('.box');
+        box.addEventListener('mousemove', function(e) {
+            var x = e.pageX - this.offsetLeft;
+            var y = e.pageY - this.offsetTop;
+            box.innerHTML = '(' + x + ',' + y + ')';
+        })
+    </script>
+</body>
+
+</html>
