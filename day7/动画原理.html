@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn500">500</button>
+    <button class="btn800">800</button>
+    <div></div>
+    <script>
+        // 简单动画函数封装 obj目标对象 target目标位置
+        // function animate(obj,target)
+        function animate(obj, target, callback) {
+            // 先清除以前的定时器
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function() {
+
+                //注意步长值如果是正数需要向上取整，负数需要向下取整
+                var step = (target - obj.offsetLeft) / 20;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        callback();
+                    }
+                }
+                div.style.left = div.offsetLeft + step + 'px';
+            }, 15);
+        }
+        var div = document.querySelector('div');
+        var btn500 = document.querySelector('.btn500');
+        var btn800 = document.querySelector('.btn800');
+        // 调用函数
+        btn500.addEventListener('click', function() {
+            animate(div, 500);
+        });
+        btn800.addEventListener('click', function() {
+            animate(div, 800, function() {
+                div.style.backgroundColor = 'red';
+            });
+        });
+    </script>
+</body>
+
+</html>

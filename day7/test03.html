@@ -13,12 +13,34 @@
         }
         
         .box {
-            background-color: aqua;
+            /* background-color: aqua; */
             width: 400px;
-            height: 400px;
+            height: 300px;
             margin-top: 100px;
             margin-left: 35%;
             display: none;
+            border: 2px solid black;
+        }
+        
+        .word1,
+        .word2 {
+            width: 250px;
+            height: 30px;
+            /* margin-top: 50px; */
+        }
+        
+        .title1,
+        .title2 {
+            font-weight: 700;
+            margin-top: 40px;
+        }
+        
+        .login {
+            margin-top: 30px;
+        }
+        
+        .close {
+            margin-left: 50px;
         }
     </style>
 </head>
@@ -26,14 +48,26 @@
 <body>
     <a class="text" href="">点击登录</a>
     <div class="box">
+        <div class="title1">用户名</div>
+        <input class="word1" type="text">
+        <div class="title2">密码</div>
+        <input class="word2" type="text">
+        <br>
+        <button class="login">登录</button>
+        <button class="close">关闭</button>
     </div>
     <script>
         var text = document.querySelector('.text');
         var box = document.querySelector('.box');
+        var word1 = document.querySelector('.word1');
+        var word2 = document.querySelector('.word2');
+        var close = document.querySelector('.close');
         text.addEventListener('click', function(e) {
             e.preventDefault();
-            word1.style.display = 'block';
             box.style.display = 'block';
+        })
+        close.addEventListener('click', function() {
+            box.style.display = 'none';
         })
     </script>
 </body>
