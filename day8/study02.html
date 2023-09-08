@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url(./test.png);
+            background-size: cover;
+        }
+        
+        .up {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            border: 2px solid;
+            float: right;
+            margin-right: 200px;
+            margin-top: 200px;
+            background-color: aliceblue;
+        }
+        
+        .radio {
+            width: 20px;
+            height: 12px;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        
+        .username,
+        .passwd {
+            height: 30px;
+            width: 90%;
+            margin-bottom: 20px;
+            font-weight: 100;
+            font-size: small;
+            color: grey;
+            margin-left: 5px;
+        }
+        
+        .username {
+            margin-top: 20px;
+        }
+        
+        .denglu {
+            background-color: greenyellow;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .denglu:hover,
+        .rem {
+            cursor: pointer;
+        }
+        
+        .rem {
+            width: 60px;
+            height: 20px;
+        }
+        
+        a {
+            margin-left: 20px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="up">
+        <div class="title">登录</div>
+        <input type="text" value="邮箱手机/用户名" class="username">
+        <input type="text" value="请输入密码" class="passwd">
+        <br>
+        <input type="checkbox" class="radio">
+        <span class="rem">记住密码</span>
+        <br>
+        <div class="denglu">登录</div>
+        <a href="#">QQ登录</a>
+        <a href="#">微博登录</a>
+        <a href="#">微信登陆</a>
+    </div>
+
+    <script>
+        var inp = document.querySelector('.username');
+        var pas = document.querySelector('.passwd');
+        inp.addEventListener('click', function() {
+            inp.value = '';
+            inp.style.color = 'black';
+            inp.style.fontWeight = '400'
+            inp.style.fontSize = 'medium'
+        })
+        pas.addEventListener('click', function() {
+            pas.value = '';
+            pas.style.color = 'black';
+            pas.style.fontWeight = '400'
+            pas.style.fontSize = 'medium'
+        })
+        inp.addEventListener('mouseout', function() {
+            if (inp.value == '') {
+                inp.value = '邮箱手机/用户名';
+                inp.style.color = 'grey';
+                inp.style.fontWeight = '100'
+                inp.style.fontSize = 'small'
+            }
+        })
+        pas.addEventListener('mouseout', function() {
+            if (pas.value == '') {
+                pas.value = '请输入密码';
+                pas.style.color = 'grey';
+                pas.style.fontWeight = '100'
+                pas.style.fontSize = 'small'
+            }
+        })
+        var radi = document.querySelector('.radio');
+        var sp = document.querySelector('.rem');
+        sp.onclick = function() {
+            if (radi.checked) {
+                radi.checked = false;
+            } else {
+                radi.checked = true;
+            }
+        }
+    </script>
+</body>
+
+</html>
