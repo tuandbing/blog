@@ -52,6 +52,7 @@
         th,
         td {
             border: 1px solid black;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -93,6 +94,13 @@
                 var tr = document.createElement('tr');
                 for (; j < 7; j++) {
                     var td = document.createElement('td');
+                    td.addEventListener('mouseenter', function() {
+                        this.style.background = 'red';
+                    });
+                    td.addEventListener('mouseout', function() {
+                        this.style.background = '';
+                    });
+
                     if (i === 1 && j < firstDay) {} else if (i > daysInMonth) {} else {
                         td.innerHTML = i;
                         i++;
