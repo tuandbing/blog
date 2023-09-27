@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        #container {
+            width: 250px;
+            position: relative;
+            left: 40%;
+            top: 100px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        #header {
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        #LastMon {
+            position: relative;
+            left: 20px;
+        }
+        
+        #NextMon {
+            position: relative;
+            left: 120px;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        
+        #calendar {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+        }
+        
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            某年某月某日
+        </div>
+        <button id="LastMon">上一月</button>
+        <button id="NextMon">下一月</button>
+        <table id="calendar">
+        </table>
+    </div>
+    <script>
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        var current = new Date();
+        // 获取月份
+        var currentMon = current.getMonth();
+
+        // 获取年份
+        var currentYear = current.getFullYear();
+
+        function updateCurrent(Month, Year) {
+            var calendar = document.getElementById('calendar');
+            calendar.innerHTML = '<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>';
+            var firstDay = new Date(Year, Month, 1).getDay(); // 获取当月第一天是星期几
+            var daysInMonth = new Date(Year, Month + 1, 0).getDate(); // 获取当月总天数
+            var current = new Date();
+            // 获取周次信息
+            var currentDay = current.getDay();
+            var header = document.getElementById('header');
+            header.innerHTML = monthNames[Month] + Year;
+            var i = 1;
+            for (; i < daysInMonth;) {
+                var j = 0;
+                var tr = document.createElement('tr');
+                for (; j < 7; j++) {
+                    var td = document.createElement('td');
+                    if (i === 1 && j < firstDay) {} else if (i > daysInMonth) {} else {
+                        td.innerHTML = i;
+                        i++;
+                    }
+                    if (Month === current.getMonth() && i === current.getDate() && Year === currentYear) {
+                        td.style.color = 'red';
+                    }
+                    tr.appendChild(td);
+                }
+                calendar.appendChild(tr);
+            }
+        }
+        updateCurrent(currentMon, currentYear);
+
+        function previousMonth() {
+            currentMon--;
+            if (currentMon === -1) {
+                currentMon = 11;
+                currentYear--;
+            }
+            updateCurrent(currentMon, currentYear);
+        }
+
+        function nextMonth() {
+            currentMon++;
+            if (currentMon === 12) {
+                currentMon = 0;
+                currentYear++;
+            }
+            updateCurrent(currentMon, currentYear);
+        }
+        var next = document.getElementById('NextMon');
+        var last = document.getElementById('LastMon');
+        next.addEventListener('click', nextMonth);
+        last.addEventListener('click', previousMonth);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            width: 300px;
+        }
+        
+        th td {
+            text-align: center;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        td.today {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="currentMonth"></h2>
+    <button onclick="previousMonth()">Previous Month</button>
+    <button onclick="nextMonth()">Next Month</button>
+    <table id="calendar">
+        <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
+    </table>
+    <br>
+
+
+    <script>
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth();
+        var currentYear = currentDate.getFullYear();
+
+        updateCalendar(currentMonth, currentYear);
+
+        function updateCalendar(month, year) {
+            var calendar = document.getElementById("calendar");
+            var currentMonthText = document.getElementById("currentMonth");
+            var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            calendar.innerHTML = ""; // 清空日历表格
+
+            currentMonthText.innerHTML = monthNames[month] + " " + year;
+
+            var firstDay = new Date(year, month, 1).getDay(); // 获取当月第一天是星期几
+            var daysInMonth = new Date(year, month + 1, 0).getDate(); // 获取当月总天数
+            var date = 1;
+
+            for (var i = 0; i < 6; i++) {
+                var row = calendar.insertRow(i);
+                for (var j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        var cell = row.insertCell(j);
+                    } else if (date > daysInMonth) {
+                        break;
+                    } else {
+                        var cell = row.insertCell(j);
+                        if (date === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
+                            cell.className = "today"; // 标记当前日期
+                        }
+                        cell.innerHTML = date++;
+                    }
+                }
+            }
+            calendar.insertRow(0).innerHTML = "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>"
+        }
+
+        function previousMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            updateCalendar(currentMonth, currentYear);
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateCalendar(currentMonth, currentYear);
+        }
+    </script>
+</body>
+
+</html>

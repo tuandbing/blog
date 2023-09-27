@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url(http://tuandbing.top/static/images/miku.jpg) no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        
+        header {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+        }
+        
+        table {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            z-index: 1;
+            position: absolute;
+            left: 30%;
+        }
+        
+        table tr td {
+            width: 70px;
+            height: 30px;
+            border: 1px solid black;
+        }
+        
+        caption {
+            text-align: center;
+            font-weight: 700;
+            font-size: 35px;
+            background-color: rgba(250, 235, 215, .4);
+        }
+        
+        .header {
+            background-color: rgba(127, 255, 212, .4)
+        }
+        
+        #introduce {
+            background-color: rgba(169, 169, 169, .4);
+        }
+        
+        #interest {
+            position: absolute;
+            left: 5%;
+            width: 400px;
+            display: inline-block;
+            width: 300px;
+        }
+        
+        #contact {
+            position: absolute;
+            width: 400px;
+            height: 200px;
+            left: 5%;
+            top: 400px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: red;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>个人主页</h2>
+    </header>
+
+    <table>
+        <caption>个人信息</caption>
+        <tr class="header">
+            <td>学号</td>
+            <td>3220608087</td>
+            <td>姓名</td>
+            <td>彭垚旺</td>
+        </tr>
+        <tr class="header">
+            <td>专业</td>
+            <td>软件工程</td>
+            <td>班级</td>
+            <td>软件2203</td>
+        </tr>
+        <tr id="introduce">
+            <td>自我介绍</td>
+            <td colspan="3" style="text-indent: 2em;text-align: left;">
+                我想要享受人生，一个不同的人生。我不想每天去去到同一个地方，遇见同样的人，做一样的工作。有趣的挑战。喜欢别人对我的计划感兴趣，不介意别人介入。这是建立在那些感兴趣的人不会干涉我原则和自由的基础上，并且能够接受以同样的兴趣回报我。我喜欢帮助别人和分享经验，特别是我关心的人。
+            </td>
+        </tr>
+    </table>
+
+    <div id="interest">
+        <h2>兴趣爱好</h2>
+        <ul>
+            <li>喜欢和朋友一起去学习知识(虽然学习时间不长且效率低下)</li>
+            <li>喜欢玩各类手游,比如王者荣耀,星穹铁道,火影忍者等</li>
+            <li>晚上的时候喜欢约上朋友一起去操场跑步</li>
+            <li><a href="https://pvp.qq.com/">王者启动!!!</a></li>
+            <li><a href="https://hyrz.qq.com/main.shtml">火影启动!!!</a></li>
+        </ul>
+    </div>
+    <div id="contact">
+        <h2>联系方式</h2>
+        <div style="text-indent: 2em;">Email:1873656423@qq.com</div>
+        <div style="text-indent: 2em;">call:17305285876</div>
+    </div>
+</body>
+
+</html>
