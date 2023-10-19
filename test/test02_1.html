@@ -42,6 +42,7 @@
         }
         
         #calendar {
+            margin-top: 50px;
             border: 1px solid black;
             border-collapse: collapse;
             height: 400px;
@@ -49,11 +50,20 @@
             text-align: center;
         }
         
-        th,
-        td {
-            width: 100px;
-            border: 1px solid black;
-            cursor: pointer;
+        .week {
+            float: left;
+            width: 14%;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 700;
+        }
+        
+        .days {
+            line-height: 60px;
+            height: 60px;
+            float: left;
+            width: 14%;
+            text-align: center;
         }
     </style>
 </head>
@@ -65,8 +75,8 @@
         </div>
         <button id="LastMon">上一月</button>
         <button id="NextMon">下一月</button>
-        <table id="calendar">
-        </table>
+        <br>
+        <div id="calendar"></div>
     </div>
     <script>
         var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -81,38 +91,35 @@
 
         function updateCurrent(Month, Year) {
             var calendar = document.getElementById('calendar');
-            calendar.innerHTML = '<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>';
+            calendar.innerHTML = '';
+            var data = document.createElement('div');
+            data.innerHTML = '<div class="week">Sun</div><div class="week">Mon</div><div class="week">Tue</div><div class="week">Wed</div><div class="week">Thu</div><div class="week">Fri</div><div class="week">Sat</div>';
+            calendar.appendChild(data);
             var firstDay = new Date(Year, Month, 1).getDay(); // 获取当月第一天是星期几
             var daysInMonth = new Date(Year, Month + 1, 0).getDate(); // 获取当月总天数
-            var current = new Date();
-            // 获取周次信息
-            var currentDay = current.getDay();
+            var currentDay = current.getDay(); // 获取周次信息
+            var i = 1;
+            var count = firstDay;
+            for (; i <= daysInMonth;) {
+                var day = document.createElement('div');
+                day.className = 'days';
+                if (count) {
+                    day.innerHTML = '';
+                    calendar.appendChild(day);
+                    count--;
+                } else {
+                    day.innerHTML = i;
+                    if (i == current.getDate() && Month == current.getMonth() && Year == current.getFullYear()) {
+                        day.style.background = 'red';
+                    }
+                    calendar.appendChild(day);
+                    i++;
+                }
+            }
             var header = document.getElementById('header');
             header.innerHTML = monthNames[Month] + Year;
             var i = 1;
-            for (; i < daysInMonth;) {
-                var j = 0;
-                var tr = document.createElement('tr');
-                for (; j < 7; j++) {
-                    var td = document.createElement('td');
-                    td.addEventListener('mouseenter', function() {
-                        this.style.background = 'gray';
-                    });
-                    td.addEventListener('mouseout', function() {
-                        this.style.background = '';
-                    });
 
-                    if (i === 1 && j < firstDay) {} else if (i > daysInMonth) {} else {
-                        td.innerHTML = i;
-                        i++;
-                    }
-                    if (Month === current.getMonth() && i === current.getDate() && Year === currentYear) {
-                        td.style.color = 'red';
-                    }
-                    tr.appendChild(td);
-                }
-                calendar.appendChild(tr);
-            }
         }
         updateCurrent(currentMon, currentYear);
 
