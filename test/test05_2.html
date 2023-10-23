@@ -114,46 +114,10 @@
     for (i = 0; i < num; i++) {
         precent[i] = datas[i].value / total;
     }
-    var movetoRight = 50; //每次绘图后右移距离
-    var nowarea = 10;
-    var width = 10;
-    var height = 10;
-    var huakuangX = 410;
-    var huakuangY = 10;
-    var textX = 430;
-    var textY = 20;
-    //绘制坐标图
-    //绘制y轴
-    ctx.beginPath();
-    ctx.strokeStyle = "black";
-    ctx.moveTo(10, 10);
-    ctx.lineTo(5, 15);
-    ctx.moveTo(10, 10);
-    ctx.lineTo(15, 15);
-    ctx.moveTo(10, 10);
-    ctx.lineTo(10, 250);
-    //绘制x轴
-    ctx.lineTo(450, 250);
-    ctx.lineTo(445, 245);
-    ctx.moveTo(450, 250);
-    ctx.lineTo(445, 255);
-    ctx.lineWidth = 1;
-    //绘制柱形图
-    ctx.moveTo(10, 250);
-    for (var i = 1; i <= 3; i++) {
-        ctx.fillStyle = '#ff0000';
-        ctx.fillRect(nowarea + (2 * i - 1) * movetoRight, 250 - (precent[i - 1] * 200), 50, (precent[i - 1] * 200));
-        ctx.fillStyle = '#ff0000';
-    }
-    for (var i = 0; i < 3; i++) {
-        ctx.fillStyle = '#ff0000';
-        ctx.fillRect(huakuangX, huakuangY + 5 * (3 * i), width, height);
-        ctx.font = 'bold 12px 宋体';
-        var View = dataNames[i].value + ": " + datas[i].value;
-        ctx.fillText(View, textX, textY + 5 * (3 * i));
-    }
-    ctx.stroke();
-    ctx.closePath();
+
+    function Rectangle() {}
+
+    function Pie() {}
 </script>
 
 </html>
