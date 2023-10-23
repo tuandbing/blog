@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 700px;
+            height: 500px;
+            background-color: aqua;
+            box-shadow: 10px 10px 15px black;
+            float: left;
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+        
+        form {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #myCanvas {
+            float: left;
+            margin-left: 100px;
+            margin-top: 200px;
+            width: 500px;
+            height: 300px;
+        }
+        
+        .box1 {
+            float: left;
+            height: 30px;
+        }
+        
+        .box2 {
+            float: left;
+            margin-left: 50px;
+        }
+        
+        .dataName {
+            float: left;
+        }
+        
+        .data {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form>
+            <!-- <canvas id="myCanvas"></canvas> -->
+        </form>
+    </div>
+</body>
+<script>
+    var container = document.getElementById('container');
+    var num = null;
+
+    // 获取数据个数
+    function check() {
+        num = prompt('请输入数据个数');
+        if (parseInt(num) <= 0) {
+            check();
+        }
+    }
+    check();
+
+
+    // 根据数据数量创建表单
+    var i = parseInt(num);
+    var form = document.querySelector('form');
+    while (i--) {
+        var string = '请输入数据名称';
+        var div1 = document.createElement('div');
+        var div2 = document.createElement('div');
+        div1.className = 'box1';
+        div2.className = 'box2';
+        div2.innerHTML = string;
+        var input = document.createElement('input');
+        input.className = 'dataName';
+        input.type = 'text';
+        var string2 = '请输入数据值';
+        var div3 = document.createElement('div');
+        div3.innerHTML = string2;
+        div3.className = 'box2';
+        var input2 = document.createElement('input');
+        input2.className = 'data';
+        input2.type = 'text';
+        div1.appendChild(div2);
+        div1.appendChild(input);
+        div1.appendChild(div3);
+        div1.appendChild(input2);
+        form.appendChild(div1);
+    }
+
+    // 创建画布
+    var canvas = document.createElement('canvas');
+    canvas.id = 'myCanvas';
+    form.appendChild(canvas);
+</script>
+
+</html>
