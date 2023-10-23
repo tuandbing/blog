@@ -104,11 +104,12 @@
 
                     if (i === 1 && j < firstDay) {} else if (i > daysInMonth) {} else {
                         td.innerHTML = i;
+                        if (Month == current.getMonth() && i == current.getDate() && Year == currentYear) {
+                            td.style.color = 'red';
+                        }
                         i++;
                     }
-                    if (Month === current.getMonth() && i === current.getDate() && Year === currentYear) {
-                        td.style.color = 'red';
-                    }
+
                     tr.appendChild(td);
                 }
                 calendar.appendChild(tr);
