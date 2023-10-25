@@ -67,12 +67,11 @@
     <div id="container">
         <form>
 
-            <!-- TODO 按钮问题 -->
-            <!-- <button onclick="Rectangle()">柱状图</button>
-            <button onclick="Pie()">饼状图</button> -->
+            <button type="button" id="CreateRect" onclick="Rectangle()">柱状图</button>
+            <button type="button" id="CreatePie" onclick="Pie()">饼状图</button>
 
-            <input id="CreateRect" type="button" value="柱状图" onclick="Rectangle()"></input>
-            <input id="CreatePie" type="button" value="饼状图" onclick="Pie()"></input>
+            <!-- <input id="CreateRect" type="button" value="柱状图" onclick="Rectangle()"></input>
+            <input id="CreatePie" type="button" value="饼状图" onclick="Pie()"></input> -->
         </form>
     </div>
 
@@ -193,7 +192,6 @@
                 ctx.fillText(datas[i].value, x + 10, y - height - 5)
 
                 // 填充数据名字
-                // TODO 字体显示模糊问题
                 ctx.fillText(dataNames[i].value, x + 5, y + 12)
                 x += distance;
                 x += Width;
@@ -215,7 +213,6 @@
             for (i = 0; i < num; i++) {
                 precent[i] = parseFloat((parseFloat(datas[i].value) / total).toFixed(4));
             }
-            console.log(precent);
             // 半径
             var radius = 50;
 
