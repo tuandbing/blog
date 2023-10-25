@@ -1,3 +1,4 @@
+// 原型和原型链
 const myself = {
     name: '馒头',
     age: 18
@@ -14,3 +15,12 @@ const t1 = new People();
 People.bind(myself)();
 console.log(t1);
 console.log(t1.__proto__);
+
+function handleMove() {
+
+}
+handleMove.prototype = t1;
+t1.constructor = handleMove;
+
+const newWorld = new handleMove();
+console.log(newWorld.dna);
