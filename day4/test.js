@@ -1,5 +1,5 @@
 function getUserInfo() {
-    // TODO
+
 }
 
 // 关键字
