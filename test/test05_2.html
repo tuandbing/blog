@@ -8,7 +8,7 @@
     <style>
         #container {
             width: 700px;
-            height: 500px;
+            height: 600px;
             background-color: aqua;
             box-shadow: 10px 10px 15px black;
             float: left;
@@ -23,10 +23,11 @@
         
         #myCanvas {
             float: left;
+            background-color: aliceblue;
             margin-left: 100px;
-            margin-top: 100px;
+            margin-top: 30px;
             width: 500px;
-            height: 300px;
+            height: 400px;
         }
         
         .box1 {
@@ -39,12 +40,25 @@
             margin-left: 50px;
         }
         
-        .dataName {
+        .dataName,
+        .data {
             float: left;
         }
         
-        .data {
+        #CreateRect,
+        #CreatePie {
+            width: 80px;
+            height: 50px;
+        }
+        
+        #CreateRect {
             float: left;
+            margin-left: 50px;
+        }
+        
+        #CreatePie {
+            float: right;
+            margin-right: 50px;
         }
     </style>
 </head>
@@ -52,72 +66,192 @@
 <body>
     <div id="container">
         <form>
-            <!-- <canvas id="myCanvas"></canvas> -->
+            <!-- <button onclick="Rectangle()">柱状图</button>
+            <button onclick="Pie()">饼状图</button> -->
+
+            <input id="CreateRect" type="button" value="柱状图" onclick="Rectangle()"></input>
+            <input id="CreatePie" type="button" value="饼状图" onclick="Pie()"></input>
         </form>
     </div>
-</body>
-<script>
-    var container = document.getElementById('container');
-    var num = null;
 
-    // 获取数据个数
-    function check() {
-        num = prompt('请输入数据个数');
-        if (parseInt(num) <= 0) {
-            check();
+    <script>
+        var container = document.getElementById('container');
+        var num = null;
+
+        // 获取数据个数
+        function check() {
+            num = prompt('请输入数据个数');
+            if (parseInt(num) <= 0 || isNaN(num)) {
+                check();
+            }
         }
-    }
-    check();
+        check();
+
+        var button = document.getElementById('CreateRect');
+        // 根据数据数量创建表单
+        var i = parseInt(num);
+        var form = document.querySelector('form');
+        while (i--) {
+            var string = '请输入数据名称';
+            var div1 = document.createElement('div');
+            var div2 = document.createElement('div');
+            div1.className = 'box1';
+            div2.className = 'box2';
+            div2.innerHTML = string;
+            var input = document.createElement('input');
+            input.className = 'dataName';
+            input.type = 'text';
+            var string2 = '请输入数据值';
+            var div3 = document.createElement('div');
+            div3.innerHTML = string2;
+            div3.className = 'box2';
+            var input2 = document.createElement('input');
+            input2.className = 'data';
+            input2.type = 'text';
+            div1.appendChild(div2);
+            div1.appendChild(input);
+            div1.appendChild(div3);
+            div1.appendChild(input2);
+            form.insertBefore(div1, button);
+        }
 
 
-    // 根据数据数量创建表单
-    var i = parseInt(num);
-    var form = document.querySelector('form');
-    while (i--) {
-        var string = '请输入数据名称';
-        var div1 = document.createElement('div');
-        var div2 = document.createElement('div');
-        div1.className = 'box1';
-        div2.className = 'box2';
-        div2.innerHTML = string;
-        var input = document.createElement('input');
-        input.className = 'dataName';
-        input.type = 'text';
-        var string2 = '请输入数据值';
-        var div3 = document.createElement('div');
-        div3.innerHTML = string2;
-        div3.className = 'box2';
-        var input2 = document.createElement('input');
-        input2.className = 'data';
-        input2.type = 'text';
-        div1.appendChild(div2);
-        div1.appendChild(input);
-        div1.appendChild(div3);
-        div1.appendChild(input2);
-        form.appendChild(div1);
-    }
+        // 获取随机颜色
+        function randomColor() {
+            return '#' + Math.random().toString(16).slice(2, 8).padEnd(6, '0');
+        }
 
-    // 创建画布
-    var canvas = document.createElement('canvas');
-    canvas.id = 'myCanvas';
-    form.appendChild(canvas);
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var total = 0;
-    var i = parseInt(num);
-    var datas = document.querySelectorAll('.data');
-    var dataNames = document.querySelectorAll('.dataName');
-    while (i--) {
-        total += datas[i].value;
-    }
-    var precent = [];
-    for (i = 0; i < num; i++) {
-        precent[i] = datas[i].value / total;
-    }
+        // 创建画布
+        var canvas = document.createElement('canvas');
+        canvas.id = 'myCanvas';
+        form.appendChild(canvas);
+        var ctx = canvas.getContext('2d');
+        var datas = document.querySelectorAll('.data');
+        var dataNames = document.querySelectorAll('.dataName');
 
-    function Rectangle() {}
 
-    function Pie() {}
-</script>
+        function Rectangle() {
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 绘制坐标轴
+            ctx.beginPath();
+            ctx.strokeStyle = "black";
+            ctx.moveTo(20, 10);
+            ctx.lineTo(15, 15);
+            ctx.moveTo(20, 10);
+            ctx.lineTo(25, 15);
+            ctx.moveTo(20, 10);
+            ctx.lineTo(20, 130);
+            ctx.lineTo(250, 130);
+            ctx.lineTo(245, 125);
+            ctx.moveTo(250, 130);
+            ctx.lineTo(245, 135);
+            ctx.font = 'bold 12px serif';
+            ctx.fillStyle = 'black';
+            ctx.fillText('0', 12, 135);
+            ctx.fillText('x', 250, 140);
+            ctx.fillText('y', 10, 15);
+            ctx.stroke();
+
+            // 获取最大值和最小值
+            var max = parseFloat(datas[0].value),
+                min = parseFloat(datas[0].value);
+            for (var i = 1; i < datas.length; i++) {
+                if (max < parseFloat(datas[i].value)) {
+                    max = parseFloat(datas[i].value);
+                } else if (min > parseFloat(datas[i].value)) {
+                    min = parseFloat(datas[i].value);
+                }
+            }
+
+            var size = max / 100;
+            // 每一个矩形的宽度
+            var Width = 25;
+            // 每两个矩形之间的距离
+            var distance = 20;
+
+            var x = 20 + distance;
+            var y = 130;
+            var i = 0;
+            for (; i < num; i++) {
+                height = parseFloat(datas[i].value) / size;
+                ctx.fillStyle = randomColor();
+                ctx.fillRect(x, y - height, Width, height);
+
+                // 填充数据值
+                ctx.fillStyle = 'black';
+                ctx.fillText(datas[i].value, x, y - height - 5)
+
+                // 填充数据名字
+                //TODO 字体显示模糊问题
+                ctx.fillText(dataNames[i].value, x, y + 12)
+                x += distance;
+                x += Width;
+            }
+        }
+
+
+        function Pie() {
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 获取数据总值
+            var total = 0;
+            var i = parseInt(num);
+            while (i--) {
+                total += parseFloat(datas[i].value);
+            }
+            // 计算各个数据所占比例
+            var precent = [];
+            for (i = 0; i < num; i++) {
+                precent[i] = parseFloat((parseFloat(datas[i].value) / total).toFixed(2));
+            }
+            console.log(precent);
+            // 半径
+            var radius = 50;
+
+            // 圆心
+            var x = radius + 20,
+                y = radius + 20;
+
+            // 标注坐标
+            var posX = x * 2 + 20,
+                posY = 30;
+
+            // 标注的样式
+
+            var width = 30,
+                height = 10;
+
+            var textX = posX + width + 5,
+                textY = posY + 10;
+
+            var startAngle = 0;
+
+            for (i = 0; i < datas.length; i++) {
+                // 绘制圆形
+                var endAngle = precent[i] * Math.PI * 2 + startAngle;
+                ctx.fillStyle = randomColor();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.arc(x, y, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fill();
+
+                //设置起始弧度
+                startAngle = endAngle;
+
+                //绘制比例图及文字
+                ctx.fillRect(posX, posY + 20 * i, width, height);
+                ctx.moveTo(posX, posY + 20 * i);
+                ctx.font = 'bold 16px 宋体';
+                ctx.fillStyle = 'black';
+                var String = dataNames[i].value + ":" + (100 * precent[i]).toFixed(2) + "%";
+                ctx.fillText(String, textX, textY + 20 * i);
+
+            }
+        }
+    </script>
+</body>
+
 
 </html>

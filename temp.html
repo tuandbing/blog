@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 700px;
+            height: 500px;
+            background-color: aqua;
+            box-shadow: 10px 10px 15px black;
+            float: left;
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+        
+        form {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #myCanvas {
+            float: left;
+            background-color: aliceblue;
+            margin-left: 100px;
+            margin-top: 100px;
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form>
+            <canvas id="myCanvas">您的浏览器不支持</canvas>
+        </form>
+    </div>
+    <button onclick="Rectangle()">柱状图</button>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+
+        var ctx = canvas.getContext('2d');
+
+        function Rectangle() {
+            var Width = 50;
+            var x = 100;
+            var y = 250;
+            ctx.beginPath();
+            ctx.fillStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.moveTo(x, y);
+            ctx.lineTo(450, 250);
+            ctx.lineTo(445, 245);
+            ctx.moveTo(450, 250);
+            ctx.lineTo(445, 255);
+            ctx.stroke();
+            ctx.closePath();
+
+        }
+    </script>
+</body>
+
+
+</html>
