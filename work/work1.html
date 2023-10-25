@@ -5,10 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* 元素选择器 */
+        
+        div {
+            color: red;
+            font-weight: bold;
+            font-size: large;
+        }
+        /* 类选择器 */
+        
+        .myself {
+            color: blue;
+            font-weight: bold;
+            font-size: large;
+        }
+        /* id选择器 */
+        
+        #myself {
+            color: aqua;
+            font-weight: bold;
+            font-size: large;
+        }
+        /* 属性选择器 */
+        
+        [name^=my] {
+            color: black;
+            font-weight: bold;
+            font-size: large;
+        }
+        /* 伪类选择器 */
+        
+        div:hover {
+            color: black;
+            cursor: pointer;
+        }
+        /* 伪元素选择器 */
+        
+        span::first-line {
+            color: chocolate;
+        }
+        /*  组合选择器 */
+        
+        button,
+        p {
+            color: pink;
+            font-weight: bold;
+            font-size: large;
+        }
+        /* 通配符选择器 */
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 
 <body>
+    <div>
+        软件2203彭垚旺
+    </div>
+    <div id="myself">
+        软件2203彭垚旺
+    </div>
+    <div class="myself">
+        软件2203彭垚旺
+    </div>
+    <div name="myself">
+        软件2203彭垚旺
+    </div>
 
+    <p>
+        软件2203彭垚旺
+    </p>
+    <span>
+        软件2203彭垚旺
+    </span>
 </body>
 
 </html>
