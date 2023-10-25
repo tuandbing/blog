@@ -213,7 +213,7 @@
             // 计算各个数据所占比例
             var precent = [];
             for (i = 0; i < num; i++) {
-                precent[i] = parseFloat((parseFloat(datas[i].value) / total).toFixed(2));
+                precent[i] = parseFloat((parseFloat(datas[i].value) / total).toFixed(4));
             }
             console.log(precent);
             // 半径
@@ -257,7 +257,6 @@
                 ctx.fillStyle = 'black';
                 var String = dataNames[i].value + ":" + (100 * precent[i]).toFixed(2) + "%";
                 ctx.fillText(String, textX, textY + 20 * i);
-
             }
         }
     </script>
