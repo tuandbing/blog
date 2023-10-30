@@ -51,28 +51,3 @@ console.log(Number.isInteger(1.00));
 console.log(Number.isInteger(1.01));
 
 
-// padStart()和padEnd()方法复制,填充字符,默认是空格
-const value = 'foo';
-// foo
-console.log(value.padEnd(6));
-//    foo
-console.log(value.padStart(6));
-// foo...
-console.log(value.padEnd(6,'.'));
-// ...foo
-console.log(value.padStart(6,'.'));
-
-// 如果所给长度小于字符长度，则会返回原始字符串
-
-// foo
-console.log(value.padStart(2));
-
-// 将字符串分隔为数组
-// [ 'f', 'o', 'o' ]
-console.log([...value]);
-
-// 数组的from方法
-// 字符串被拆分为单字符数组
-
-// [ 'm', 'a', 't', 'c', 'h' ]
-console.log(Array.from('match'));
