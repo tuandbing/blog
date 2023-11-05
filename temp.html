@@ -6,62 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #container {
-            width: 700px;
-            height: 500px;
-            background-color: aqua;
-            box-shadow: 10px 10px 15px black;
-            float: left;
-            margin-left: 300px;
-            margin-top: 100px;
+        .player {
+            width: 70%;
+            height: 600px;
+            background-color: gray;
+            position: relative;
+            left: 15%;
         }
-        
-        form {
+
+        video {
             width: 100%;
             height: 100%;
         }
-        
-        #myCanvas {
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+
+        button {
+            margin: 5px;
+        }
+
+        input[type="range"] {
+            width: 200px;
+        }
+        #container{
+            width: 10%;
+            height: 600px;
+            background-color: aqua;
             float: left;
-            background-color: aliceblue;
-            margin-left: 100px;
-            margin-top: 100px;
-            width: 500px;
-            height: 300px;
+            left: 5%;
         }
     </style>
 </head>
 
 <body>
-    <div id="container">
-        <form>
-            <canvas id="myCanvas">您的浏览器不支持</canvas>
-        </form>
+    <input type="file" id="files"></input>
+    <div class="player">
+        <video id="video"></video>
+        <div class="controls">
+            <button id="play">播放</button>
+            <button id="pause">暂停</button>
+            <button id="mute">静音</button>
+            <button id="fullscreen">全屏</button>
+            <button id="prev">上一个</button>
+            <button id="next">下一个</button>
+            <button id="fastforward">快进</button>
+            <button id="rewind">快退</button>
+            <input type="range" id="seekbar" min="0" max="100" value="0" step="10">
+            <button id="volumechange">音量调节</button>
+        </div>
     </div>
-    <button onclick="Rectangle()">柱状图</button>
     <script>
-        var canvas = document.getElementById('myCanvas');
+        let array = [];
+        let files = document.getElementById('files');
+        let video = document.getElementById('video');
+        let playButton = document.getElementById('play');
+        let pauseButton = document.getElementById('pause');
+        let muteButton = document.getElementById('mute');
+        let fullscreenButton = document.getElementById('fullscreen');
+        let prevButton = document.getElementById('prev');
+        let nextButton = document.getElementById('next');
+        let fastforwardButton = document.getElementById('fastforward');
+        let rewindButton = document.getElementById('rewind');
+        let seekbar = document.getElementById('seekbar');
+        let volumechangeButton = document.getElementById('volumechange');
 
-        var ctx = canvas.getContext('2d');
+        files.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            video.src = URL.createObjectURL(file);
 
-        function Rectangle() {
-            var Width = 50;
-            var x = 100;
-            var y = 250;
-            ctx.beginPath();
-            ctx.fillStyle = 'black';
-            ctx.lineWidth = 2;
-            ctx.moveTo(x, y);
-            ctx.lineTo(450, 250);
-            ctx.lineTo(445, 245);
-            ctx.moveTo(450, 250);
-            ctx.lineTo(445, 255);
-            ctx.stroke();
-            ctx.closePath();
+            // 向数组中添加文件列表
+            if (!array.includes(video.src)) {
+                array.push(video.src);
+            }
 
-        }
+            video.load();
+            video.play();
+        });
+
+        playButton.addEventListener('click', function () {
+            video.play();
+        });
+        pauseButton.addEventListener('click', function () {
+            video.pause();
+        });
+        muteButton.addEventListener('click', function () {
+            video.muted = !video.muted;
+        });
+        fullscreenButton.addEventListener('click', function () {
+            video.requestFullscreen();
+        });
+        rewindButton.addEventListener('click', function () {
+            video.currentTime = Math.max(0, video.currentTime - 10);
+        });
+        fastforwardButton.addEventListener('click', function () {
+            video.currentTime = Math.min(video.duration, video.currentTime + 10);
+        });
+        volumechangeButton.addEventListener('click', function () {
+            video.volume = (video.volume + 0.1) || 0;
+        });
+        seekbar.addEventListener('input', function () {
+            video.currentTime = (parseFloat(seekbar.value) / 100) * video.duration;
+        });
+
+        nextButton.addEventListener('click', function () {
+            if (!(array.length == 1 || array.length == 0)) {
+                let cur = array.indexOf(video.src);
+                let next = cur < array.length - 1 ? cur + 1 : 0;
+                video.src = array[next];
+                // video.load();
+                video.play();
+            }
+        })
+        prevButton.addEventListener('click',function(){
+            if (!(array.length == 1 || array.length == 0)) {
+                let cur = array.indexOf(video.src);
+                let next = cur == 0 ? array.length - 1 : cur - 1;
+                video.src = array[next];
+                // video.load();
+                video.play();
+            }
+        })
     </script>
 </body>
-
 
 </html>
