@@ -221,3 +221,47 @@ console.log(people2.find((element,index,array) => element.age<20));
 
 // 0
 console.log(people2.findIndex((element,index,array) => element.age<20));
+
+let testarr = arr2[Symbol.iterator]();
+
+console.log(testarr.next());
+console.log(testarr.next());
+console.log(testarr.next());
+console.log(testarr.next());
+console.log(testarr.next());
+console.log(testarr.next());
+console.log(testarr.next());
+
+
+function *test(){
+    yield 'foo';
+    yield 'push';
+    yield '馒头'
+}
+
+// foo
+// push
+// 馒头
+for(let i of test()){
+    console.log(i);
+}
+
+// { value: 'foo', done: false }
+// { value: 'push', done: false }
+// { value: '馒头', done: false }
+// { value: undefined, done: true }
+let testarr2 = test();
+console.log(testarr2.next());
+console.log(testarr2.next());
+console.log(testarr2.next());
+console.log(testarr2.next());
+
+function* generatorFn(initial) { 
+    console.log(initial); 
+    console.log(yield); 
+    console.log(yield); 
+} 
+let generatorObject = generatorFn('foo'); 
+generatorObject.next('bar'); 
+generatorObject.next('花生');  
+generatorObject.next('qux');  

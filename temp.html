@@ -1,137 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .player {
-            width: 70%;
-            height: 600px;
-            background-color: gray;
+        .menu-container{
+            width: 700px;
+            height: 500px;
+            background-color: aquamarine;
             position: relative;
-            left: 15%;
+            top: 150px;
+            left: 300px;
+        }
+        .item{
+            height: 120px;
+            text-align: center;
+            font-size: 30px;
         }
 
-        video {
-            width: 100%;
-            height: 100%;
+        .item:hover {
+            animation: scaleUp 1s forwards;
+            text-shadow: -1px -1px white,1px 1px #333;
+            /* box-shadow: 3px 3px 5px black; */
+            cursor: pointer;
         }
 
-        .controls {
+        .order{
+            height: 120px;
+            line-height: 120px;
+            background-color: red;
+        }
+        .remove{
+            width: 400px;
+            height: 200px;
+            line-height: 200px;
+            background-color: rgb(185, 127, 255);
+        }
+        .pay{
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
+            left: 400px;
+            top: 120px;
+            width: 300px;
+            height: 380px;
+            line-height: 380px;
+            background-color: blue;
         }
 
-        button {
-            margin: 5px;
+        .comment{
+            position: absolute;
+            top: 320px;
+            width: 400px;
+            height: 180px;
+            line-height: 180px;
+            background-color: green;
         }
+        @keyframes scaleUp {
+            0% {
+                transform: scale(1);
+                /* transform-origin: 50% 50%; */
+                transform-origin: 0 0;
+                color: black;
+            }
 
-        input[type="range"] {
-            width: 200px;
-        }
-        #container{
-            width: 10%;
-            height: 600px;
-            background-color: aqua;
-            float: left;
-            left: 5%;
+            100% {
+                color: chocolate;
+                
+                transform: scale(1.3);
+            }
         }
     </style>
 </head>
-
 <body>
-    <input type="file" id="files"></input>
-    <div class="player">
-        <video id="video"></video>
-        <div class="controls">
-            <button id="play">播放</button>
-            <button id="pause">暂停</button>
-            <button id="mute">静音</button>
-            <button id="fullscreen">全屏</button>
-            <button id="prev">上一个</button>
-            <button id="next">下一个</button>
-            <button id="fastforward">快进</button>
-            <button id="rewind">快退</button>
-            <input type="range" id="seekbar" min="0" max="100" value="0" step="10">
-            <button id="volumechange">音量调节</button>
+    <div class="menu-container">
+        <div class="order">
+            <div class="item">点菜</div>
         </div>
+        <div class="remove">
+            <div class="item">取消</div>
+        </div>
+        <div class="pay">
+            <div class="item">支付</div>
+        </div>
+        <div class="comment">
+            <div class="item">评价</div>
+        </div>
+        
     </div>
-    <script>
-        let array = [];
-        let files = document.getElementById('files');
-        let video = document.getElementById('video');
-        let playButton = document.getElementById('play');
-        let pauseButton = document.getElementById('pause');
-        let muteButton = document.getElementById('mute');
-        let fullscreenButton = document.getElementById('fullscreen');
-        let prevButton = document.getElementById('prev');
-        let nextButton = document.getElementById('next');
-        let fastforwardButton = document.getElementById('fastforward');
-        let rewindButton = document.getElementById('rewind');
-        let seekbar = document.getElementById('seekbar');
-        let volumechangeButton = document.getElementById('volumechange');
-
-        files.addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            video.src = URL.createObjectURL(file);
-
-            // 向数组中添加文件列表
-            if (!array.includes(video.src)) {
-                array.push(video.src);
-            }
-
-            video.load();
-            video.play();
-        });
-
-        playButton.addEventListener('click', function () {
-            video.play();
-        });
-        pauseButton.addEventListener('click', function () {
-            video.pause();
-        });
-        muteButton.addEventListener('click', function () {
-            video.muted = !video.muted;
-        });
-        fullscreenButton.addEventListener('click', function () {
-            video.requestFullscreen();
-        });
-        rewindButton.addEventListener('click', function () {
-            video.currentTime = Math.max(0, video.currentTime - 10);
-        });
-        fastforwardButton.addEventListener('click', function () {
-            video.currentTime = Math.min(video.duration, video.currentTime + 10);
-        });
-        volumechangeButton.addEventListener('click', function () {
-            video.volume = (video.volume + 0.1) || 0;
-        });
-        seekbar.addEventListener('input', function () {
-            video.currentTime = (parseFloat(seekbar.value) / 100) * video.duration;
-        });
-
-        nextButton.addEventListener('click', function () {
-            if (!(array.length == 1 || array.length == 0)) {
-                let cur = array.indexOf(video.src);
-                let next = cur < array.length - 1 ? cur + 1 : 0;
-                video.src = array[next];
-                // video.load();
-                video.play();
-            }
-        })
-        prevButton.addEventListener('click',function(){
-            if (!(array.length == 1 || array.length == 0)) {
-                let cur = array.indexOf(video.src);
-                let next = cur == 0 ? array.length - 1 : cur - 1;
-                video.src = array[next];
-                // video.load();
-                video.play();
-            }
-        })
-    </script>
 </body>
-
 </html>

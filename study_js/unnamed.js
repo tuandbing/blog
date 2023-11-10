@@ -51,3 +51,53 @@ console.log(Number.isInteger(1.00));
 console.log(Number.isInteger(1.01));
 
 
+// NaN
+let a = 0/''; 
+
+// NaN
+let b = 0/'';
+
+console.log(a);
+console.log(b);
+
+// false
+console.log(a===b);
+
+const m = new Map().set(a,'馒头');
+
+// 馒头
+console.log(m.get(a));
+//馒头
+console.log(m.get(b));
+
+const m2 = new Map();
+m2.set('myName','馒头');
+m2.set('age',18);
+m2.set('className','软件2203');
+
+// Map(3) { 'myName' => '馒头', 'age' => 18, 'className' => '软件2203' }
+console.log(m2);
+
+// [ [ 'myName', '馒头' ], [ 'age', 18 ], [ 'className', '软件2203' ] ]
+console.log([...m2]);
+
+// [ 'myName', '馒头' ]
+// [ 'age', 18 ]
+// [ 'className', '软件2203' ]
+for(let pair of m2.entries()){
+    console.log(pair);
+}
+
+// [ 'myName', '馒头' ]
+// [ 'age', 18 ]
+// [ 'className', '软件2203' ]
+for(let pair of m2[Symbol.iterator]()){
+    console.log(pair);
+}
+
+// myName->馒头
+// age->18
+// className->软件2203
+m2.forEach((val,key)=>console.log(`${key}->${val}`));   // 注意是`不是'
+// m2.forEach((val, key) => console.log(`${key}->${val}`));
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* *{
+            margin: 0;
+            padding: 0;
+        } */
+
+        .menu-item {
+            float: left;
+            margin-left: 30px;
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid black;
+        }
+
+        .menu-item:first-child{
+            margin-left: 30%;
+        }
+        /* 鼠标悬浮放大动画 */
+        .menu-item:hover {
+            animation: scaleUp 1s forwards;
+            text-shadow: -1px -1px white,1px 1px #333;
+            box-shadow: 3px 3px 5px black;
+            cursor: pointer;
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(1);
+                color: black;
+            }
+
+            100% {
+                color: chocolate;
+                transform: scale(1.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu-container">
+        <div class="menu-item">苹果</div>
+        <div class="menu-item">梨子</div>
+        <div class="menu-item">香蕉</div>
+        <div class="menu-item">花生</div>
+        <div class="menu-item">樱桃</div>
+        <div class="menu-item">葡萄</div>
+        <div class="menu-item">火龙果</div>
+        <div class="menu-item">榴莲</div>
+        <div class="menu-item">西瓜</div>
+    </div>
+</body>
+
+</html>
