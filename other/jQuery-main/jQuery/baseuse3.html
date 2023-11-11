@@ -1,0 +1,29 @@
+<!--使用jQuery实现排他思想-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery_min.js"></script>
+</head>
+
+<body>
+    <button>登录</button>
+    <button>登录</button>
+    <button>登录</button>
+    <button>登录</button>
+    <button>登录</button>
+    <script>
+        $(function(){
+            $('button').click(function () { 
+            // $(this).css('background','pink');
+            // $(this).siblings('button').css('background','');
+            $(this).css('background','pink').siblings('button').css('background','');
+         });
+        })
+    </script>
+</body>
+
+</html>

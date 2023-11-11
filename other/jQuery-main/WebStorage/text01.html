@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检测浏览器对HTML5 Web存储的支持</title>
+    <!-- 
+        注意：
+            localStorage方法用于在客户端永久存储数据，没有过期时间
+            sessionStorage方法有时间限制，只能用于浏览器打开的时间段
+     -->
+</head>
+<body>
+    <div id="support1"></div>
+    <div id="support2"></div>
+    <script>
+        // 对localStorage存储的支持情况检查 (本地存储)
+        if(window.localStorage){
+            document.getElementById('support1').innerHTML = '恭喜,您的浏览器支持HTML5 Web存储中的localStorage存储<br>'
+        }else{
+            document.getElementById('support1').innerHTML = '抱歉,您的浏览器不支持HTML5 Web存储中的localStorage存储<br>'
+        }
+        // 对sessionStorage存储的支持情况检查 (会话存储)
+        if(window.sessionStorage){
+            document.getElementById('support2').innerHTML = '恭喜,您的浏览器支持HTML5 Web存储中的sessionStorage存储<br>'
+        }else{
+            document.getElementById('support2').innerHTML = '抱歉,您的浏览器不支持HTML5 Web存储中的sessionStorage存储<br>'
+        }
+    </script>
+</body>
+</html>

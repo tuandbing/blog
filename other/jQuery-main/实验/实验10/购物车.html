@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="css/carstyle.css">
+  <style>
+  * {
+    margin:0;
+    padding:0;
+}
+body {
+    font-size:13px;
+}
+input {
+    vertical-align:middle;
+}
+a {
+    text-decoration:none;
+    color:#333333;
+}
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+.pro-main {
+    width:1000px;
+    margin:100px auto;
+}
+.cart-info .all,.cart-info .pro-info,.cart-info .dj-price,.cart-info .num-pro,.cart-info .zj-price,.cart-info .cz {
+    float:left;
+}
+.cart-info {
+    height:40px;
+    line-height:40px;
+    background-color:#EFEFEF;
+}
+.cart-info .all {
+    width:80px;
+    padding:0px 15px;
+}
+.cart-info .all input {
+    margin-right:8px;
+}
+.cart-info .pro-info {
+    width:500px;
+}
+.cart-info .dj-price {
+    width:80px;
+}
+.cart-info .num-pro {
+    width:120px;
+}
+.cart-info .zj-price {
+    width:110px;
+}
+.cart-info .cz {
+    width:80px;
+}
+.cart-main {
+    margin-top:15px;
+}
+.cart-item {
+    border:1px solid #EFEFEF;
+    padding:15px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+.cart-j {
+    width:30px;
+}
+.pro-item {
+    width:560px;
+}
+.pro-item .pro-img {
+    width:80px;
+    height:80px;
+}
+.pro-item .pro-title {
+    width:225px;
+    line-height:1.8;
+    padding:0px 15px;
+}
+.pro-item .pro-gg {
+    width:185px;
+    padding:0px 15px;
+    font-size:10px;
+    color:#666;
+}
+.price-g {
+    width:80px;
+    color:black;
+    font-weight:bold;
+}
+.price-num {
+    width:95px;
+    margin-right:30px;
+    background-color:#EFEFEF;
+    /* border:1px solid #EFEFEF;
+    */
+}
+.price-num .increment,.price-num .decrement {
+    width:20px;
+    float:left;
+    text-align:center;
+}
+.price-num .num {
+    float:left;
+    width:50px;
+    text-align:center;
+}
+.price-jiner{
+    width:110px;
+    color:red;
+    font-weight:bold;
+}
+.price-caozuo {
+    width:40px;
+}
+.priceAll {
+    margin:0px 20px;
+}
+.priceAll span {
+    padding:0px 8px;
+    color:#f22d00;
+    font-weight:bold;
+    font-size:15px;
+}
+.spnum em {
+    font-style:normal;
+    padding:0px 8px;
+    color:#f22d00;
+    font-weight:bold;
+    font-size:15px;
+}
+.js-btn {
+    display:block;
+    width:100px;
+    text-align:center;
+    background-color:#f22d00;
+    color:white;
+}
+.pro-item img {
+    width:80px;
+}
+</style>	
+  <script>
+	$(function (){
+	  /*点击全选按钮复选框*/
+	  $(".allCheck").change(function (){
+  
+		  if ($(".allCheck").prop("checked")){
+			$(".j-check").prop("checked",true);
+		  }else{
+			$(".j-check").prop("checked",false);
+		  }
+  
+		  allprice();
+		  allgoods();
+	  })
+	  //当取消一个复选框的选中，那就取消全选复选框的选中
+	  $(".j-check").change(function (){
+		allprice();
+		allgoods();
+		$.each($(".j-check"),function (e,domE){
+		  if ($(domE).prop("checked")==false){
+			$(".allCheck").prop("checked",false);
+		  }
+		})
+	  })
+	  /*复选框发生改变*/
+	  $(".j-check").change(function (){
+		allprice();
+		allgoods();
+		var num=0;
+		$.each($(".j-check"),function (){
+		  if (!$(this).prop("checked")){
+			num+=1;
+		  }
+		})
+		if (num==0){
+		  $(".allCheck").prop("checked",true);
+		}
+	  })
+	  var num=1;
+	  //去除指定字符
+	  var reg=new RegExp("￥");
+	  /*数量增加*/
+	  $(".increment").click(function (){
+  
+		var nums=parseInt($(this).siblings(".num").val())+num;
+		//添加数量
+		$(this).siblings(".num").val(parseInt(nums));
+		var price=parseFloat($(this).parent(".price-num").siblings(".price-g").html().replace(reg,"")).toFixed(2)
+		 $(this).parent(".price-num").siblings(".price-jiner").html("￥"+parseFloat(nums*price).toFixed(2));
+		allprice();
+		allgoods();
+	  })
+	  /*数量减少*/
+	  $(".decrement").click(function (){
+  
+		var nums=parseInt($(this).siblings(".num").val())-num;
+		//获取当前货物的单价
+		var price=parseFloat($(this).parent(".price-num").siblings(".price-g").html().replace(reg,"")).toFixed(2)
+		if (parseInt($(this).siblings(".num").val())>1){
+		  $(this).siblings(".num").val(nums);
+		  $(this).parent(".price-num").siblings(".price-jiner").html("￥"+parseFloat(nums*price).toFixed(2));
+		}else{
+		 confirm("数量不可减少！！");
+		}
+		allprice();
+		allgoods();
+	  })
+	  /**/
+	  /*删除一个货物*/
+	  $(".del-d").click(function (){
+		if ($(this).parent(".price-caozuo").siblings(".cart-j").children(".j-check").prop("checked")){
+		  $(this).parent(".price-caozuo").parent(".cart-item").remove();
+		  allprice();
+		  allgoods();
+		}else{
+		  confirm("请勾选要删除宝贝！！");
+		}
+  
+	  })
+	  /*批量删除宝贝*/
+	  $(".clearAll").click(function (){
+		var i=0;
+		$(".j-check").each(function (e,domE){
+		  if ($(domE).prop("checked")){
+			i++;
+			$(domE).parent(".cart-j").parent(".cart-item").remove();
+		  }
+		})
+		allprice();
+		allgoods();
+		/*判断是否选中删除的货物*/
+		if (i==0){
+		  confirm("请选中要删除的货物！！！")
+		}
+  
+	  })
+  
+	  /*总价格*/
+	  function allprice(){
+		var all=0;
+		$(".j-check").each(function (){
+		  if ($(this).prop("checked")){
+			var price=parseFloat($(this).parent(".cart-j").siblings(".price-jiner").html().replace(reg,"")).toFixed(2);
+			all=parseFloat(all)+parseFloat(price);
+		  }
+  
+		})
+		if (all==0){
+		  $(".priceAll").children("span").html('0.00 元')
+		}else{
+		  $(".priceAll").children("span").html(parseFloat(all).toFixed(2)+" 元")
+		}
+  
+	  }
+	  /*结算，清除购物车要结算的商品*/
+	  $(".js-btn").click(function () {
+		var i=0;
+		$(".j-check").each(function (e,domE){
+		  if ($(domE).prop("checked")){
+			i++;
+		  }
+		})
+		/*判断是否选中删除的货物*/
+		if (i==0){
+		  confirm("请选中要购买的商品！！！")
+		}else{
+		  if(confirm("请确认是否要支付")==true){
+  
+			$(".j-check").each(function (e,domE){
+			  if ($(domE).prop("checked")){
+				i++;
+				$(domE).parent(".cart-j").parent(".cart-item").remove();
+				/*此处应有一个ajax将数据传入后台并跳转界面*/
+			  }
+			})
+			confirm("您已下单，宝贝正在运送的途中，请耐心等待");
+		  }
+		}
+		allprice();
+		allgoods();
+	  })
+	})
+	/*商品总件数*/
+	function allgoods(){
+	  var allgoods=0;
+	  $(".j-check").each(function (){
+		if ($(this).prop("checked")){
+		  var goods=parseInt($(this).parent(".cart-j").siblings(".price-num").children(".num").val());
+		  allgoods=parseInt(allgoods)+parseInt(goods);
+		  console.log(parseInt(allgoods));
+		}
+	  })
+	  if (allgoods==0){
+		$(".spnum").children("em").html('0');
+	  }else {
+		$(".spnum").children("em").html(parseInt(allgoods));
+	  }
+	}
+  
+  </script>
+
+</head>
+<!--https://blog.csdn.net/qq_41801219/article/details/116065244-->
+<body>
+<div class="pro-main">
+  <div class="cart-info">
+    <div class="all"><input type="checkbox" class="allCheck">全选</div>
+    <div class="pro-info">商品信息</div>
+    <div class="dj-price">单价</div>
+    <div class="num-pro">数量</div>
+    <div class="zj-price">金额</div>
+    <div class="cz">操作</div>
+  </div>
+  <div class="cart-main">
+    <div class="cart-item">
+      <div class="cart-j fl">
+        <input type="checkbox" class="j-check" >
+      </div>
+      <div class="pro-item fl">
+        <div class="pro-img fl"><img src="https://www.jq22.com/img/cs/500x500-1.png" alt=""></div>
+        <div class="pro-title fl">西部数据(WD)蓝盘 1TB1</div>
+        <div class="pro-gg fl">SATA6Gb/s 7200转64MB 台式机械硬盘(WD10EZEX)</div>
+      </div>
+      <div class="price-g fl">￥28.60</div>
+      <div class="price-num fl">
+        <a href="javascript:;" class="increment">+</a>
+        <input type="text" value="1" readonly="readonly" class="num">
+        <a href="javascript:;" class="decrement">-</a>
+      </div>
+      <div class="price-jiner fl">￥28.60</div>
+      <div class="price-caozuo fl"><a href="#" class="del-d">删除</a></div>
+    </div>
+    <div class="cart-item">
+      <div class="cart-j fl">
+        <input type="checkbox" class="j-check">
+      </div>
+      <div class="pro-item fl">
+        <div class="pro-img fl"><img src="https://www.jq22.com/img/cs/500x500-1.png" alt=""></div>
+        <div class="pro-title fl">西部数据(WD)蓝盘 1TB2</div>
+        <div class="pro-gg fl">SATA6Gb/s 7200转64MB 台式机械硬盘(WD10EZEX)</div>
+      </div>
+      <div class="price-g fl">￥40.50</div>
+      <div class="price-num fl">
+        <a href="javascript:;" class="increment">+</a>
+        <input type="text" value="1" readonly="readonly" class="num">
+        <a href="javascript:;" class="decrement">-</a>
+      </div>
+      <div class="price-jiner fl" id="price">￥40.50</div>
+      <div class="price-caozuo fl"><a href="javascript:;" class="del-d">删除</a></div>
+    </div>
+    <div class="cart-item">
+      <div class="cart-j fl">
+        <input type="checkbox" class="j-check">
+      </div>
+      <div class="pro-item fl">
+        <div class="pro-img fl"><img src="https://www.jq22.com/img/cs/500x500-1.png" alt=""></div>
+        <div class="pro-title fl">西部数据(WD)蓝盘 1TB3</div>
+        <div class="pro-gg fl">SATA6Gb/s 7200转64MB 台式机械硬盘(WD10EZEX)</div>
+      </div>
+      <div class="price-g fl">￥29.60</div>
+      <div class="price-num fl">
+        <a href="javascript:;" class="increment">+</a>
+        <input type="text" value="1" readonly="readonly"  class="num">
+        <a href="javascript:;" class="decrement">-</a>
+      </div>
+      <div class="price-jiner fl" >￥29.60</div>
+      <div class="price-caozuo fl"><a href="javascript:;" class="del-d">删除</a></div>
+    </div>
+  </div>
+  <div class="cart-info">
+    <div class="all fl">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="fl">
+      <a href="#" class="clearAll">批量删除</a>
+    </div>
+    <div class="fr" style="width: 500px;">
+      <div class="spnum fl">
+        已选商品<em>0</em>件
+      </div>
+      <div class="priceAll fl">合计（不含运费）: <span>0.00 元</span></div>
+      <div class="jiesuan fr"><a href="#" class="js-btn">结算</a></div>
+    </div>
+  </div>
+</div>
+  
+</body>
+</html>

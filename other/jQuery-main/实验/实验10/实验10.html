@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>徐瑞的购物网</title>	
+		<style>
+        .topBar{height: 50px; font-size: 25px; color:#666;line-height: 50px;background-color:rgb(255, 201, 119);}                
+        .topBar-left{float: left;list-style: none;}                
+        .topBar-right{float: right; list-style: none;}                
+        .topBar-left li,.topBar-right li{margin: 0 2px;float:left;text-align: center;font-family:"宋体" ;}         
+        .topBar-left li a:hover,.topBar-right li:hover {color:rgb(228, 148, 73);}       
+        .logoBar{height:100px;width: 100%;left: 0px; background-color:rgb(255, 201, 119) }         
+        .search_box{ width: 447px;padding-top: 33px;padding-left: 160px; }             
+        .search_text{background-color: white; width:360px;height: 35px;padding:0 8px;position:absolute;top:70px;left:615px; }           
+        .search_btn{ width: 70px;height: 39px;position:absolute;top:70px;left:1000px;font-size:14px;background-color:rgb(255, 140, 46);font-family: "微软雅黑";color: white;}
+        .tui{
+            background: lightgrey;
+            border: #dddddd;
+
+        }
+        .menu{
+            font-family: Arial, sans-serif;
+            width: 100%;
+            margin: 0;
+        }
+        .menu ul{
+            padding:0;
+            margin: 0;
+            list-style-type: none;
+            left: 30%;
+        }
+        .menu ul li{
+            float: left;
+            position: relative;
+        }
+        .menu ul li a,.menu ul li a:visited{
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            width: 277px;
+            height: 40px;
+            color:#000;
+            border: 3px solid rgb(255, 234, 190);
+            border-width: 1px 1px 0 0;
+            background: #ffd79b;
+            line-height: 30px;
+            font-size: 25px;
+        }
+        .main ul li :hover a{
+            color: #fff;
+        }
+        .menu ul li ul{
+            display: none;
+        }
+        .menu ul li:hover ul{
+            display: block;
+            position: absolute;
+            top: 31px;
+            left: 0;
+            width: 105px;
+        }
+        .menu ul li:hover ul li a{
+            display: block;
+            background:rgb(255, 234, 190);
+            color: #000;
+        }
+        .menu ul li:hover ul li a:hover{
+            background: #dfc184;
+            color: #000;
+        }
+
+        .footer{ width:1100px;margin:0 auto;border-top:#dddddd 1px solid;margin-top:150px; height: 210px;  background: rgb(245,245,245);text-align: center;}
+        .footer p{ margin-top:20px;}
+        .footer a{color:#666;}.footer a:hover{ color:rgb(228, 121, 89);}.footer .fp{color:#666;margin-top:10px;}
+        .footimg{width:"120px";height: "10px";}
+        .list{position: fixed;top: 250px;left:100px;font-family: "微软雅黑";font-size: 20px;color:red;}
+        .list a {text-decoration: none;color:black;}
+		</style>		
+	</head>
+	<body bgcolor="white" >
+
+		<div class="headerBar">
+        <div class="topBar">
+            <ul class="topBar-left">
+                <a name="Top"></a>                
+                <li><img src="1.png" width="140" height="85" ></li>
+            </ul>
+            <ul class="topBar-right">
+                <a href="购物车2.html">购物车</a>
+                <li><a href="#">登陆</a></li>
+                <li><a href="register.html" target="_blank">注册</a></li>
+            </ul>
+        </div>  
+		<div class="logoBar">
+            <div class="search_box">
+                <input type="button" value="搜 索" class="search_btn">   
+                <input type="text" class="search_text" >
+            </div>
+        </div>
+        </div>   
+        
+      <div class="menu">
+        <ul>
+            <li><a href="#">女装</a>
+                <ul>
+                    <li><a href="#">半身裙</a></li>
+                    <li><a href="#">连衣裙</a></li>
+                    <li><a href="#">沙滩裙</a></li>
+                </ul>
+            </li>
+            <li><a href="#">男装</a>
+                <ul>
+                    <li><a href="#">商务装</a></li>
+                    <li><a href="#">休闲装</a></li>
+                    <li><a href="#">运动装</a></li>
+                </ul>
+            </li>
+            <li><a href="#">童装</a>
+                <ul>
+                    <li><a href="#">女童装</a></li>
+                    <li><a href="#">男童装</a></li>
+                </ul>
+            </li>
+            <li><a href="#">童鞋</a>
+                <ul>
+                    <li><a href="#">女童鞋</a></li>
+                    <li><a href="#">男童鞋</a></li>
+                </ul>
+            </li>
+            <li><a href="#">饰品</a>
+                <ul>
+                    <li><a href="#">项链</a></li>
+                    <li><a href="#">手环</a></li>
+                    <li><a href="#">脚环</a></li>
+                    <li><a href="#">头饰</a></li>
+                    <li><a href="#">摆件</a></li>
+                </ul>
+            </li>
+        </ul>
+
+
+      <table cellspacing="2" align="center">
+      	<tr><td><a href="wdress.html" target="_blank">
+            <img src="2.png" width="400" height="300"></a></td>
+            <td >
+                <video width="500" height="300" autoplay="autoplay" loop="loop" id="video" x-webkit-airplay="true" webkit-playsinline="true" muted="">
+                    <source src="1.mp4" type="video/mp4">
+                 </video>           
+                </td>      
+            <td><img src="3.png" width="400" height="300"  ></td>	</tr> 	
+      </table>
+
+      <table class="list" align="center" border="2" bgcolor="orange" bordercolor="white" cellpadding="15">
+      	<tr><td><a href="wdress.html" target="_blank">限时秒杀>></a></td></tr>
+      	<tr><td><a href="time.html" target="_blank">断码清仓>></a></td></tr>
+      	<tr><td><a href="shopping.html" target="_blank">9块9特卖>></a></td></tr>
+      	<tr><td><a href="wdress.html" target="_blank">充值中心>></a></td></tr>
+      	<tr><td><a href="service.html" target="_blank">联系客服>></a></td></tr>
+        <tr><td><a href="#Top">回到顶部>></a></td></tr>
+      	
+      </table>
+      <p align="center" style="font-family: 宋体;font-size: 30px;color: black;"><b>-今日推荐-</b></p>
+     <table  class="tui" border="1" bordercolor="crimson" cellspacing="10" align="center">
+     	<tr>
+     		<td rowspan="2"><a href="wdress.html" target="_blank"><img src="5.png" width="300px" height="600px"></a></td>
+     		<td rowspan="2" colspan="2"><a href="wdress.html" target="_blank"><img src="4.png" width="600px" height="600px"></a></td>
+     		<td><a href="wdress.html" target="_blank"><img src="6.png" width="300px" height="200px"></a></td>  		 		
+     	</tr>
+     	<tr>
+     		<td><a name="11"><img src="7.png" width="300px" height="200px"></td>   		 		  
+     	</tr>
+     	<tr>
+     		<td align="center"><img src="10.png" width="273px" height="367px"></td> 
+     		<td align="center"><img src="11.png" width="273px" height="367px"></td>
+     		<td align="center"><img src="12.png" width="273px" height="367px"></td>
+     		<td align="center"><img src="13.png" width="273px" height="367px"></td>   		
+     	</tr>
+     	<tr>
+     		<td align="center"><img src="14.png"width="273px" height="367px"></td> 
+     		<td align="center"><img src="15.png"width="273px" height="367px"></td>
+     		<td align="center"><img src="16.png"width="273px" height="367px"></td>
+     		<td align="center"><img src="17.png"width="273px" height="367px"></td>   		
+     	</tr>
+
+     </table> 
+     <div class="footer">
+            <p><a href="#">联系我们</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#">诚聘英才</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#">合作招商</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#">广告平台</a></p>
+            <p class="fp">本网站直接或间接向消费者推销商品或者服务的商业宣传均属于“广告”（包装及参数、售后保障等商品信息除外）</p>
+            <div class="footimg">
+                    <img src="t01241497bdc971361b.jpg" width="70px";height="60px";>
+                    <img src="t01f0d50363735cde75.jpg" width="60px";height="40px">
+                    <img src="t01498ad26a3efc7212.jpg" width="70px";height="60px">
+                    <img src="t01cbc36903619044fd.png" width="60px";height="30px">
+            </div>
+        </div>
+	</body>
+</html>

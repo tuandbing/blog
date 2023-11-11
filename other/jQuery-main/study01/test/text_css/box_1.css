@@ -1,0 +1,20 @@
+.box_1{
+    width: 100%;
+    height: 160px;
+    border: 1px solid ;
+    border-color: grey;
+    background-color: skyblue;
+}
+.watch_ul{
+    margin-top: 20px;
+    margin-left: 25%;
+    list-style: none;
+}
+.watch_ul li{
+    margin-left: 70px;
+    display: inline;
+}
+.watch_ul li:hover{
+    color: red;
+    cursor: pointer;
+}

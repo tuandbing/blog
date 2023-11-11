@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #label{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="请输入用户名" id="username">
+    <br>
+    <input type="text" placeholder="密码" id="password" required="required">
+    <br>
+    <label id="label">
+        <input type="checkbox" id="remember">
+        记住密码
+    </label>
+    <br>
+    <input type="reset">
+    <input type="submit">
+    </form>
+    <script>
+        var username = document.getElementById('username');
+        var password = document.getElementById('password');
+        var remember = document.getElementById('remember');
+        if(localStorage.getItem('username')){
+            username.value = localStorage.getItem('username');
+        }
+        if(localStorage.getItem('password')){
+            password.value = localStorage.getItem('password');
+            remember.checked = true;
+        }
+        remember.addEventListener('change',function () { 
+            if(remember.checked){
+                localStorage.setItem('username',username.value);
+                localStorage.setItem('password',password.value);
+            }else{
+                localStorage.removeItem('password');
+            }
+         })
+    </script>
+</body>
+</html>

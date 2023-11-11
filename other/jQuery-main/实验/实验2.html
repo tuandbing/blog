@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>徐瑞的新闻网站</title>
+        <style>
+            h1 {
+                color: rgb(0, 81, 255);
+            }
+            ul li {
+                float: left;width: 150px;height: 50px;
+            }
+            ul {
+                margin: 5px;padding: 0px;list-style: none;
+            }
+            .search{
+                background-color: white;
+                color: grey;
+                position: absolute;
+                top:30px;
+                left:655px
+            }
+            .button{
+                position: absolute;
+                top:30px;
+                left:600px
+            }
+            .pic{
+                float: left;
+                height: 1000;
+                width: 1200;
+                margin: 0px 50px 50px 0px;
+            }
+            .news_1{
+                height: 150px;
+                width: 1000px;
+            }
+            .news_2 li::before{
+            /*设置颜色大小边距*/
+            color: rgb(218,218,218);
+            font-size: 12px;
+            margin-right: 4px;
+            }
+            .news_3 li::before{
+            /*设置颜色大小边距*/
+            color: rgb(218,218,218);
+            height: 300px;
+            width: 1000px;
+            }
+        </style>
+    </head>
+
+<body>
+    <img src="D:/桌面/HTML实验文件/图片/素材1.png" width="168" height="68.5" >
+    <div>
+        <button class="button"><b>搜索</b></button>
+        <input type="text" value="请输入查询条件" class="search"></input>
+    </div>
+    <hr color="black" size="3">
+
+    <div>
+        <ul>
+            <li>首页</li>
+            <li>时政</li>
+            <li>国际</li>
+            <li>军事</li>
+            <li>警法</li>
+            <li>公益</li>
+            <li>神吐槽</li>
+        </ul>
+    </div>
+
+    <div class="pic">
+        <img src="D:/桌面/HTML实验文件/图片/素材2.png" width="400" height="192" ><br/>
+        <img src="D:/桌面/HTML实验文件/图片/素材3.png" width="400" height="192" >
+    </div>
+
+    <div class="news_1">
+            <li><b><a href="https://www.ujs.edu.cn/" target="_blank">疫情之后的首场重大国际活动为什么是它?
+            </a></b></li>
+            <li><b>“太热太重了”，开学“第一课”小朋友体验消防员...</b></li>
+    </div>
+
+    <div class="news_2">
+        <li><b>疫情之后的首场重大国际活动为什么是它?</b></li>
+        <li>《我的县长父亲》获征文一等奖后遭删除，网友：文章情真意切</li>
+        <li>贵阳市委书记：深入细致做好隔离人员转运工作，防范类似事故 </li>
+        <li>湖北黄梅一派出所副所长抓捕嫌疑人时壮烈牺牲</li>
+        <li>靠铁路吃铁路，用人、用权腐败交织，73岁盛光祖被开除党籍 </li>
+        <li>美食家称预制菜是“猪狗食” ：你怎么看？如何吃才能均衡营养？</li>
+    </div>
+
+    <div class="news_3">
+        <br/>
+        <br/>
+        <li><b>王思聪回应点评半藏森林 和网友对骂</b></li>
+        <li>豪车配司机！甘薇失信后仍潇洒 背名包逛街</li>
+        <li>网曝杨洋蜡像被年轻女子骚扰</li>
+        <li>丁太昇吐槽郭敬明抄袭 言语粗俗被骂</li>
+    </div>
+</body>
+</html>
+

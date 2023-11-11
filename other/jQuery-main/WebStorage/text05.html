@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Web存储API之删除指定数据</title>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>
+                添加测试数据
+            </legend>
+            <input type="text" id="testData">
+            <input type="button" value="add" onclick="addDate()">
+        </fieldset>
+    </form>
+    <p>
+        当前在sessionStorage中保存的数据如下:
+    </p>
+    <table id="allData" border="1" style="border-collapse: collapse;"></table>
+    <script>
+        var allData = document.getElementById('allData');
+        
+        // 刷新数据显示
+        function refreshData(){
+            var length = sessionStorage.length;
+            // 如果总数为0
+            if(length == 0){
+                allData.innerHTML = '目前暂无数据';
+            }else{
+                //清空列表
+                allData.innerHTML = '<tr><th>键名称</th><th>键值</th><th>操作</th></tr>'
+                //遍历所有数据并显示出来
+                for(var i = 0;i < length;i++){
+                    var tr = document.createElement('tr');
+                    var name = sessionStorage.key(i);
+                    tr.innerHTML = '<td>' + name + '</td><td>' + sessionStorage.getItem(name) + '</td><td><button onclick="delData(' + i + ')">删除</button></td>';
+                    allData.appendChild(tr);
+                }
+            }
+        }
+        // 添加新数据
+        function addDate(){
+            var length = sessionStorage.length;
+            var n = length + 1;
+            var test = document.getElementById('testData');
+
+            // 获取测试数据内容
+            var value = test.value;
+
+            // 保存当前测试数据
+            sessionStorage.setItem(n,value);
+
+            // 清空测试数据
+            test.value = '';
+            refreshData();
+        }
+        // 删除第n个数据
+        function delData(n){
+            var name = sessionStorage.key(n);
+            sessionStorage.removeItem(name);
+            refreshData();
+        }
+    </script>
+</body>
+</html>

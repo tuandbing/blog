@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+        #container{
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h3>HTML5拖放API的简单应用</h3>
+    <hr>
+    <p id="text" draggable="true" ondragstart="drag(event)">这是一个可以用于拖放的段落元素</p>
+    <div id="container" ondragover="allowDrop(event)" ondrop="drop(event)">这是一个可以用于放置被拖放元素的区域</div>
+    <script>
+        function drag(ev){
+            ev.dataTransfer.setData('text/plain',ev.target.id);
+        }
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+        function drop(ev){
+            ev.preventDefault();
+            var id = ev.dataTransfer.getData('text');
+            var p = document.getElementById(id);
+            ev.target.appendChild(p);
+        }
+    </script>
+</body>
+</html>

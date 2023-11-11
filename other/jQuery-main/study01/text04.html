@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <p class="box" id="box" draggable="true">需要拖放的元素</p>
+    <div class="container" id="container">将元素拖放至此</div>
+    <script>
+        var box = document.querySelector('.box');
+        var container = document.querySelector('.container');
+        box.ondragstart = function(){
+            console.log('开始被拖动啦');
+        }
+        box.ondrag = function(){
+            console.log('被拖动啦');
+        }
+        box.ondragend = function(){
+            console.log('拖动结束啦');
+        }
+        container.ondragenter = function(){
+            console.log('我进来啦')
+        }
+        container.ondragover = function(ev){
+            ev.preventDefault();
+            console.log('我移动啦')
+        }
+        container.ondragleave = function(){
+            console.log('我出去啦')
+        }
+        container.ondrop = function(){
+            console.log('我不走啦')
+        }
+    </script>
+</body>
+</html>

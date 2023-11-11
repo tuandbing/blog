@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>徐瑞的问卷调查</title>
+<style>
+	body{background:rgb(166, 222, 239);}
+	div{background:rgb(242, 244, 245);
+	color:rgb(0, 0, 0);
+	padding:15px;
+	margin:60px auto 0px;
+	width:600px;
+	font-family:"微软雅黑";
+	box-shadow:10px 10px 15px black  ;}	
+	h2{text-align:center;}
+	hr{width:80%;
+	border:2px solid  rgb(166, 222, 239) ;
+	margin-top:-5px;
+	}
+	input{margin:10px}
+	li{margin:10px;}
+	input[type="text"] ,input[type="tel"]
+    { width:300px;
+	border:0px;
+	border-bottom:1px solid;	}
+	
+	button{background:rgb(79, 93, 247);
+	color:rgb(255, 255, 255);
+	width:100px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	font-family:"微软雅黑";
+	margin:5% 39%;} 
+	button:hover{background:rgb(251, 216, 18);}
+</style>
+</head>
+
+<body>
+	<div>
+    	<h2>徐瑞相亲对象问卷调查</h2><br/>
+        <hr/><br/>
+        <form method="post" action="URL" onSubmit="return check()">
+        	<ol>
+                <li>你的性别是？</li>
+                <label> <input type="radio" name="1"  required>男</label>
+                <label> <input type="radio" name="1"  required>女 </label>
+                <label> <input type="radio" name="1"  required>其他</label>
+
+            	<li>你的教育程度是？</li>
+                	<label> <input type="radio" name="1"  required>高中 </label>
+                   <label> <input type="radio" name="1"  required>大专 </label>
+                   <label> <input type="radio" name="1"  required>本科 </label>
+                   <label> <input type="radio" name="1"  required>硕士研究生 </label>
+                   <label> <input type="radio" name="1"  required>博士及以上 </label>
+            	 
+                <li>你的年龄段是？</li>
+                	<label> <input type="radio" name="2"  required>18岁以下 </label>
+                   <label> <input type="radio" name="2"  required>18-25岁 </label>
+                   <label> <input type="radio" name="2"  required>26-30岁 </label>
+                   <label> <input type="radio" name="2"  required>31-35岁 </label>
+                   <label> <input type="radio" name="2"  required>35岁以上 </label>
+
+                <li>你觉得以下选项哪些比较重要？（可多选）</li>
+                	<label> <input type="checkbox"  name="q3">外貌 </label>
+                   <label> <input type="checkbox"  name="q3">职业 </label>
+                   <label> <input type="checkbox"  name="q3">工资 </label>
+                   <label> <input type="checkbox"  name="q3">德行 </label>
+                   <label> <input type="checkbox"  name="q3">学历 </label><br/>
+                   <label>其他<input type="tel" name="tel"  required></label>
+
+                <li>你的爱好有哪些？（可多选）</li>
+                	<label> <input type="checkbox"  name="q4">游戏 </label><br/>
+                   <label> <input type="checkbox"  name="q4">小说 </label><br/>
+                   <label> <input type="checkbox"  name="q4">追剧 </label><br/>
+                   <label> <input type="checkbox"  name="q4">音乐 </label><br/>
+                   <label> <input type="checkbox"  name="q4">运动 </label><br/>
+                   <label>其他<input type="tel" name="tel"  required></label>
+            </ol>
+            <label>你的姓名<input type="text" name="name"  required></label><br/>
+            <label>联系电话<input type="tel" name="tel"  required></label><br/>
+            <h4>你的择偶标准</h4>
+            <textarea cols="80" rows="6" readonly>请留下你的要求</textarea>
+            <button type="submit" onclick="alert('提交成功')">提交问卷</button>
+        	
+        </form>
+        <script>
+		 	function checkBox(name){
+				var j=0;
+				var checkbox=document.getElementsByName(name);
+				for(var i=0; i<checkbox.length;i++){
+					if(checkbox[i].checked){
+						j++;
+						break;
+					}
+				}
+				if(j==0)return false;
+				return true;
+			}	
+			function check(){
+				var q3=checkBox("q3");
+				if(q3==false){
+					alert("第3题起码要选择一个选项");
+					return false;
+				}	
+				var q4=checkBox("q4");
+				if(q4==false){
+					alert("第4题起码要选择一个选项");
+					return false;
+				}	
+			}
+		
+		</script>
+    </div>
+</body>
+</html>
+

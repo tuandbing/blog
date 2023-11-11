@@ -1,0 +1,47 @@
+.search_inp{
+    float: left;
+    width: 80%;
+    height: 100%;
+    font-size: small;
+    font-weight: 100;
+    border: 0px;
+    outline: none;
+}
+.search_box{
+    position: relative;
+    margin-left: 25%;
+    margin-top: 50px;
+    width: 50%;
+    height: 40px;
+    border: 1px solid red;
+}
+.search{
+    float: left;
+    width: 20%;
+    height: 100%;
+    background-color: red;
+    text-align: center;
+    font-size: medium;
+    font-weight: 400;
+    line-height: 40px;
+}
+.search:hover{
+    cursor: pointer;
+}
+.search_ul{
+    margin-left: 25%;
+    list-style: none;
+}
+.search_ul li{
+    display: inline-block;
+    margin-left: 70px;
+    font-size: small;
+    font-weight: 100;
+}
+.search_ul li:hover{
+    cursor: pointer;
+    color: red;
+}
+.search_fir_a{
+    color: red;
+}

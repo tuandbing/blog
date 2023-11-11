@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .flex-container {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-flow: row wrap;
+            flex-flow: row wrap;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .flex-container > * {
+            padding: 10px;
+            flex: 1 100%;
+        }
+
+        .main {
+            text-align: left;
+            background: rgb(142, 214, 216);
+        }
+
+        .header {background: rgb(160, 252, 255);}
+        .footer {background: rgb(112, 171, 173);}
+        .aside1 {background: rgb(145, 194, 203);}
+        .aside2 {background: rgb(116, 157, 164);}
+
+        @media all and (min-width: 600px) {
+            .aside { flex: 1 auto; }
+        }
+
+        @media all and (min-width: 800px) {
+            .main    { flex: 3 0px; }
+            .aside1 { order: 1; }
+            .main    { order: 2; }
+            .aside2 { order: 3; }
+            .footer  { order: 4; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="flex-container">
+    <header class="header">经典古诗词</header>
+    <article class="main">
+        <p>明月几时有？把酒问青天。
+            不知天上宫阙，今夕是何年。
+            我欲乘风归去，又恐琼楼玉宇，高处不胜寒。
+            起舞弄清影，何似在人间。
+            转朱阁，低绮户，照无眠。
+            不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。
+            但愿人长久，千里共婵娟。</p>
+    </article>
+    <aside class="aside aside1">唐诗</aside>
+    <aside class="aside aside2">宋词</aside>
+    <footer class="footer">查看更多</footer>
+</div>
+
+</body>
+<html>

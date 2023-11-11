@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 200px;
+            height: 230px;
+            background-color: gray;
+            float: left;
+            margin-left: 10%;
+        }
+        li{
+            list-style: none;
+            background-color: aqua;
+            margin: 10px;
+            height: 30px;
+            padding-left: 5px;
+            cursor: pointer;
+        }
+        .box_2{
+            width: 300px;
+            height: 300px;
+            background-color: gray;
+            top: 100px;
+            float: right;
+            margin-right: 20%;
+        }
+        .container{
+            min-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="box_ul">
+            <li draggable="true" class="demo">1.馒头</li>
+            <li draggable="true" class="demo">2.花生</li>
+            <li draggable="true" class="demo">3.小旺</li>
+            <li draggable="true" class="demo">4.旺仔</li>
+            <li draggable="true" class="demo">5.牛奶</li>
+        </ul>
+    </div>
+    <div class="box_2">
+        <ul class="container">
+
+        </ul>
+    </div>
+    <script>
+        var demolist = document.querySelectorAll('.demo');
+        var container = document.querySelector('.container');
+        var demonow = null;
+        for(let i = 0,len = demolist.length;i < len;i++){
+            demolist[i].ondragstart = function(ev){
+                demonow = this;
+            }
+        }
+        container.ondragover = function(ev){
+            ev.preventDefault();
+        }
+        container.ondrop = function(){
+            this.appendChild(demonow);
+        }
+    </script>
+</body>
+</html>

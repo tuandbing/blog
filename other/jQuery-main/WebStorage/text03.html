@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记录用户访问页面的次数</title>
+</head>
+<body>
+    localStorage存储: 您曾经访问了当前页面<span id="time1">0</span>次。
+    <br>
+    sessionStorage存储: 您曾经访问了当前页面<span id="time2">0</span>次。
+    <br>
+    <script>
+        var count1 = localStorage.getItem('count1');
+        var count2 = sessionStorage.getItem('count2');
+
+        if(count1 == null)
+            count1 = 0;
+        if(count2 == null)
+            count2 = 0;
+
+            document.getElementById('time1').innerHTML = count1;
+            document.getElementById('time2').innerHTML = count2;
+
+            localStorage.setItem('count1',parseInt(count1) + 1);
+            sessionStorage.setItem('count2',parseInt(count2) + 1);
+    </script>
+</body>
+</html>

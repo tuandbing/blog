@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>五子棋</title>
+        <style>
+            body{
+            background-image:url(zhuomian.jpg);
+			background-attachment: fixed;
+			background-size:100%;
+        }
+            canvas{
+                position: absolute;
+                top: 80px;
+                left: 380px;
+                border: 2px solid black;
+                background-image: url("qipan.jpg");
+                box-shadow: 5px 5px 5px black;
+            }
+            #huihe{
+                position: absolute;
+                top: 43px;
+                left: 565px;
+                height: 30px;
+                width: 120px;
+                text-align: center;
+                line-height: 30px;
+                border: 4px dotted black;
+                font-size: 20px;
+                font-weight: bolder;
+            }
+            .heizi{
+                position: absolute;
+                top: 1px;
+                left: 365px;
+            }
+            #heiqi{
+                position: absolute;
+                top: 40px;
+                left: 380px;
+                border: 2px ridge black;
+                width: 50px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+            }
+            .baizi{
+                position: absolute;
+                top: 1px;
+                left: 820px;
+            }
+            #baiqi{
+                position: absolute;
+                top: 40px;
+                left: 835px;
+                border: 2px ridge black;
+                width: 50px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+            }
+            #remake{
+                position: absolute;
+                top: 600px;
+                left: 780px;
+                height: 50px;
+                width: 100px;
+                border: 1px solid black;
+                border-radius: 25px;
+                background-color:blanchedalmond;
+            }
+            .zuo{
+                position: absolute;
+                left: 100px;
+                top:200px;
+                height: 300px;
+                width: 200px;
+                background-image: url("zuo.png");
+                background-size:100%;
+            }
+            .you{
+                position: absolute;
+                left: 950px;
+                top:200px;
+                height: 300px;
+                width: 200px;
+                background-image: url("you.png");
+                background-size:100%;
+            }
+            #yinyue{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+            }
+            #kaishi{
+                position: absolute;
+                top: 600px;
+                left: 380px;
+                height: 50px;
+                width: 100px;
+                border: 1px solid black;
+                border-radius: 25px;
+                background-color:blanchedalmond;
+            }
+            #kaishi1{
+                position: absolute;
+                top: 600px;
+                left: 280px;
+                height: 50px;
+                width: 100px;
+                color: darkred;
+                border: 1px solid black;
+                background-color:aquamarine;
+                display: none;
+            }
+            #kaishi2{
+                position: absolute;
+                top: 550px;
+                left: 280px;
+                height: 50px;
+                width: 100px;
+                color: darkred;
+                border: 1px solid black;
+                background-color:aquamarine;
+                display: none;
+            }
+            #baocun{
+                position: absolute;
+                top: 600px;
+                left: 480px;
+                height: 50px;
+                width: 100px;
+                border: 1px solid black;
+                border-radius: 25px;
+                background-color:blanchedalmond;
+            }
+            #huiqi{
+                position: absolute;
+                top: 600px;
+                left: 580px;
+                height: 50px;
+                width: 100px;
+                border: 1px solid black;
+                border-radius: 25px;
+                background-color:blanchedalmond;
+            }
+            #qiuhe{
+                position: absolute;
+                top: 600px;
+                left: 680px;
+                height: 50px;
+                width: 100px;
+                border: 1px solid black;
+                border-radius: 25px;
+                background-color:blanchedalmond;
+            }
+            #heitime{
+                position: absolute;
+                left: 100px;
+                top: 95px;
+                height: 50px;
+                width: 200px;
+                border: 3px ridge black;
+                text-align: center;
+                line-height: 50px;
+                color: darkred;
+                background-color: wheat;
+            }
+            #heibushi{
+                position: absolute;
+                left: 100px;
+                top: 145px;
+                height: 50px;
+                width: 200px;
+                border: 3px ridge black;
+                text-align: center;
+                line-height: 50px;
+                color: darkred;
+                background-color: wheat;
+            }
+            #baitime{
+                position: absolute;
+                left: 950px;
+                top: 95px;
+                height: 50px;
+                width: 200px;
+                border: 3px ridge black;
+                text-align: center;
+                line-height: 50px;
+                color: darkorange;
+                background-color: wheat;
+            }
+            #baibushi{
+                position: absolute;
+                left: 950px;
+                top: 145px;
+                height: 50px;
+                width: 200px;
+                border: 3px ridge black;
+                text-align: center;
+                line-height: 50px;
+                color: darkorange;
+                background-color: wheat;
+            }
+            #bifen{
+                position:absolute;
+                left: 530px;
+                top: 0px;
+                border: 2px ridge darkred;
+                height: 30px;
+                width: 200px;
+                text-align: center;
+                line-height: 30px;
+                font-size: 20px;
+                font-weight: bolder;
+            }
+            #huiqicount{
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                height: 70px;
+                width: 120px;
+                background-color: bisque;
+                border: 3px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="baibushi">步时:2分0秒</div><div id="heibushi">步时:2分0秒</div>
+        <div id="huiqicount">所剩悔棋次数<br>黑棋:3次<br>白棋:3次</div>
+        <div id="heitime">局时:20分0秒</div>
+        <div id="baitime">局时:20分0秒</div>
+        <button id="yinyue" onclick="bgm()">打开背景音乐</button>
+        <div class="zuo"></div>
+        <div class="you"></div>
+        <button id="remake" onclick="Remake()">认输</button>
+        <button id="kaishi" onclick="Kaishi()">开始游戏</button>
+        <button id="kaishi1" onclick="Kaishione()">人人对战</button>
+        <button id="kaishi2" onclick="Kaishitwo()">人机对战</button>
+        <button id="baocun" onclick="Baocun()">暂停游戏</button>
+        <button id="huiqi" onclick="Huiqi()">悔棋</button>
+        <button id="qiuhe" onclick="Qiuhe()">求和</button>
+        <div id="huihe">五子棋游戏</div>
+        <h3 class="baizi">白子落子数</h3>
+        <h3 class="heizi">黑子落子数</h3>
+        <div id="baiqi">0</div>
+        <div id="heiqi">0</div>
+        <div id="bifen">黑棋 0:0 白棋</div>
+        <canvas id="myCanvas" width="500" height="500" onclick="XiaQi(event)"></canvas>
+        <audio id="music1"><source src="5390.mp3"></audio>
+        <audio id="music2"><source src="14230.mp3"></audio>
+        <audio id="music3" src="10018.mp3" autoplay="autoplay" loop="loop"></audio>
+        <script>
+            var c=document.getElementById("myCanvas");
+            var ctx=c.getContext("2d");
+            var hh=document.getElementById("huihe");
+            var bz=document.getElementById("baiqi");
+            var hz=document.getElementById("heiqi");
+            var music1=document.getElementById("music1");
+            var music2=document.getElementById("music2");
+            var music3=document.getElementById("music3");
+            var bf=document.getElementById("yinyue");
+            var startname=document.getElementById("kaishi");
+            var bifen=document.getElementById("bifen");
+            var onetime=document.getElementById("heitime");
+            var twotime=document.getElementById("baitime");
+            var onebu=document.getElementById("heibushi");
+            var twobu=document.getElementById("baibushi");
+
+            var fenone=20;
+            var fentwo=20;
+            var miaoone=0;
+            var miaotwo=0;
+            var clockone;
+            var clocktwo;
+            var bufenone=2;
+            var bumiaoone=0;
+            var bufentwo=2;
+            var bumiaotwo=0;
+            function resetTimerone(){
+                clearInterval(clockone);
+                fenone=20;
+                miaoone=0;
+                onetime.innerHTML="局时:"+fenone+"分"+miaoone+"秒";
+            }
+            function resetTimertwo(){ 
+                clearInterval(clocktwo);
+                fentwo=20;
+                miaotwo=0;
+                twotime.innerHTML="局时:"+fentwo+"分"+miaotwo+"秒";
+            }
+            function startTimerone(){
+                clockone=setInterval(timerone,1000);
+                bufenone=2;
+                bumiaoone=0;
+            }
+            function startTimertwo(){
+                clocktwo=setInterval(timertwo,1000);
+                bufentwo=2;
+                bumiaotwo=0;
+            }
+            function stopTimerone(){
+                clearInterval(clockone);
+                bufenone=2;
+                bumiaoone=0;
+                onetime.innerHTML="局时:"+fenone+"分"+miaoone+"秒";
+                onebu.innerHTML="步时:"+bufenone+"分"+bumiaoone+"秒";
+            }
+            function stopTimertwo(){
+                clearInterval(clocktwo);
+                bufentwo=2;
+                bumiaotwo=0;
+                twotime.innerHTML="局时:"+fentwo+"分"+miaotwo+"秒";
+                twobu.innerHTML="步时:"+bufentwo+"分"+bumiaotwo+"秒";
+            }
+            function timerone(){
+                miaoone=miaoone-1;
+                bumiaoone=bumiaoone-1;
+                if(miaoone<0){
+                    miaoone=miaoone+60;
+                    fenone=fenone-1;
+                }
+                if(bumiaoone<0){
+                    bumiaoone=bumiaoone+60;
+                    bufenone=bufenone-1;
+                }
+                onetime.innerHTML="局时:"+fenone+"分"+miaoone+"秒";
+                onebu.innerHTML="步时:"+bufenone+"分"+bumiaoone+"秒";
+            }
+            function timertwo(){
+                miaotwo=miaotwo-1;
+                bumiaotwo=bumiaotwo-1;
+                if(miaotwo<0){
+                    miaotwo=miaotwo+60;
+                    fentwo=fentwo-1;
+                }
+                if(bumiaotwo<0){
+                    bumiaotwo=bumiaotwo+60;
+                    bufentwo=bufentwo-1;
+                }
+                twotime.innerHTML="局时:"+fentwo+"分"+miaotwo+"秒";
+                twobu.innerHTML="步时:"+bufentwo+"分"+bumiaotwo+"秒";
+            }
+
+            function HuaQiPan(){
+                c.height=c.height;
+                ctx.beginPath();
+                ctx.lineWidth="2";
+                var a=25;
+                while(a<=475){
+                    ctx.moveTo(25,a);
+                    ctx.lineTo(475,a);
+                    a=a+30;
+                }
+                a=25;
+                while(a<=475){
+                    ctx.moveTo(a,25);
+                    ctx.lineTo(a,475);
+                    a=a+30;
+                }
+                ctx.stroke();
+            }
+
+            var xycount=new Array();
+            var i=0;
+            var j=0;
+            for(i=0;i<=15;i++){
+                xycount[i]=new Array(i);
+                for(j=0;j<=15;j++)
+                xycount[i][j]=0;
+            }
+            var aicount=new Array();
+            var i=0;
+            var j=0;
+            for(i=0;i<=15;i++){
+                aicount[i]=new Array(i);
+                for(j=0;j<=15;j++)
+                aicount[i][j]=0;
+            }
+            var baizishu=0;
+            var heizishu=0;
+            var jud=1;
+            var win=0;
+            var xpass=[];
+            var ypass=[];
+            for(i=1;i<=256;i++){
+                xpass[i]=0;
+                ypass[i]=0;
+            }
+            var pass=0;
+            function ChongZhi(){
+                for(i=0;i<=15;i++)
+                for(j=0;j<=15;j++)
+                {
+                    xycount[i][j]=0;
+                    aicount[i][j]=0;
+                }
+                pass=0;
+                for(i=1;i<=256;i++){
+                    xpass[i]=0;
+                    ypass[i]=0;
+                }
+                baizishu=0;
+                heizishu=0;
+                hh.innerHTML="黑棋的回合";
+                hz.innerHTML=heizishu;
+                bz.innerHTML=baizishu;
+                jud=1;
+                win=0;
+            }
+            var start=0;
+            var suoding=0;
+            var blackhuiqi=3;
+            var whitehuiqi=3; 
+            var k1=document.getElementById("kaishi1");
+            var k2=document.getElementById("kaishi2");
+            var mode=0;
+            function Kaishi(){
+                k1.style.display="block";
+                k2.style.display="block";
+                startname.innerHTML="请选择模式";
+            }
+            function Kaishione(){
+                    k1.style.display="none";
+                    k2.style.display="none";
+                    startname.innerHTML="重新开始";
+                    HuaQiPan();
+                    ChongZhi();
+                    start=start+1;
+                    startname.innerHTML="重新开始";
+                    stopTimerone();
+                    stopTimertwo();
+                    resetTimerone();
+                    resetTimertwo();
+                    startTimerone();
+                    var blackhuiqi=3;
+                    var whitehuiqi=3;
+                    start=1;
+                    mode=1;
+                    jud=1;
+            }
+            
+            function Kaishitwo(){
+                    k1.style.display="none";
+                    k2.style.display="none";
+                    startname.innerHTML="重新开始";
+                    HuaQiPan();
+                    ChongZhi();
+                    start=start+1;
+                    startname.innerHTML="重新开始";
+                    stopTimerone();
+                    stopTimertwo();
+                    resetTimerone();
+                    resetTimertwo();
+                    startTimerone();
+                    var blackhuiqi=3;
+                    var whitehuiqi=3;
+                    start=1;
+                    mode=2;
+                    jud=1;
+            }
+
+            var xpingmu=0;
+            var ypingmu=0;
+            var xqipan=0;
+            var yqipan=0;
+            var d1=0;
+            var d2=0;
+            var xqi=0;
+            var yqi=0;
+            function LuoHeiZi(i,j){
+                ctx.beginPath();
+                ctx.fillStyle="black";
+                ctx.arc(i,j,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.stroke();
+                heizishu=heizishu+1;
+            }
+            function LuoBaiZi(i,j){
+                ctx.beginPath();
+                ctx.fillStyle="white";
+                ctx.arc(i,j,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.stroke();
+                baizishu=baizishu+1;
+            }
+            function CaQuQi(){
+                xqi=xpass[pass]*30+25;
+                yqi=450-ypass[pass]*30+25;
+                xycount[xpass[pass]][ypass[pass]]=0;
+                ctx.clearRect(xqi-15,yqi-15,30,30);
+                ctx.beginPath();
+                ctx.lineWidth="2";
+                ctx.moveTo(xqi-15,yqi);
+                ctx.lineTo(xqi+15,yqi);
+                ctx.moveTo(xqi,yqi-15);
+                ctx.lineTo(xqi,yqi+15);
+                ctx.stroke();
+                pass=pass-1;
+            } 
+            function Luozi(){
+                xpingmu=event.clientX;
+			    ypingmu=event.clientY;
+                xqipan=xpingmu-405;
+                yqipan=450+105-ypingmu;
+                d1=Math.round(xqipan/30.0);
+                d2=Math.round(yqipan/30.0);
+                if(d1>=0&&d2>=0&&d1<=15&&d2<=15&&xycount[d1][d2]==0){
+                    xqi=d1*30+25;
+                    yqi=450-d2*30+25;
+                    pass=pass+1;
+                    xpass[pass]=d1;
+                    ypass[pass]=d2;
+                    if(jud==1){
+                        LuoHeiZi(xqi,yqi);
+                        jud=2;
+                        xycount[d1][d2]=1;
+                        hh.innerHTML="白棋的回合";
+                        hz.innerHTML=heizishu;
+                    }else if(jud==2){
+                        LuoBaiZi(xqi,yqi);
+                        jud=1;
+                        xycount[d1][d2]=2;
+                        hh.innerHTML="黑棋的回合";
+                        bz.innerHTML=baizishu;
+                    }
+                }else if(xycount[d1][d2]!=0){
+                    alert("此处已有棋!");
+                }else {
+                    alert("请在规定区域内下棋");
+                }
+            }
+            var blackwin=0;
+            var whitewin=0;
+            function judwin(){
+                if(xycount[d1][d2]==1){
+                    if(d1>=4){
+                        if(xycount[d1-1][d2]==1&&xycount[d1-2][d2]==1&&xycount[d1-3][d2]==1&&xycount[d1-4][d2]==1) win=1;
+                        if(d2>=4) if(xycount[d1-1][d2-1]==1&&xycount[d1-2][d2-2]==1&&xycount[d1-3][d2-3]==1&&xycount[d1-4][d2-4]==1) win=1;
+                        if(d2<=11) if(xycount[d1-1][d2+1]==1&&xycount[d1-2][d2+2]==1&&xycount[d1-3][d2+3]==1&&xycount[d1-4][d2+4]==1) win=1;
+                    }        
+                    if(d1<=11){
+                        if(xycount[d1+1][d2]==1&&xycount[d1+2][d2]==1&&xycount[d1+3][d2]==1&&xycount[d1+4][d2]==1) win=1;
+                        if(d2>=4) if(xycount[d1+1][d2-1]==1&&xycount[d1+2][d2-2]==1&&xycount[d1+3][d2-3]==1&&xycount[d1+4][d2-4]==1) win=1;
+                        if(d2<=11) if(xycount[d1+1][d2+1]==1&&xycount[d1+2][d2+2]==1&&xycount[d1+3][d2+3]==1&&xycount[d1+4][d2+4]==1) win=1;
+                    }
+                    if(d1>=1&&d1<=12){
+                        if(xycount[d1-1][d2]==1&&xycount[d1+1][d2]==1&&xycount[d1+2][d2]==1&&xycount[d1+3][d2]==1) win=1;
+                        if(d2>=1&&d2<=12){
+                            if(xycount[d1-1][d2-1]==1&&xycount[d1+1][d2+1]==1&&xycount[d1+2][d2+2]==1&&xycount[d1+3][d2+3]==1) win=1;
+                            if(xycount[d1-1][d2+1]==1&&xycount[d1+1][d2-1]==1&&xycount[d1+2][d2-2]==1&&xycount[d1+3][d2-3]==1) win=1;}
+                        }
+                        if(d1>=3&&d1<=14){
+                            if(xycount[d1-3][d2]==1&&xycount[d1-2][d2]==1&&xycount[d1-1][d2]==1&&xycount[d1+1][d2]==1) win=1;
+                            if(d2>=3&&d2<=14){
+                    if(xycount[d1-3][d2-3]==1&&xycount[d1-2][d2-2]==1&&xycount[d1-1][d2-1]==1&&xycount[d1+1][d2+1]==1) win=1;
+                    if(xycount[d1-3][d2+3]==1&&xycount[d1-2][d2+2]==1&&xycount[d1-1][d2+1]==1&&xycount[d1+1][d2-1]==1) win=1;}
+                    }   
+                    if(d1>=2&&d1<=13){
+                        if(xycount[d1-2][d2]==1&&xycount[d1-1][d2]==1&&xycount[d1+1][d2]==1&&xycount[d1+2][d2]==1) win=1;
+                        if(d2>=2&&d2<=13){
+                            if(xycount[d1-2][d2-2]==1&&xycount[d1-1][d2-1]==1&&xycount[d1+1][d2+1]==1&&xycount[d1+2][d2+2]==1) win=1;
+                            if(xycount[d1-2][d2+2]==1&&xycount[d1-1][d2+1]==1&&xycount[d1+1][d2-1]==1&&xycount[d1+2][d2-2]==1) win=1;
+                        }
+                    }
+                    if(d2>=4) if(xycount[d1][d2-4]==1&&xycount[d1][d2-3]==1&&xycount[d1][d2-2]==1&&xycount[d1][d2-1]==1) win=1;
+                    if(d2<=11) if(xycount[d1][d2+4]==1&&xycount[d1][d2+3]==1&&xycount[d1][d2+2]==1&&xycount[d1][d2+1]==1) win=1;
+                    if(d2>=1&&d2<=12) if(xycount[d1][d2-1]==1&&xycount[d1][d2+3]==1&&xycount[d1][d2+2]==1&&xycount[d1][d2+1]==1) win=1;
+                    if(d2>=3&&d2<=14) if(xycount[d1][d2+1]==1&&xycount[d1][d2-3]==1&&xycount[d1][d2-2]==1&&xycount[d1][d2-1]==1) win=1;
+                    if(d2>=2&&d2<=13) if(xycount[d1][d2+2]==1&&xycount[d1][d2+1]==1&&xycount[d1][d2-2]==1&&xycount[d1][d2-1]==1) win=1;
+                }
+                if(xycount[d1][d2]==2){
+                    if(d1>=4){
+                        if(xycount[d1-1][d2]==2&&xycount[d1-2][d2]==2&&xycount[d1-3][d2]==2&&xycount[d1-4][d2]==2) win=2;
+                    if(d2>=4) if(xycount[d1-1][d2-1]==2&&xycount[d1-2][d2-2]==2&&xycount[d1-3][d2-3]==2&&xycount[d1-4][d2-4]==2) win=2;
+                    if(d2<=11) if(xycount[d1-1][d2+1]==2&&xycount[d1-2][d2+2]==2&&xycount[d1-3][d2+3]==2&&xycount[d1-4][d2+4]==2) win=2;
+                    }        
+                    if(d1<=11){
+                        if(xycount[d1+1][d2]==2&&xycount[d1+2][d2]==2&&xycount[d1+3][d2]==2&&xycount[d1+4][d2]==2) win=2;
+                        if(d2>=4) if(xycount[d1+1][d2-1]==2&&xycount[d1+2][d2-2]==2&&xycount[d1+3][d2-3]==2&&xycount[d1+4][d2-4]==2) win=2;
+                        if(d2<=11) if(xycount[d1+1][d2+1]==2&&xycount[d1+2][d2+2]==2&&xycount[d1+3][d2+3]==2&&xycount[d1+4][d2+4]==2) win=2;
+                    }
+                    if(d1>=1&&d1<=12){
+                        if(xycount[d1-1][d2]==2&&xycount[d1+1][d2]==2&&xycount[d1+2][d2]==2&&xycount[d1+3][d2]==2) win=2;
+                        if(d2>=1&&d2<=12){
+                            if(xycount[d1-1][d2-1]==2&&xycount[d1+1][d2+1]==2&&xycount[d1+2][d2+2]==2&&xycount[d1+3][d2+3]==2) win=2;
+                            if(xycount[d1-1][d2+1]==2&&xycount[d1+1][d2-1]==2&&xycount[d1+2][d2-2]==2&&xycount[d1+3][d2-3]==2) win=2;}
+                    }
+                    if(d1>=3&&d1<=14){
+                        if(xycount[d1-3][d2]==2&&xycount[d1-2][d2]==2&&xycount[d1-1][d2]==2&&xycount[d1+1][d2]==2) win=1;
+                            if(d2>=3&&d2<=14){
+                            if(xycount[d1-3][d2-3]==2&&xycount[d1-2][d2-2]==2&&xycount[d1-1][d2-1]==2&&xycount[d1+1][d2+1]==2) win=1;
+                            if(xycount[d1-3][d2+3]==2&&xycount[d1-2][d2+2]==2&&xycount[d1-1][d2+1]==2&&xycount[d1+1][d2-1]==2) win=1;
+                        }
+                    }   
+                    if(d1>=2&&d1<=13){
+                        if(xycount[d1-2][d2]==2&&xycount[d1-1][d2]==2&&xycount[d1+1][d2]==2&&xycount[d1+2][d2]==2) win=2;
+                        if(d2>=2&&d2<=13){
+                            if(xycount[d1-2][d2-2]==2&&xycount[d1-1][d2-1]==2&&xycount[d1+1][d2+1]==2&&xycount[d1+2][d2+2]==2) win=2;
+                            if(xycount[d1-2][d2+2]==2&&xycount[d1-1][d2+1]==2&&xycount[d1+1][d2-1]==2&&xycount[d1+2][d2-2]==2) win=2;
+                        }
+                    }
+                    if(d2>=4)  if(xycount[d1][d2-4]==2&&xycount[d1][d2-3]==2&&xycount[d1][d2-2]==2&&xycount[d1][d2-1]==2) win=2;
+                    if(d2<=11) if(xycount[d1][d2+4]==2&&xycount[d1][d2+3]==2&&xycount[d1][d2+2]==2&&xycount[d1][d2+1]==2) win=2;
+                    if(d2>=1&&d2<=12) if(xycount[d1][d2-1]==2&&xycount[d1][d2+3]==2&&xycount[d1][d2+2]==2&&xycount[d1][d2+1]==2) win=2;
+                    if(d2>=3&&d2<=14) if(xycount[d1][d2+1]==2&&xycount[d1][d2-3]==2&&xycount[d1][d2-2]==2&&xycount[d1][d2-1]==2) win=2;
+                    if(d2>=2&&d2<=13) if(xycount[d1][d2+2]==2&&xycount[d1][d2+1]==2&&xycount[d1][d2-2]==2&&xycount[d1][d2-1]==2) win=2;
+                }
+            }
+            function XiaQione(event){
+                if(start!=0){
+                    if(suoding==0){
+                        if(win==0){
+                            if(jud==1){
+                                stopTimerone();
+                                if(win==0)startTimertwo();
+                            }else if(jud==2){
+                                stopTimertwo();
+                                if(win==0)startTimerone();
+                            }
+                            Luozi();
+                            judwin();
+                            if(win==1){
+                                alert("游戏结束,黑棋胜利!");
+                                hh.innerHTML="黑棋已胜利";
+                                music2.play();
+                                stopTimerone();
+                                stopTimertwo();
+                                blackwin=blackwin+1;
+                            }if(win==2){
+                                alert("游戏结束,白棋胜利!");
+                                hh.innerHTML="白棋已胜利";
+                                music2.play();
+                                stopTimerone();
+                                stopTimertwo();
+                                whitewin=whitewin+1;
+                            }else if(baizishu+heizishu==256) {alert("游戏结束,平局!");hh.innerHTML="此局为平局";}
+                            bifen.innerHTML="黑棋 "+blackwin+":"+whitewin+" 白棋";
+                            music1.play();
+                        }else{
+                            alert("此局已结束，请重新开始！");
+                            stopTimerone();
+                            stopTimertwo();
+                        }
+                    }else{
+                        alert("棋局已暂停！");
+                    }}
+                else{
+                    alert("游戏还未开始");
+                }
+            } 
+
+            function AIjud(){
+                var aix=0;
+                var aiy=0;
+                var max=0;
+                var i;
+                var yes=1;
+                var maxnow=0;
+                for(aix=0;aix<=15;aix++)
+                    for(aiy=0;aiy<=15;aiy++)
+                        if(xycount[aix][aiy]==0)
+                        {   
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+                            //白左四
+                            if(aix-4>=0){
+                                if(xycount[aix-4][aiy]==2&&xycount[aix-3][aiy]==2&&xycount[aix-2][aiy]==2&&xycount[aix-1][aiy]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白左下四
+                            if(aix-4>=0&&aiy-4>=0){
+                                if(xycount[aix-4][aiy-4]==2&&xycount[aix-3][aiy-3]==2&&xycount[aix-2][aiy-2]==2&&xycount[aix-1][aiy-1]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白左上四
+                            if(aix-4>=0&&aiy+4<=15){
+                                if(xycount[aix-4][aiy+4]==2&&xycount[aix-3][aiy+3]==2&&xycount[aix-2][aiy+2]==2&&xycount[aix-1][aiy+1]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白右上四
+                            if(aix+4<=15){
+                                if(xycount[aix+4][aiy]==2&&xycount[aix+3][aiy]==2&&xycount[aix+2][aiy]==2&&xycount[aix+1][aiy]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白右下四
+                            if(aix+4<=15&&aiy-4>=0){
+                                if(xycount[aix+4][aiy-4]==2&&xycount[aix+3][aiy-3]==2&&xycount[aix+2][aiy-2]==2&&xycount[aix+1][aiy-1]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白右上四
+                            if(aix+4<=15&&aiy+4<=15){
+                                if(xycount[aix+4][aiy+4]==2&&xycount[aix+3][aiy+3]==2&&xycount[aix+2][aiy+2]==2&&xycount[aix+1][aiy+1]==2) {maxnow=5-0;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白上四
+                            if(aiy+4<=15){
+                                if(xycount[aix][aiy+4]==2&&xycount[aix][aiy+3]==2&&xycount[aix][aiy+2]==2&&xycount[aix][aiy+1]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白下四
+                            if(aiy-4>=0){
+                                if(xycount[aix][aiy-4]==2&&xycount[aix][aiy-3]==2&&xycount[aix][aiy-2]==2&&xycount[aix][aiy-1]==2) {maxnow=500;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }    
+                            //白左三
+                            if(aix-3>=0){
+                                if(xycount[aix-3][aiy]==2&&xycount[aix-2][aiy]==2&&xycount[aix-1][aiy]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白左下三
+                            if(aix-3>=0&&aiy-3>=0){
+                                if(xycount[aix-3][aiy-3]==2&&xycount[aix-2][aiy-2]==2&&xycount[aix-1][aiy-1]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白左上三
+                            if(aix-3>=0&&aiy+3<=15){
+                                if(xycount[aix-3][aiy+3]==2&&xycount[aix-2][aiy+2]==2&&xycount[aix-1][aiy+1]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白右三
+                            if(aix+3<=15){
+                                if(xycount[aix+3][aiy]==2&&xycount[aix+2][aiy]==2&&xycount[aix+1][aiy]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白右下三
+                            if(aix+3<=15&&aiy-3>=0){
+                                if(xycount[aix+3][aiy-3]==2&&xycount[aix+2][aiy-2]==2&&xycount[aix+1][aiy-1]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白右上三
+                            if(aix+3<=15&&aiy+3<=15){
+                                if(xycount[aix+3][aiy+3]==2&&xycount[aix+2][aiy+2]==2&&xycount[aix+1][aiy+1]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白上三
+                            if(aiy+3<=15){
+                                if(xycount[aix][aiy+3]==2&&xycount[aix][aiy+2]==2&&xycount[aix][aiy+1]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //白下三
+                            if(aiy-3>=0){
+                                if(xycount[aix][aiy-3]==2&&xycount[aix][aiy-2]==2&&xycount[aix][aiy-1]==2) {maxnow=400;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+
+
+                            //黑左四
+                            if(aix-4>=0){
+                                if(xycount[aix-4][aiy]==1&&xycount[aix-3][aiy]==1&&xycount[aix-2][aiy]==1&&xycount[aix-1][aiy]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左下四
+                            if(aix-4>=0&&aiy-4>=0){
+                                if(xycount[aix-4][aiy-4]==1&&xycount[aix-3][aiy-3]==1&&xycount[aix-2][aiy-2]==1&&xycount[aix-1][aiy-1]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左上四
+                            if(aix-4>=0&&aiy+4<=15){
+                                if(xycount[aix-4][aiy+4]==1&&xycount[aix-3][aiy+3]==1&&xycount[aix-2][aiy+2]==1&&xycount[aix-1][aiy+1]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右四
+                            if(aix+4<=15){
+                                if(xycount[aix+4][aiy]==1&&xycount[aix+3][aiy]==1&&xycount[aix+2][aiy]==1&&xycount[aix+1][aiy]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右下四
+                            if(aix+4<=15&&aiy-4>=0){
+                                if(xycount[aix+4][aiy-4]==1&&xycount[aix+3][aiy-3]==1&&xycount[aix+2][aiy-2]==1&&xycount[aix+1][aiy-1]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右上四
+                            if(aix+4<=15&&aiy+4<=15){
+                                if(xycount[aix+4][aiy+4]==1&&xycount[aix+3][aiy+3]==1&&xycount[aix+2][aiy+2]==1&&xycount[aix+1][aiy+1]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑上四
+                            if(aiy+4<=15){
+                                if(xycount[aix][aiy+4]==1&&xycount[aix][aiy+3]==1&&xycount[aix][aiy+2]==1&&xycount[aix][aiy+1]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑下四
+                            if(aiy-4>=0){
+                                if(xycount[aix][aiy-4]==1&&xycount[aix][aiy-3]==1&&xycount[aix][aiy-2]==1&&xycount[aix][aiy-1]==1) {maxnow=450;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }    
+                            //黑左三
+                            if(aix-3>=0){
+                                if(xycount[aix-3][aiy]==1&&xycount[aix-2][aiy]==1&&xycount[aix-1][aiy]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左下三
+                            if(aix-3>=0&&aiy-3>=0){
+                                if(xycount[aix-3][aiy-3]==1&&xycount[aix-2][aiy-2]==1&&xycount[aix-1][aiy-1]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左上三
+                            if(aix-3>=0&&aiy+3<=15){
+                                if(xycount[aix-3][aiy+3]==1&&xycount[aix-2][aiy+2]==1&&xycount[aix-1][aiy+1]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右三
+                            if(aix+3<=15){
+                                if(xycount[aix+3][aiy]==1&&xycount[aix+2][aiy]==1&&xycount[aix+1][aiy]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右下三
+                            if(aix+3<=15&&aiy-3>=0){
+                                if(xycount[aix+3][aiy-3]==1&&xycount[aix+2][aiy-2]==1&&xycount[aix+1][aiy-1]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右上三
+                            if(aix+3<=15&&aiy+3<=15){
+                                if(xycount[aix+3][aiy+3]==1&&xycount[aix+2][aiy+2]==1&&xycount[aix+1][aiy+1]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑上三
+                            if(aiy+3<=15){
+                                if(xycount[aix][aiy+3]==1&&xycount[aix][aiy+2]==1&&xycount[aix][aiy+1]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑下三
+                            if(aiy-3>=0){
+                                if(xycount[aix][aiy-3]==1&&xycount[aix][aiy-2]==1&&xycount[aix][aiy-1]==1) {maxnow=350;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左二
+                            if(aix-2>=0){
+                                if(xycount[aix-2][aiy]==1&&xycount[aix-1][aiy]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左下二
+                            if(aix-2>=0&&aiy-2>=0){
+                                if(xycount[aix-2][aiy-2]==1&&xycount[aix-1][aiy-1]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左上二
+                            if(aix-2>=0&&aiy+2<=15){
+                                if(xycount[aix-2][aiy+2]==1&&xycount[aix-1][aiy+1]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右二
+                            if(aix+2<=15){
+                                if(xycount[aix+2][aiy]==1&&xycount[aix+1][aiy]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑右下二
+                            if(aix+2<=15&&aiy-2>=0){
+                                if(xycount[aix+2][aiy-2]==1&&xycount[aix+1][aiy-1]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑左上二
+                            if(aix+2<=15&&aiy+2<=15){
+                                if(xycount[aix+2][aiy+2]==1&&xycount[aix+1][aiy+1]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑上二
+                            if(aiy+2<=15){
+                                if(xycount[aix][aiy+2]==1&&xycount[aix][aiy+1]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            //黑下二
+                            if(aiy-2>=0){
+                                if(xycount[aix][aiy-2]==1&&xycount[aix][aiy-1]==1) {maxnow=250;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            if(aix+1<=15){
+                                if(xycount[aix+1][aiy]==1) {maxnow=150;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                            if(aix-1>=0){
+                                if(xycount[aix-1][aiy]==1) {maxnow=150;
+                                if(aicount[aix][aiy]<maxnow) aicount[aix][aiy]=maxnow;}
+                            }
+                    }
+                var maxd1=0;
+                var maxd2=0;
+                for(aix=0;aix<=15;aix++)
+                    for(aiy=0;aiy<=15;aiy++)
+                        if(aicount[aix][aiy]>max&&xycount[aix][aiy]==0){
+                            max=aicount[aix][aiy];
+                            maxd1=aix;
+                            maxd2=aiy;
+                        }
+                d1=maxd1;
+                d2=maxd2;
+            }
+            function AI(){
+                AIjud();
+                stopTimerone();
+                pass=pass+1;
+                xpass[pass]=d1;
+                ypass[pass]=d2;
+                LuoBaiZi(d1*30+25,450-d2*30+25);
+                jud=1;
+                xycount[d1][d2]=2;
+                hh.innerHTML="黑棋的回合";
+                bz.innerHTML=baizishu;
+            }
+            function XiaQitwo(event){
+                if(start!=0){
+                    if(suoding==0){
+                        if(win==0){
+                            startTimerone();
+                            Luozi();
+                            judwin();
+                            if(win!=1)
+                            AI();
+                            judwin();
+                            if(win==1){
+                                alert("游戏结束,黑棋胜利!");
+                                hh.innerHTML="黑棋已胜利";
+                                music2.play();
+                                stopTimerone();
+                                stopTimertwo();
+                                blackwin=blackwin+1;
+                            }if(win==2){
+                                alert("游戏结束,白棋胜利!");
+                                hh.innerHTML="白棋已胜利";
+                                music2.play();
+                                stopTimerone();
+                                stopTimertwo();
+                                whitewin=whitewin+1;
+                            }else if(baizishu+heizishu==256) {alert("游戏结束,平局!");hh.innerHTML="此局为平局";}
+                            bifen.innerHTML="黑棋 "+blackwin+":"+whitewin+" 白棋";
+                            music1.play();
+                        }else{
+                            alert("此局已结束，请重新开始！");
+                            stopTimerone();
+                            stopTimertwo();
+                        }
+                    }else{
+                        alert("棋局已暂停！");
+                    }}
+                else{
+                    alert("游戏还未开始");
+                }
+            } 
+
+            function XiaQi(event){
+                if(mode==0) alert("请选择模式!");
+                else if(mode==1) XiaQione(event);
+                else if(mode==2) XiaQitwo(event);
+            }
+
+            var baocunname=document.getElementById("baocun");
+
+            function Baocun(){
+                if(suoding==0){
+                    suoding=1;
+                    baocunname.innerHTML="继续游戏";  
+                    hh.innerHTML="此局已暂停";
+                    stopTimerone();stopTimertwo();
+                }else if(suoding==1){
+                    suoding=0;
+                    baocunname.innerHTML="暂停游戏";
+                    if(jud==1){
+                        hh.innerHTML="黑棋的回合";
+                        startTimerone();
+                    }else if(jud==2){
+                        hh.innerHTML="白棋的回合";
+                        startTimertwo();
+                    }   
+                }
+            }
+
+            var hqc=document.getElementById("huiqicount");
+            function Huiqi1(){
+                if(heizishu==0){
+                    alert("当前还没有棋子!");
+                }else{
+                    if(jud==1){
+                        if(blackhuiqi==0) alert("黑棋悔棋次数已用完");
+                        else{xycount[d1][d2]=0;
+                        jud=2;
+                        hh.innerHTML="白棋的回合";
+                        baizishu=baizishu-1;
+                        bz.innerHTML=baizishu;
+                        stopTimerone();
+                        startTimertwo();
+                        blackhuiqi=blackhuiqi-1;
+                        hqc.innerHTML="所剩悔棋次数<br>黑棋:"+blackhuiqi+"次<br>白棋:"+whitehuiqi+"次";
+                        CaQuQi();}
+                    }else if(jud==2){
+                        if(whitehuiqi==0) alert("白棋悔棋次数已用完");
+                        else{xycount[d1][d2]=0;
+                        jud=1;
+                        hh.innerHTML="黑棋的回合";
+                        heizishu=heizishu-1;
+                        hz.innerHTML=heizishu;
+                        jud=1;
+                        stopTimertwo();
+                        startTimerone();
+                        whitehuiqi=whitehuiqi-1;
+                        hqc.innerHTML="所剩悔棋次数<br>黑棋:"+blackhuiqi+"次<br>白棋:"+whitehuiqi+"次";
+                        CaQuQi();}
+                    }
+            }
+        }
+
+            function Huiqi2(){
+                if(heizishu==0){
+                    alert("当前还没有棋子!");
+                }else{
+                        if(blackhuiqi==0) alert("黑棋悔棋次数已用完");
+                        else{
+                        xycount[d1][d2]=0;
+                        CaQuQi();
+                        xycount[d1][d2]=0;
+                        CaQuQi();
+                        hh.innerHTML="黑棋的回合";
+                        baizishu=baizishu-1;
+                        bz.innerHTML=baizishu;
+                        heizishu=heizishu-1;
+                        hz.innerHTML=heizishu;
+                        whitehuiqi=whitehuiqi-1;
+                        blackhuiqi=blackhuiqi-1;
+                        hqc.innerHTML="所剩悔棋次数<br>黑棋:"+blackhuiqi+"次<br>白棋:"+whitehuiqi+"次";
+                        }
+                    }
+                }
+
+            function Huiqi(){
+                if(mode==1) Huiqi1();
+                else if(mode==2) Huiqi2();
+                else alert("未选择模式!");
+            }    
+
+
+            function Qiuhe(){
+                hh.innerHTML="此局为平局";
+                win=1;
+                stopTimerone();stopTimertwo();
+            }
+
+            function Remake(){
+                if(jud==1){hh.innerHTML="黑棋已认输";win=1;}
+                else if(jud==2){hh.innerHTML="白棋已认输";win=1;}
+                stopTimerone();stopTimertwo();
+            }
+                        
+            function bgm(){
+                if(music3.paused){
+                    music3.play();    
+                    bf.innerHTML="关闭背景音乐";
+                }else{
+                    music3.pause();
+                    bf.innerHTML="打开背景音乐";
+                }
+            }
+        </script>
+    </body>
+</html>

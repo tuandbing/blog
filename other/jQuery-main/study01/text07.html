@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            width: 285px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" oninput="output1.innerHTML = range1.value">
+        <fieldset>
+            <legend>range的简单应用</legend>
+            <label>
+                音量大小：
+                <input type="range" name="range1" id="range1" min="0" max="100" step="1" value="0">
+                <output name="output1" for="range1">
+                    
+                </output>
+            </label>
+        </fieldset>
+    </form>
+</body>
+</html>

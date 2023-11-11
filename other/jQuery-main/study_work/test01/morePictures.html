@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: url(pictures/background2.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        div {
+            float: left;
+            margin-left: 30px;
+        }
+
+        img {
+            width: 450px;
+            height: 400px;
+        }
+        h2,h3{
+            color: aqua;
+            cursor: pointer;
+        }
+        #x{
+            float: right;
+        }
+        #warning{
+            background-color: rgba(255, 192, 203,.8);
+            text-align: center;
+            margin-left: 600px;
+            margin-top: 200px;
+            width: 400px;
+            height: 80px;
+        }
+        #warning::backdrop{
+            background-color: rgba(119, 96, 96, 0.5);
+            backdrop-filter: blur(1px);
+        }
+    </style>
+</head>
+
+<body>
+    <h2 style="color: red;text-align: center;" onclick="resource()">馒头的私藏资料，禁止外传!!!</h2>
+    <div>
+        <h3 onclick="birthday()">馒头的生日小聚会</h3>
+        <img src="pictures/birthday.jpg">
+    </div>
+    <div>
+        <h3 onclick="party()">馒头的毕业聚餐</h3>
+        <img src="pictures/party.jpg">
+    </div>
+    <div>
+        <h3 onclick="highschoolClassmates()">馒头的高中合照</h3>
+        <img src="pictures/highschoolClassmates.jpg">
+    </div>
+    <div>
+        <h3 onclick="schoolFriends()">馒头的大学第一次见面会</h3>
+        <img src="pictures/school-friends.jpg">
+    </div>
+    <div>
+        <h3 onclick="classmates()">馒头的大学团日</h3>
+        <img src="pictures/classmates.jpg">
+    </div>
+    <div>
+        <h3 onclick="cool()">馒头的粉色耳机</h3>
+        <img src="pictures/cool.jpg">
+    </div>
+    <div>
+        <h3 onclick="dance()">被坑去跳舞的馒头</h3>
+        <img src="pictures/dance.jpg">
+    </div>
+    <div>
+        <h3 onclick="heavy()">变胖的馒头</h3>
+        <img src="pictures/heavy.jpg">
+    </div>
+    
+    <div>
+        <h3 onclick="wife()">馒头的老婆</h3>
+        <img src="pictures/wife.jpg">
+    </div>
+    <dialog id="warning">
+        <button onclick="warning.close()" id="x">X</button>
+        <br>
+        <div id="print">
+
+        </div>
+    </dialog>
+    <script>
+        var warn = document.querySelector('#warning');
+        var print = document.querySelector('#print');
+        function birthday() { 
+            print.innerHTML = '怎么样,馒头的生日排队还算丰盛吧';
+            warn.showModal();
+         }
+         function party() { 
+            print.innerHTML = '论有一个超级棒的数学老师是什么体验';
+            warn.showModal();
+         }
+         function highschoolClassmates() { 
+            print.innerHTML = '超~棒的高中经历,可惜不再有';
+            warn.showModal();
+         }
+         function schoolFriends() { 
+            print.innerHTML = '能找到我算我输啰';
+            warn.showModal();
+         }
+         function classmates() { 
+            print.innerHTML = '联办的一次团日活动,还要继续努力';
+            warn.showModal();
+         }
+         function cool() { 
+            print.innerHTML = '怎么样,是不是有一种超~酷的感觉';
+            warn.showModal();
+         }
+         function heavy() { 
+            print.innerHTML = '不得不承认,上了一年大学以后变胖了不少';
+            warn.showModal();
+         }
+         function dance(){
+            print.innerHTML = '可恶啊,高考后被朋友坑去体验跳舞,累死小爷了';
+            warn.showModal();
+         }
+         function wife() { 
+            print.innerHTML = '这是小爷我的老婆,都不准抢';
+            warn.showModal();
+         }
+
+    </script>
+</body>
+
+</html>

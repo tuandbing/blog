@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .frame {
+            width: 1200px;
+            height: 400px;
+            background-color: pink;
+        }
+
+        .pic img {
+            width: 250px;
+            height: 250px;
+            margin-top: 30px;
+            margin-left: 30px;
+            float: left;
+        }
+
+        .frame h2 {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="frame">
+        <h2>皮卡丘</h2>
+        <div class="pic">
+            <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.RHu0CEU5EY-ccVDnZEpuyQHaHk?w=200&h=204&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                alt="">
+            <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.ru1ogDk7eqoT4BMc90k9pAHaHa?w=206&h=206&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                alt="">
+            <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.gC-dhU1XvnvBnYMDeR7eqgHaHa?w=206&h=206&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                alt="">
+            <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.1tDPJ2B-4gd13h-EfxPtugHaHa?w=173&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                alt="">
+        </div>
+    </div>
+
+    <script>
+        var pic = document.querySelectorAll('img');
+        for (var i = 0; i < pic.length; i++) {
+            (function (index) {
+                pic[index].addEventListener('mouseover', function () {
+                    pic[index].style.width = '300px';
+                    pic[index].style.height = '300px';
+                    pic[index].style.marginTop = '20px';
+                });
+                pic[index].addEventListener('mouseout', function () {
+                    pic[index].style.width = '250px';
+                    pic[index].style.height = '250px';
+                    pic[index].style.marginTop = '30px';
+                });
+            })(i);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <p id="p" draggable="true" ondragstart="drag(event)">需要拖放的元素</p>
+    <div id="container" ondragover="allowDrag(event)" ondrop="drop(event)">将元素拖放至此</div>
+    <script>
+        function drag(ev){
+            ev.dataTransfer.setData('text/plain',ev.target.id)
+        }
+        function allowDrag(ev){
+            ev.preventDefault();
+        }
+        function drop(ev){
+            ev.preventDefault();
+            var id = ev.dataTransfer.getData('text');
+            var p = document.getElementById(id);
+            ev.target.appendChild(p);
+        }
+    </script>
+</body>
+</html>

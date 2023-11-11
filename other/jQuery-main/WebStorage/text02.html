@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分别使用localStorage 和 sessionStorage存储数据</title>
+    <style>
+        form{
+            width: 200px;
+        }
+        select,button{
+            margin: 10px;
+            width: 180px;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        请在下拉列表中选择颜色并点击保存按钮
+    </p>
+    <form>
+        <fieldset>
+            <select id="color">
+                <option value="red">red</option>
+                <option value="green">green</option>
+                <option value="blue">blue</option>
+            </select>
+            <br>
+            <button onclick="saveLocal()">localStorage存储</button>
+            <br>
+            <button onclick="saveSession()">sessionStorage存储</button>
+        </fieldset>
+    </form>
+    <script>
+        function saveLocal(){
+            var color = document.getElementById('color').value;
+            alert('数据已保存到localStorage中!当前颜色为: '+color);
+            localStorage.setItem('color',color);
+        }
+
+        function saveSession(){
+            var color = document.getElementById('color').value;
+            alert('数据已保存到sessionStorage中!当前颜色为: '+color);
+            sessionStorage.setItem('color',color);
+        }
+    </script>
+</body>
+</html>

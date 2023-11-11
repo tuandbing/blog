@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>text</title>
+    <style>
+        body{
+            background-image:url(2.jpg);
+            background-size:100%;
+        }
+
+        div#A{
+            border: 3px ridge black;
+            width: 1170px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        div#B{
+            position: relative;
+            top: 200px;
+            border: 3px ridge yellow;
+            width: 450px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        div.s{
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            border: 3px solid darkgrey;
+        }
+        
+        p.sss{
+            text-align: center;
+            color: red;
+            margin: 0 auto;
+        }
+        img{
+            width: 90px;
+            height: 150px;
+            float: left;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="Fapai()">开始发牌</button>
+    <button onclick="jieshu()">完成游戏</button>
+    <hr>
+    <div id="A" ondragover="allowDrop(event)" ondrop="drop1(event)">
+        <img id="move1" src="veryhuo.com_pkp_7.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move2" src="veryhuo.com_pkp_8.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move3" src="veryhuo.com_pkp_24.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move4" src="veryhuo.com_pkp_35.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move5" src="veryhuo.com_pkp_1.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move6" src="veryhuo.com_pkp_3.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move7" src="veryhuo.com_pkp_4.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move8" src="veryhuo.com_pkp_5.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move9" src="veryhuo.com_pkp_6.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move10" src="veryhuo.com_pkp_46.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move11" src="veryhuo.com_pkp_54.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move12" src="veryhuo.com_pkp_52.jpg" draggable="true" ondragstart="drag(event)">
+        <img  id="move13" src="veryhuo.com_pkp_53.jpg" draggable="true" ondragstart="drag(event)">
+    </div>
+    
+    <div id="B" ondragover="allowDrop(event)" ondrop="drop2(event)">
+    </div>
+    
+    <div class="s"><p class="sss">当前分数</p><p class="sss" id="score">0</p></div>
+
+    <script>
+        var m1=document.getElementById("move1");
+        var m2=document.getElementById("move2");
+        var m3=document.getElementById("move3");
+        var m4=document.getElementById("move4");
+        var m5=document.getElementById("move5");
+        var m6=document.getElementById("move6");
+        var m7=document.getElementById("move7");
+        var m8=document.getElementById("move8");
+        var m9=document.getElementById("move9");
+        var m10=document.getElementById("move10");
+        var m11=document.getElementById("move11");
+        var m12=document.getElementById("move12");
+        var m13=document.getElementById("move13");
+
+        var score=document.getElementById("score");
+        var scorecount=0
+
+        var sbsb=[];
+        var q;
+        q=Math.floor(Math.random()*4+1);
+        var a;
+            var b;
+            var brr=[];
+            var arr=[];
+            for(a=1;a<=13;a++)
+                arr[a]=0;
+            for(a=1;a<=13;a++) 
+            {
+                b=Math.floor(Math.random()*13+1);
+                while(arr[b]!=0) b=Math.floor(Math.random()*13+1);
+                brr[a]=b;
+                arr[b]=1;
+            }
+
+
+        function drag(ev){
+            ev.dataTransfer.setData("text",ev.target.id);
+            scorecount++;
+            score.innerHTML=scorecount;
+            var id=ev.dataTransfer.getData("text");
+            var img=document.getElementById(id);
+        }
+
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+      
+      var s1=0;
+        function drop1(ev){
+            ev.preventDefault();
+            var id=ev.dataTransfer.getData("text");
+            var img=document.getElementById(id);
+            ev.target.appendChild(img);
+            s1--;
+
+            img.src="1.jpg";
+        }
+
+        
+        
+        var dad=10;
+
+        function drop2(ev){
+            ev.preventDefault();
+            var id=ev.dataTransfer.getData("text");
+            var img=document.getElementById(id);
+            ev.target.appendChild(img); 
+            s1++;
+
+            img.src=Suiji(q,dad);
+            img.alt=dad;
+            dad--;
+
+            sbsb[s1]=img.alt;
+        }
+
+        function jieshu(){
+            var judge=0;
+            
+            if(s1==5){
+            if(sbsb[1]+1==sbsb[2])
+            if(sbsb[2]+1==sbsb[3])
+            if(sbsb[3]+1==sbsb[4])
+            if(sbsb[4]+1==sbsb[5])
+            {alert("游戏结束,你的得分为:"+scorecount);judge=1;}
+            
+            if(sbsb[1]-1==sbsb[2])
+            if(sbsb[2]-1==sbsb[3])
+            if(sbsb[3]-1==sbsb[4])
+            if(sbsb[4]-1==sbsb[5])
+            {alert("游戏结束,你的得分为:"+scorecount);judge=1;}
+            
+            if(judge===0) alert("不是顺子,请继续游戏");
+            }else{
+                alert("这才放了"+s1+"张牌呢");
+            }
+        }
+
+        function Fapai(){
+                m1.src="1.jpg";
+                
+                m2.src="1.jpg";
+                
+                m3.src="1.jpg";
+
+                m4.src="1.jpg";
+                
+                m5.src="1.jpg";
+                
+                m6.src="1.jpg";
+                
+                m7.src="1.jpg";
+                
+                m8.src="1.jpg";
+                
+                m9.src="1.jpg";
+                
+                m10.src="1.jpg";
+                
+                m11.src="1.jpg";
+                
+                m12.src="1.jpg";
+                
+                m13.src="1.jpg";
+
+                refresh();
+            }
+
+            var i;
+            var j;
+        
+            function Suiji(i,j){
+                if(i===1){
+                if(j===1) srcc="veryhuo.com_pkp_7.jpg";
+                else if(j===2) srcc="veryhuo.com_pkp_8.jpg";
+                else if(j===3) srcc="veryhuo.com_pkp_24.jpg";
+                else if(j===4) srcc="veryhuo.com_pkp_35.jpg";
+                else if(j===5) srcc="veryhuo.com_pkp_46.jpg";
+                else if(j===6) srcc="veryhuo.com_pkp_52.jpg";
+                else if(j===7) srcc="veryhuo.com_pkp_53.jpg";
+                else if(j===8) srcc="veryhuo.com_pkp_54.jpg";
+                else if(j===9) srcc="veryhuo.com_pkp_1.jpg";
+                else if(j===10) srcc="veryhuo.com_pkp_3.jpg";
+                else if(j===11) srcc="veryhuo.com_pkp_4.jpg";
+                else if(j===12) srcc="veryhuo.com_pkp_5.jpg";
+                else if(j===13) srcc="veryhuo.com_pkp_6.jpg";
+            }else if(i===2){
+                if(j===1) srcc="veryhuo.com_pkp_3.jpg";
+                else if(j===2) srcc="veryhuo.com_pkp_21.jpg";
+                else if(j===3) srcc="veryhuo.com_pkp_22.jpg";
+                else if(j===4) srcc="veryhuo.com_pkp_9.jpg";
+                else if(j===5) srcc="veryhuo.com_pkp_10.jpg";
+                else if(j===6) srcc="veryhuo.com_pkp_12.jpg";
+                else if(j===7) srcc="veryhuo.com_pkp_14.jpg";
+                else if(j===8) srcc="veryhuo.com_pkp_15.jpg";
+                else if(j===9) srcc="veryhuo.com_pkp_16.jpg";
+                else if(j===10) srcc="veryhuo.com_pkp_17.jpg";
+                else if(j===11) srcc="veryhuo.com_pkp_18.jpg";
+                else if(j===12) srcc="veryhuo.com_pkp_19.jpg";
+                else if(j===13) srcc="veryhuo.com_pkp_20.jpg";
+            }else if(i===3){
+                if(j===1) srcc="veryhuo.com_pkp_36.jpg";
+                else if(j===2) srcc="veryhuo.com_pkp_37.jpg";
+                else if(j===3) srcc="veryhuo.com_pkp_23.jpg";
+                else if(j===4) srcc="veryhuo.com_pkp_25.jpg";
+                else if(j===5) srcc="veryhuo.com_pkp_26.jpg";
+                else if(j===6) srcc="veryhuo.com_pkp_27.jpg";
+                else if(j===7) srcc="veryhuo.com_pkp_28.jpg";
+                else if(j===8) srcc="veryhuo.com_pkp_29.jpg";
+                else if(j===9) srcc="veryhuo.com_pkp_30.jpg";
+                else if(j===10) srcc="veryhuo.com_pkp_31.jpg";
+                else if(j===11) srcc="veryhuo.com_pkp_32.jpg";
+                else if(j===12) srcc="veryhuo.com_pkp_33.jpg";
+                else if(j===13) srcc="veryhuo.com_pkp_34.jpg";
+            }else if(i===4){
+                if(j===1) srcc="veryhuo.com_pkp_50.jpg";
+                else if(j===2) srcc="veryhuo.com_pkp_51.jpg";
+                else if(j===3) srcc="veryhuo.com_pkp_38.jpg";
+                else if(j===4) srcc="veryhuo.com_pkp_39.jpg";
+                else if(j===5) srcc="veryhuo.com_pkp_40.jpg";
+                else if(j===6) srcc="veryhuo.com_pkp_41.jpg";
+                else if(j===7) srcc="veryhuo.com_pkp_42.jpg";
+                else if(j===8) srcc="veryhuo.com_pkp_43.jpg";
+                else if(j===9) srcc="veryhuo.com_pkp_44.jpg";
+                else if(j===10) srcc="veryhuo.com_pkp_45.jpg";
+                else if(j===11) srcc="veryhuo.com_pkp_47.jpg";
+                else if(j===12) srcc="veryhuo.com_pkp_48.jpg";
+                else if(j===13) srcc="veryhuo.com_pkp_49.jpg";
+            }
+
+            
+            return srcc;
+        }
+
+    </script>
+</body>
+</html>

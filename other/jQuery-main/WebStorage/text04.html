@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Web存储API之数据遍历</title>
+</head>
+<body>
+    <h4>留言框</h4>
+    <textarea id="comment"></textarea>
+    <br>
+    <button onclick="saveComment()">提交留言</button>
+    <!-- 全部留言记录 -->
+    <ol id="all"></ol>
+    <script>
+        var allComments = document.getElementById('all');
+
+        // 读取全部历史留言
+        function getAll(){
+            var num = localStorage.length;
+            if(num == 0){
+                allComments.innerHTML = '暂无留言';
+            }else{
+                allComments.innerHTML = '';
+                for(var i = 0;i < num; i++){
+                    var x = document.createElement('li');
+                    var name = localStorage.key(i);
+                    x.innerHTML = localStorage.getItem(name);
+                    allComments.appendChild(x);
+                }
+            }
+        }
+        getAll();
+
+        // 保存当前留言内容
+        function saveComment(){
+            var comment = document.getElementById('comment');
+            var now = new Date();
+            var key = now.getTime();
+            localStorage.setItem(key,comment.value);
+
+            // 清空留言板
+            comment.value = '';
+            getAll();
+        }
+    </script>
+</body>
+</html>
