@@ -12,13 +12,14 @@
         }
         
         #container {
+            box-shadow: 10px 10px 10px gray;
             height: 600px;
             width: 700px;
             position: relative;
             left: 25%;
             top: 100px;
         }
-        
+
         #header {
             height: 100px;
             text-align: center;
@@ -26,30 +27,30 @@
             font-size: 30px;
             font-weight: 700;
         }
-        
+
         #LastMon {
             float: left;
         }
-        
+
         #NextMon {
             float: right;
         }
-        
+
         button {
             height: 50px;
             width: 100px;
             cursor: pointer;
+            border: none;
         }
-        
+
         #calendar {
             margin-top: 50px;
-            border: 1px solid black;
             border-collapse: collapse;
             height: 400px;
             width: 100%;
             text-align: center;
         }
-        
+
         .week {
             float: left;
             width: 14%;
@@ -57,7 +58,7 @@
             font-size: 25px;
             font-weight: 700;
         }
-        
+
         .days {
             line-height: 60px;
             height: 60px;
@@ -65,23 +66,31 @@
             width: 14%;
             text-align: center;
         }
+        .days:hover{
+            background-color: gray;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <div id="container">
         <div id="header">
-            某年某月某日
+
         </div>
-        <button id="LastMon">上一月</button>
-        <button id="NextMon">下一月</button>
+        <button id="LastMon" onclick="previousMonth()">上一月</button>
+        <button id="NextMon" onclick="nextMonth()">下一月</button>
         <br>
         <div id="calendar"></div>
     </div>
     <script>
+
+        var container = document.getElementById('container');
+
         var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
+
         var current = new Date();
         // 获取月份
         var currentMon = current.getMonth();
@@ -110,7 +119,7 @@
                 } else {
                     day.innerHTML = i;
                     if (i == current.getDate() && Month == current.getMonth() && Year == current.getFullYear()) {
-                        day.style.background = 'red';
+                        day.style.color = 'red';
                     }
                     calendar.appendChild(day);
                     i++;
@@ -118,7 +127,42 @@
             }
             var header = document.getElementById('header');
             header.innerHTML = monthNames[Month] + Year;
-            var i = 1;
+
+            var next = document.getElementById('NextMon');
+            var last = document.getElementById('LastMon');
+
+            switch (parseInt(Month/3)) {
+                case 0:
+                    next.style.backgroundColor = '#DDA0DD';
+                    last.style.backgroundColor = '#DDA0DD';
+                    document.body.style.backgroundImage = 'url(./pictures/spring-2.jpg)'
+                    container.style.backgroundImage = 'url(./pictures/spring.jpg)';
+                    break;
+                case 1:
+                    next.style.backgroundColor = '#90C4E9';
+                    last.style.backgroundColor = '#90C4E9';
+                    document.body.style.backgroundImage = 'url(./pictures/summer-2.jpg)'
+                    container.style.backgroundImage = 'url(./pictures/summer.jpg)';
+                    break;
+                case 2:
+                    next.style.backgroundColor = '#F16F4A';
+                    last.style.backgroundColor = '#F16F4A';
+                    document.body.style.backgroundImage = 'url(./pictures/autumn-2.jpg)'
+                    container.style.backgroundImage = 'url(./pictures/autumn.jpg)';
+                    break;
+                case 3:
+                    next.style.backgroundColor = '#9ff';
+                    last.style.backgroundColor = '#9ff';
+                    document.body.style.backgroundImage = 'url(./pictures/winter-2.jpg)'
+                    container.style.backgroundImage = 'url(./pictures/winter.jpg)';
+                    break;
+                default:
+                    break;
+            }
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundSize = 'cover';
+            container.style.backgroundRepeat = 'no-repeat';  
+            container.style.backgroundSize = 'cover';
 
         }
         updateCurrent(currentMon, currentYear);
@@ -140,10 +184,9 @@
             }
             updateCurrent(currentMon, currentYear);
         }
-        var next = document.getElementById('NextMon');
-        var last = document.getElementById('LastMon');
-        next.addEventListener('click', nextMonth);
-        last.addEventListener('click', previousMonth);
+        
+        // next.addEventListener('click', nextMonth);
+        // last.addEventListener('click', previousMonth);
     </script>
 </body>
 
