@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第五次作业</title>
+    <style>
+        .container{
+            background-color: aqua;
+            width: 900px;
+            height: 700px;
+            position: relative;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label>数据1：<input type="number" class="data" min="0"></label>
+        <label>数据2：<input type="number" class="data" min="0"></label>
+        <br>
+        <label>数据3：<input type="number" class="data" min="0"></label>
+        <label>数据4：<input type="number" class="data" min="0"></label>
+        <br>
+        <button type="button" onclick="drawCircle()">点击生成饼状图</button>
+        <button type="button" onclick="drawChart()">点击生成柱状图</button>
+        <canvas style="background-color:bisque; width: 75%;height: 70%;position: relative;top: 120px;left: 12.5%;" id="myCanvas"></canvas>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------------->
+    <script>
+        function drawCircle(){
+            // 获取所有输入框的数据
+            const dataInputs = document.querySelectorAll('.data');
+            const dataValues = Array.from(dataInputs).map(input => parseFloat(input.value));
+            // 获取画布元素和上下文
+            const canvas = document.getElementById('myCanvas');
+            const context = canvas.getContext('2d');
+
+        }
+
+
+        function drawChart() {
+            // 获取所有输入框的数据
+            const dataInputs = document.querySelectorAll('.data');
+            const dataValues = Array.from(dataInputs).map(input => parseFloat(input.value));
+
+            // 获取画布元素和上下文
+            const canvas = document.getElementById('myCanvas');
+            const context = canvas.getContext('2d');
+
+            // 清空画布
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 在这里使用 dataValues 进行绘图，这里只是一个简单的例子
+            context.fillStyle = 'blue';
+            const barWidth = 50;
+            const spacing = 10;
+            let x = 10;
+
+            for (const value of dataValues) {
+                const barHeight = value * 5; // 为了方便演示，将值乘以一个因子
+                context.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + spacing;
+            }
+            context.fillStyle="black";
+            context.fillText("数据一",20,60);
+        }
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

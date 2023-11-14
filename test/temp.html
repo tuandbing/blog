@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<!--https://www.jb51.net/article/154869.htm-->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+	<mate http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>cluttonous snake</title>
+	<style type="text/css" media="screen">
+		body{
+			margin:0;
+			padding:0;
+		}
+		.main{
+			width:800px;
+			height:400px;
+			margin:50px auto;
+		}
+		.btn{
+			width:100px;
+			height:40px;
+		}
+		.map{
+			position:relative;
+			width:800px;
+			height: 400px;
+			background: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<p>
+			<button class="btn" id="begin">begin</button> &nbsp;
+			score:<i id="score">0</i>&nbsp;
+			speed:<i id="speed">0</i>&nbsp;
+			<button class="btn" id="stop">stop</button> &nbsp;
+		</p>
+		<div class="map" id="map"></div>
+		<script type="text/javascript">
+			var map = document.getElementById('map');
+			var speed = 200;
+			function Snake(){
+				this.width = 10;
+				this.height = 10;
+				this.step = 1;
+				this.score = 0;
+				this.times = 0;
+				this.range = 1;
+				//方向
+				this.direction = 'right';
+ 
+				this.body = [
+					{x:2,y:0},
+					{x:1,y:0},
+					{x:0,y:0}
+				];
+				this.display = function(){
+					for (var i =0 ; i <this.body.length; i++) {
+						if(this.body[i].x !=null){
+							var s = document.createElement('div');
+							this.body[i].flag =s ;	
+							s.style.width = this.width+'px';
+							s.style.height = this.height+'px';
+							s.style.borderRadius = '0%';
+							//s.style.background = "rgb("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
+							s.style.background = "#fffccc";
+							s.style.position = 'absolute';
+							/*if(this.times>0){
+								switch(this.direction){
+									case "left":
+										this.body[i].x -=this.step;
+										break;
+									case "right":
+										this.body[i].x +=this.step;
+										break;
+									case "up":
+										this.body[i].y -=this.step;
+										break;
+									case "down":
+										this.body[i].y +=this.step;
+										break;
+								}	
+							}*/
+							var left = this.body[i].x*this.width;	
+							var top = this.body[i].y*this.height;
+							s.style.left = left+'px';
+							s.style.top = top+'px';
+							map.appendChild(s);
+						}		
+					}
+					this.times++;
+				}
+				this.clear= function(){
+					for(var i=0;i<this.body.length;i++){
+						if(this.body[i].flag!=null){
+							map.removeChild(this.body[i].flag);
+						}
+					}
+					this.init();
+				}
+				this.init = function(){
+					this.body = [
+						{x:2,y:0},
+						{x:1,y:0},
+						{x:0,y:0},
+					];
+					this.score = 0;
+					this.times = 0;
+					this.direction="right";
+					this.speed = 500;
+				}
+				this.changeSpeed = function(){
+					if(this.score%30==0){
+						if(speed>=100){
+							speed -=50;	
+						}
+						clearInterval(timer);
+						timer = setInterval("snake.run()",speed);
+					}
+				}
+				this.checkIn = function(x,y){
+					for (var i = 0; i < this.body.length; i++) {
+						var item = this.body[i];
+						if(x==item.x&&y==item.y){
+							return true;
+						}
+					}
+				}
+				this.run = function(){
+					for(var i=this.body.length-1;i>0;i--){
+						this.body[i].x = this.body[i-1].x;
+						this.body[i].y = this.body[i-1].y;
+					}
+					//改方向
+					switch(this.direction){
+						case "left":
+							this.body[0].x -=1;
+							break;
+						case "right":
+							this.body[0].x +=1;
+							break;
+						case "up":
+							this.body[0].y -=1;
+							break;
+						case "down":
+							this.body[0].y +=1;
+							break;
+					}
+					//判断是否出界
+					if(this.body[0].x<0||this.body[0].x>79
+						||this.body[0].y<0||this.body[0].y>39){
+						clearInterval(timer);
+						alert(" GAME OVER &^&");
+						restartGame();
+						return false;
+					}
+					//吃到食物 蛇加一节
+					//if(Math.abs(this.body[0].x-food.x)<=this.range && Math.abs(this.body[0].y-food.y)<=this.range){
+					var header =this.body[0];
+					var result = foods.checkIn(header.x,header.y);
+					console.log(result);
+					if(typeof result === 'number'){
+						var foodIndex = result;
+						this.body.push({x:null,y:null,flag:null});
+						foods.clearItem(foodIndex);//清除食物
+						this.score += foods.score;
+						changeSpeed();
+						changeView();
+						foods.displayItem();
+					}
+					//判断吃到自己
+					for(var i=4;i<this.body.length;i++){
+						if(this.body[0].x == this.body[i].x 
+							&&this.body[0].y==this.body[i].y){
+							clearInterval(timer);
+							alert(" GAME OVER @^@");
+							restartGame();
+							return false;
+						}
+					}
+					//判断碰到障碍物
+					for (var i = 0; i < this.body.length; i++) {
+						if(barrier.checkIn(this.body[i].x,this.body[i].y)){
+							clearInterval(timer);
+							alert(" GAME OVER (*^*)");
+							restartGame();
+							return false;	
+						}
+					}
+					for(var i=0;i<this.body.length;i++){
+						if(this.body[i].flag!=null){
+							map.removeChild(this.body[i].flag);
+						}
+					}
+					this.display();
+				}
+			}
+			/*function Food(){
+				this.width =10;
+				this.height=10;
+				this.score = 10;
+				this.clear = function(){
+					map.removeChild(this.flag);
+				}
+				this.display = function(){
+					//排除障碍位置
+					var f =document.createElement('div');
+					this.flag =f;
+					f.style.width = this.width+'px';
+					f.style.height = this.height+'px';
+					f.style.background = 'blue';
+					f.style.borderRadius = '0%';
+					f.style.position = 'absolute';
+					do {
+					    this.x = Math.floor(Math.random()*80);
+						this.y = Math.floor(Math.random()*40);
+					} while (barrier.checkIn(this.x,this.y));
+					f.style.left = this.x*this.width+'px';
+					f.style.top = this.y*this.height+'px';
+					map.appendChild(f);					
+				}
+			}*/
+			function Foods(){
+				this.length = 4;
+				this.score = 10;
+				this.width =10;
+				this.height=10;
+				this.foods = [];
+				this.clear = function(){
+					this.foods.forEach(function(v,k){
+					    map.removeChild(v.flag);
+					    //this.clearItem(k);     
+					 });  
+				}
+				this.createPoint = function(){
+					var x = Math.floor(Math.random()*80);
+					var y = Math.floor(Math.random()*40);
+					if(this.checkIn(x,y)||barrier.checkIn(x,y)||snake.checkIn(x,y)){
+						return false;
+					}else{
+						return {x:x,y:y};
+					}
+				}
+				this.checkIn = function(x,y){
+					var result = false;
+					this.foods.forEach(function(v,k){
+						console.log(x,y,v);
+						console.log(x==v.x,y==v.y);
+						if(x==v.x&&y==v.y){
+							result = k;
+						}
+					})
+					return result;
+				}
+				this.getDIv = function() {
+					var f =document.createElement('div');
+					f.style.width = this.width+'px';
+					f.style.height = this.height+'px';
+					f.style.background = 'blue';
+					f.style.borderRadius = '0%';
+					f.style.position = 'absolute';
+					return f;
+				}
+				this.clearItem = function(index){
+					var obj = this.foods[index];
+					if(typeof obj === 'object'){
+						delete this.foods[index];
+						map.removeChild(obj.flag);
+					}
+				}
+				this.displayItem = function(){
+					do{
+						var obj = this.createPoint();
+					}while(!obj)
+					var x = obj.x;
+					var y = obj.y;
+					f = this.getDIv();
+					f.style.left = x*this.width+'px';
+					f.style.top = y*this.height+'px';
+					this.foods.push({x:obj.x,y:obj.y,flag:f});
+					map.appendChild(f);
+				}
+				this.display = function(){
+					for (var i = 0; i < this.length; i++) {
+						this.displayItem();	
+					}	
+				}
+			}
+			function  barrier(){
+				this.width =10;
+				this.height=10;
+				//this.barrierLength = Math.floor(Math.random()*3);
+				this.barrier = [];
+				this.barrierLength = 10;
+				this.color = '#123456';
+				this.clear = function(){
+					for(var i=0;i<this.barrier.length;i++){
+						var line = this.barrier[i];
+						for (var j = 0; j < line.length; j++) {
+							map.removeChild(item[j].flag);
+						}
+					}
+					this.barrier = [];
+				}
+				this.createStartPoint = function(){
+					var x = Math.floor(Math.random()*70);
+					var y = Math.floor(Math.random()*30);	
+					var direction = Math.floor(Math.random()*5);
+					direction = direction<=0?1:direction;		
+					x = x<10?10:x;
+					y = y<10?10:y;
+					var startPoint = {x:x,y:y,direction:direction};
+					$result = this.checkStartPoint(x,y,direction);
+					if(!$result){
+						this.createStartPoint();
+					}else{
+						return {x:x,y:y,direction:direction};	
+					}
+				}
+				this.checkIn = function(x,y){
+					for (var i = 0; i < this.barrier.length; i++) {
+						var line = this.barrier[i];
+						for(var j = 0;j < line.point.length; j++){
+							var item = line.point[j];
+							if(x==item.x&&y==item.y){
+								return true;
+							}
+						}
+					}
+					return false;
+				}
+				this.checkStartPoint = function(x,y,direction){
+					var length = this.barrier.length;
+					if(length>0){
+						for (var i = 0; i < length; i++) {
+							var objDirection = this.barrier[i].direction;
+							var obj =this.barrier[i].point;
+							if(obj[0].x==x&&obj[0].y==y&&objDirection==direction){
+								return false;
+							}
+						}	
+					}
+					return true;
+				}
+				this.craeteBarrier = function(){
+					for (var i = 0; i < this.barrierLength; i++) {
+						console
+						var length = Math.floor(Math.random()*10);
+						length = length<5?10:length;
+						//起始位置
+						var startPoint = this.createStartPoint();
+						if( typeof startPoint !== 'object'){
+							document.location.reload();
+						}
+						var x = startPoint.x;
+						var y = startPoint.y;	
+						var direction = startPoint.direction;
+						var body = {point:[],direction:direction};
+						for (var j = 0; j < length; j++) {
+							switch(direction){
+								/*case 0:
+									x +=1;
+									y +=1;
+								break;*/
+								case 1:
+									y -=1;//上
+								break;
+								case 2:
+									y +=1;//下
+								break;
+								case 3:
+									x -=1;//左
+								break;
+								case 4:
+									x +=1;//右
+								break;
+								/*case 5:
+									x -=1;
+									y +=1;
+								break;*/
+							}
+							body.point.push({x:x,y:y});	
+						}
+						this.barrier.push(body);
+					}
+				}
+				this.display = function(){
+					this.craeteBarrier();
+					for (var i = 0; i < this.barrierLength; i++) {
+						var barrierItem = this.barrier[i].point;
+						for (var j = 0; j < barrierItem.length; j++) {
+							var item = barrierItem[j];
+							var b = document.createElement('div');
+							b.style.width = this.width+'px';
+							b.style.height = this.height+'px';
+							b.style.background = this.color;
+							b.style.borderRadius = '0%';
+							b.style.position = 'absolute';
+							b.style.left = item.x*this.width+'px';
+							b.style.top = item.y*this.height+'px';
+							this.barrier[i].flag = b;
+							map.appendChild(b);	
+						}
+					}
+				}	
+			}
+			document.body.onkeydown = function(e){
+				var ev = e || window.event;
+				switch(ev.keyCode){
+					case 37:
+						if(snake.direction !="right"){
+							snake.direction = "left";
+						}
+						break;
+					break;
+					case 38:
+						if(snake.direction !="down"){
+							snake.direction = "up";	
+						}
+						break;
+					break;
+					case 39:
+						if(snake.direction!="left"){
+							snake.direction = "right";
+						}
+					break;
+					case 40:
+						if(snake.direction!="up"){
+							snake.direction="down";
+						}
+					break;
+				}
+			}
+			var begin = document.getElementById('begin');
+			var isTemp = false;
+			var stop = document.getElementById('stop');
+			var timer;
+			function initGame(){
+				barrier.display();
+				snake.display();
+				foods.display();
+				isTemp = false;	
+				changeView();
+			}
+			function clearGame(){
+				barrier.clear();
+				snake.clear();
+				foods.clear();	
+			}
+			function restartGame(){
+				clearGame();
+				initGame();
+			}
+			function changeView(){
+				var scoreDiv = document.getElementById('score');
+				var speedDiv = document.getElementById('speed');
+				scoreDiv.innerHTML = snake.score;
+				speedDiv.innerHTML = speed;
+			}
+			function changeSpeed(){
+                                /*变速*/
+				/*if(snake.score%30==0){
+					if(speed>=100){
+						speed -=50;	
+					}
+					clearInterval(timer);
+					timer = setInterval("snake.run()",speed);
+				}*/
+			}
+			var snake = new Snake();
+			var foods = new Foods();
+			var barrier = new barrier();
+			initGame();
+			begin.onclick = function(){
+				clearInterval(timer);
+				timer = setInterval("snake.run()",speed);
+			}
+			stop.onclick = function(){
+				clearInterval(timer);
+			}
+		</script>
+	</div>
+</body>
+</html>

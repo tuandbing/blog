@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
+        body {
             background-image: url(./扑克牌/2.jpg);
             background-repeat: no-repeat;
             background-size: 100%;
         }
-        #box{
+
+        #box {
             margin-top: 20px;
             width: 100%;
             height: 200px;
             background-color: grey;
         }
-        #box img{
+
+        #box img {
             margin-top: 10px;
             margin-left: 5px;
         }
-        #box2{
+
+        #box2 {
             margin-top: 100px;
             width: 700px;
             height: 200px;
             background-color: rgba(199, 255, 192, 0.85);
             margin-left: 350px;
         }
-        .box2_container{
+
+        .box2_container {
             display: inline-block;
-            background-color: rgba(128, 128, 128,.5);
+            background-color: rgba(128, 128, 128, .5);
             margin-left: 30px;
             margin-top: 10px;
         }
-        #x{
+
+        #x {
             float: right;
 
         }
-        #score{
+
+        #score {
             width: 150px;
             height: 50px;
             margin-top: 5px;
             margin-left: 20px;
         }
-        #al{
+
+        #al {
             width: 200px;
             height: 100px;
-            background-color: rgba(255, 192, 203,.5);
+            background-color: rgba(255, 192, 203, .5);
             margin-left: 600px;
             margin-top: 200px;
             background-image: url(2c40-hsqyiwu3954293.gif);
@@ -56,23 +64,26 @@
             background-repeat: no-repeat;
             overflow: hidden;
         }
-        #al::backdrop{
+
+        #al::backdrop {
             background-color: rgba(119, 96, 96, 0.5);
             backdrop-filter: blur(1px);
         }
-        
-        #tip{
+
+        #tip {
             width: 250px;
             height: 150px;
-            background-color: rgba(255, 192, 203,.8);
+            background-color: rgba(255, 192, 203, .8);
             margin-left: 600px;
             margin-top: 200px;
         }
-        #tip::backdrop{
+
+        #tip::backdrop {
             background-color: rgb(96, 111, 119);
             backdrop-filter: blur(1px);
         }
-        #know{
+
+        #know {
             margin-left: 90px;
             margin-top: 10px;
             height: 30px;
@@ -80,6 +91,7 @@
         }
     </style>
 </head>
+
 <body>
     <dialog id="tip">
         <div id="tips">
@@ -109,20 +121,21 @@
     </dialog>
     <script>
         var tip = document.querySelector('#tip');
-        
+
         var array = []
         var box = document.getElementById('box');
-        var i = 0,CardNum = 13;
+        var i = 0, CardNum = 13;
+        let ca = Math.floor(Math.random() * 4);
         var CardWidth = window.innerWidth / (CardNum + 4);
         var CardHeight = 100 / CardWidth * 160;
         var Left = (window.innerWidth - CardWidth * 13) / 14 + 'px';
         // 为box盒子添加子盒子
-        for(i = 0;i<CardNum;i++){
+        for (i = 0; i < CardNum; i++) {
             var img = document.createElement('img');
             img.draggable = "false";
-            img.ondragstart = function (event) { 
-                event.dataTransfer.setData("text/plain",event.target.id);
-             };
+            img.ondragstart = function (event) {
+                event.dataTransfer.setData("text/plain", event.target.id);
+            };
             img.style.width = CardWidth + 'px';
             img.style.marginLeft = (window.innerWidth - CardWidth * 13) / 14 + 'px';
             img.style.height = CardHeight + 'px';
@@ -133,23 +146,23 @@
         CardNum = 5;
 
         // 为box2添加子盒子
-        for(i = 0;i<CardNum;i++){
+        for (i = 0; i < CardNum; i++) {
             var div = document.createElement('div');
-            div.className="box2_container";
+            div.className = "box2_container";
             div.draggable = "true";
             div.style.width = CardWidth + 'px';
             div.style.marginLeft = (window.innerWidth - CardWidth * 12) / 14 + 'px';
             div.style.height = CardHeight + 'px';
-            div.ondragstart = function (event) { 
-                event.dataTransfer.setData("text/plain",event.target.id);
-             };
-            div.ondragover=function(ev){
+            div.ondragstart = function (event) {
+                event.dataTransfer.setData("text/plain", event.target.id);
+            };
+            div.ondragover = function (ev) {
                 ev.preventDefault();
             }
-            div.ondrop = function (ev) { 
-                if(ev.target.tagName === 'IMG'){
+            div.ondrop = function (ev) {
+                if (ev.target.tagName === 'IMG') {
                     return;
-                }else{
+                } else {
                     ev.preventDefault();
                     var id = event.dataTransfer.getData("text/plain");
                     var img = document.getElementById(id);
@@ -159,10 +172,9 @@
                     var num = id.match(/\d+/g);
                     img.src = "扑克牌/veryhuo.com_pkp_" + num + ".jpg";
                     ev.target.appendChild(img);
-                
                 }
-             }
-            
+            }
+
             box2.appendChild(div);
         }
         var box2_container = document.querySelectorAll('.box2_container');
@@ -172,53 +184,57 @@
         // 游戏开始前展示卡牌
         function show() {
             array = [];
-            for(i=0;i<imgs.length;i++){
-                // 获取一个1-54的随机数
-                var num = Math.floor(Math.random() * 54);
-                if(array.includes(num)){
+            for (i = 0; i < imgs.length; i++) {
+
+                var num = Math.floor(Math.random() * 13 + 13 * ca);
+                if (array.includes(num)) {
                     i--;
-                }else{
+                } else {
                     array.push(num);
                     var srcc = "扑克牌/veryhuo.com_pkp_" + num + ".jpg";
                     imgs[i].src = srcc;
                 }
             }
-         }
+        }
         show();
-        
+
         // 游戏结束后将所有卡片归位
-        function  ReturnBack() { 
+        function ReturnBack() {
             var i = 0;
             CardNum = 13;
             // 将第一个盒子的牌牌清空
             var s = box.querySelectorAll('img');
-            for(i=0;i<s.length;i++){
+            for (i = 0; i < s.length; i++) {
                 box.removeChild(s[i])
             }
             // 重新给第一个盒子赋值
-            for(i = 0;i<CardNum;i++){
+            for (i = 0; i < CardNum; i++) {
                 var src = "扑克牌/veryhuo.com_pkp_" + array[i] + ".jpg";
                 var img = document.createElement('img');
+                img.draggable = "false";
+                img.ondragstart = function (event) {
+                    event.dataTransfer.setData("text/plain", event.target.id);
+                };
                 img.style.width = CardWidth + 'px';
                 img.style.marginLeft = Left;
                 img.style.height = CardHeight + 'px';
                 img.src = src;
                 box.appendChild(img);
-        }
+            }
             // 将第二个盒子清空
-            for(i=0;i<box2.querySelectorAll('img').length;i++){
-                box2.remove(box2.querySelectorAll('img')[i]);
+            for (i = 0; i < box2.querySelectorAll('div').length; i++) {
+                box2.querySelectorAll('div')[i].removeChild(box2.querySelectorAll('div')[i].querySelector('img'));
             }
         }
         // 游戏开始函数
-        function startcard() { 
+        function startcard() {
             var imgs = box.querySelectorAll('img');
             array = [];
-            for(i=0;i<imgs.length;i++){
-                var num = Math.floor(Math.random() * (54 - 1 + 1)) + 1;
-                if(array.includes(num)){
+            for (i = 0; i < imgs.length; i++) {
+                var num = Math.floor(Math.random() * 13 + 13 * ca);
+                if (array.includes(num)) {
                     i--;
-                }else{
+                } else {
                     array.push(num);
                     imgs[i].src = "扑克牌/1.jpg";
                     imgs[i].id = "box_" + num;
@@ -227,24 +243,24 @@
             }
         }
         // 设置允许被放置
-        function allowDrop (ev) { 
+        function allowDrop(ev) {
             ev.preventDefault();
-         }
-         // 设置盒子一被放置情况
-         function drop2(ev) { 
+        }
+        // 设置盒子一被放置情况
+        function drop2(ev) {
             ev.preventDefault();
             // 判断拖拽到何处(box / box.img ?)
             // 使用三元运算符 一步到位
             // ev = ev.target.tagName === 'IMG' ? ev.target.parentNode : ev.target;
-            if(ev.target.tagName === 'IMG'){
+            if (ev.target.tagName === 'IMG') {
                 ev = ev.target.parentNode;
-            }else{
+            } else {
                 ev = ev.target;
             }
 
             var id = event.dataTransfer.getData("text/plain");
             var img = document.getElementById(id);
-            img.style.marginLeft = Left;
+            // img.style.marginLeft = Left;
 
             // 使用正则表达式获取拖拽图片的图片编号
             var src = parseInt(img.id.match(/\d+/g));
@@ -256,83 +272,84 @@
             // 获取当前box的长度
             var CurrentLen = s.length;
 
-            
+
             var CardNum = 13;
             img.src = "扑克牌/1.jpg";
-                var flag = 1;
-                var m = CurrentLen;
-                // 从box的第一个元素到最后一个元素进行遍历比较
-                while(m !== 0){
-                    if(array.indexOf(src) < array.indexOf(parseInt(s[CurrentLen - m].id.match(/\d+/g)))){
-                        s[CurrentLen - m].parentElement.insertBefore(img,s[CurrentLen - m]);
-                        flag = 0;
-                        break;
-                    }
-                    m--;
+            var flag = 1;
+            var m = CurrentLen;
+            // 从box的第一个元素到最后一个元素进行遍历比较
+            while (m !== 0) {
+                if (array.indexOf(src) < array.indexOf(parseInt(s[CurrentLen - m].id.match(/\d+/g)))) {
+                    s[CurrentLen - m].parentElement.insertBefore(img, s[CurrentLen - m]);
+                    flag = 0;
+                    break;
                 }
-                if(flag == 1){
-                    ev.appendChild(img);
-                }
+                m--;
+            }
+            if (flag == 1) {
+                ev.appendChild(img);
+            }
         }
-            
+
         // 游戏结束函数
-        function endgram() { 
-            var score = 0,i=0;
+        function endgram() {
+            var score = 0, i = 0;
             var box2 = document.querySelector('#box2');
             var imgs2 = box2.querySelectorAll('img');
             var nums = [];
             var score_box = document.querySelector('#score');
 
             // 用数组存下每个卡片的点数
-            for(i = 0;i<imgs2.length;i++){
+            for (i = 0; i < imgs2.length; i++) {
                 nums[i] = imgs2[i].id.match(/\d+/g) % 13;
             }
 
             // 先顺序进行对比，每有两个连续的牌分数增加25
-            for(i = 0;i<nums.length - 1;i++){
-                if(nums[i] == nums[i+1] -1){
+            for (i = 0; i < nums.length - 1; i++) {
+                if (nums[i] == nums[i + 1] - 1) {
                     score += 25;
                 }
             }
 
             // 如果顺序没有连续的牌，则再逆序进行判断
-            if(score == 0){
-                for(i = 0;i<nums.length - 1;i++){
-                    if(nums[i] == nums[i+1] +1){
+            if (score == 0) {
+                for (i = 0; i < nums.length - 1; i++) {
+                    if (nums[i] == nums[i + 1] + 1) {
                         score += 25;
                     }
                 }
             }
 
             // 由于游戏结束，图片将不可再被拖拽 
-            for(i = 0;i<imgs.length;i++){
+            for (i = 0; i < imgs.length; i++) {
                 imgs[i].draggable = false;
             }
 
             // 根据分值不同，给予不同的弹窗
-            switch (score/25) {
+            switch (score / 25) {
                 case 4:
-                    score_box.innerHTML = "恭喜您,您的得分为"+score+",不要骄傲喔!";
+                    score_box.innerHTML = "恭喜您,您的得分为" + score + ",不要骄傲喔!";
                     break;
                 case 3:
-                    score_box.innerHTML = "您的得分为"+score+",再接再厉呀!";
+                    score_box.innerHTML = "您的得分为" + score + ",再接再厉呀!";
                     break;
                 case 2:
-                    score_box.innerHTML = "您的得分为"+score+",还要加油喔!";
+                    score_box.innerHTML = "您的得分为" + score + ",还要加油喔!";
                     break;
                 case 1:
-                    score_box.innerHTML = "抱歉,您的得分为"+score+",继续努力吧!";
+                    score_box.innerHTML = "抱歉,您的得分为" + score + ",继续努力吧!";
                     break;
                 case 0:
-                    score_box.innerHTML = "很遗憾,您的得分为"+score+",休息一下吧!";
+                    score_box.innerHTML = "很遗憾,您的得分为" + score + ",休息一下吧!";
                     break;
                 default:
                     break;
             }
             // 将所有卡片还原
             ReturnBack();
-         }
-         tip.showModal();
+        }
+        tip.showModal();
     </script>
 </body>
+
 </html>

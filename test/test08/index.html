@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: url(./snake.jpg) no-repeat;
+            background-size: cover;
+        }
+        .map{
+            position: relative;
+            left: 250px;
+            top: 100px;
+            width: 1000px;
+            height: 600px;
+            background: url(./1.png) repeat;
+            box-shadow: 0 0 100px black inset, 0 0 50px yellow;
+        }
+        .body,
+        .food,
+        .head{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .body{
+            background-color: orange;
+            left: 20px;
+        }
+
+        .food{
+            background-color: aqua;
+            animation: foodAnimation 2s linear infinite;
+        }
+        @keyframes foodAnimation {
+            0%{
+                box-shadow: 0 0 10px white;
+            }
+            50%{
+                box-shadow: 0 0 20px red;
+            }
+            100%{
+                box-shadow: 0 0 10px white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="map">
+    </div>
+    <script src="./Food.js"></script>
+    <script>
+        const food = new Food('.map');
+    </script>
+</body>
+</html>
