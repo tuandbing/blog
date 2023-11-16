@@ -6,28 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* *{
-            margin: 0;
-            padding: 0;
-        } */
-
+        .menu-container{
+            width: 1000px;
+            height: 600px;
+            position: relative;
+            top: 100px;
+            left: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transform: translateX(-50%);
+            background: url(https://scpic.chinaz.net/files/pic/pic9/201312/apic2827.jpg) no-repeat;
+            background-size: cover;
+        }
         .menu-item {
-            float: left;
-            margin-left: 30px;
-            width: 50px;
+            width: 100px;
             text-align: center;
-            font-size: 16px;
+            line-height: 30px;
+            height: 30px;
+            font-size: 30px;
+            /* transform: translateX(50%); */
+            margin-left: 400px;
             border: 1px solid black;
+            background-color: aqua;
         }
 
-        .menu-item:first-child{
-            margin-left: 30%;
-        }
         /* 鼠标悬浮放大动画 */
         .menu-item:hover {
             animation: scaleUp 1s forwards;
             text-shadow: -1px -1px white,1px 1px #333;
-            box-shadow: 3px 3px 5px black;
+            box-shadow: 3px 3px 10px black,0 0 5px black;
             cursor: pointer;
         }
 

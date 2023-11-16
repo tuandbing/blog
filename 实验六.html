@@ -73,8 +73,7 @@
             <button id="next">下一个</button>
             <button id="fastforward">快进</button>
             <button id="rewind">快退</button>
-            <input type="range" id="seekbar" min="0" max="1" value="0.5" step="0.01">
-            <!-- <button id="volumechange">音量调节</button> -->
+            <input type="range" id="vol" min="0" max="1" value="0.5" step="0.01">
         </div>
     </div>
     <div id="container">
@@ -92,8 +91,7 @@
         let nextButton = document.getElementById('next');
         let fastforwardButton = document.getElementById('fastforward');
         let rewindButton = document.getElementById('rewind');
-        let seekbar = document.getElementById('seekbar');
-        // let volumechangeButton = document.getElementById('volumechange');
+        let vol = document.getElementById('vol');
         let valueCount = 0.5;
 
         files.addEventListener('change', function (event) {
@@ -131,12 +129,12 @@
         muteButton.addEventListener('click', function () {
             if(video.muted){
                 video.muted = false;
-                seekbar.value = valueCount;
+                vol.value = valueCount;
                 
             }else{
                 video.muted = true;
-                valueCount = seekbar.value;
-                seekbar.value = 0;
+                valueCount = vol.value;
+                vol.value = 0;
             }
             
         });
@@ -149,11 +147,7 @@
         fastforwardButton.addEventListener('click', function () {
             video.currentTime = Math.min(video.duration, video.currentTime + 10);
         });
-        // volumechangeButton.addEventListener('change', function () {
-        //     video.volume = (video.volume + 0.1) || 0;
-        // });
-        seekbar.addEventListener('change', function () {
-            // video.currentTime = (parseFloat(seekbar.value) / 100) * video.duration;
+        vol.addEventListener('change', function () {
             video.volume = this.value;
         });
 

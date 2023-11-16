@@ -40,6 +40,15 @@
             background-color: aqua;
             animation: foodAnimation 2s linear infinite;
         }
+
+        button{
+            background-color: black;
+            width: 80px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: orange;
+        }
         @keyframes foodAnimation {
             0%{
                 box-shadow: 0 0 10px white;
@@ -54,11 +63,75 @@
     </style>
 </head>
 <body>
+    <div id="buttons">
+        <button id="start">开始</button>
+        <button id="pause">暂停</button>
+        <button id="restart">重开</button>
+        <button id="up">加大难度</button>
+        <button id="down">减小难度</button>
+        <select>
+            <option value="MIN">最小难度</option>
+            <option value="MID">中等难度</option>
+            <option value="MAX">地狱难度</option>
+        </select>
+    </div>
     <div class="map">
     </div>
     <script src="./Food.js"></script>
+    <script src="./Snake.js"></script>
+    <script src="./Game.js"></script>
     <script>
-        const food = new Food('.map');
+        const game = new Game('.map');
+        const start = document.querySelector('#start');
+        const pause = document.querySelector('#pause');
+        const restart = document.querySelector('#restart');
+        const up = document.querySelector('#up');
+        const down = document.querySelector('#down');
+        const sele = document.querySelector('select');
+        document.onkeydown = function(e){
+            switch(e.keyCode){
+                case 37:
+                    game.change('left');
+                    break;
+                case 38:
+                    game.change('top');
+                    break;
+                case 39:
+                    game.change('right');
+                    break;
+                case 40:
+                    game.change('bottom');
+                    break;
+            }
+        }
+        start.addEventListener('click',function(){
+            game.start();
+        })
+        pause.addEventListener('click',function(){
+            game.pause();
+        })
+        restart.addEventListener('click',function(){
+            game.restart();
+        })
+        up.addEventListener('click',function(){
+            game.up();
+        })
+        down.addEventListener('click',function(){
+            game.down();
+        })
+        sele.addEventListener('change',function(){
+            switch(sele.value){
+                case 'MIN':
+                    game.MIN();
+                break;
+                case 'MAX':
+                    game.MAX();
+                break;
+                case 'MID':
+                    game.MID();
+                break;
+            }
+        })
     </script>
 </body>
 </html>

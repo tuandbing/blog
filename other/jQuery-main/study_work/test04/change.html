@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- 篮球： -->
+    <!-- https://zhuanlan.zhihu.com/p/136010862 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: rgb(166, 222, 239);
+        }
+
+        .box {
+            background: rgb(242, 244, 245);
+            color: rgb(0, 0, 0);
+            padding: 15px;
+            margin: 60px auto 0;
+            width: 600px;
+            box-shadow: 10px 10px 15px black;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        hr {
+            width: 80%;
+            border: 2px solid rgb(166, 222, 239);
+            margin-top: -5px;
+        }
+
+        .question {
+            font-weight: 700;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>馒头的信息问卷调查</h2>
+        <hr>
+        <form>
+            <div>
+                <div class="question">您的性别是</div>
+                <input type="radio" name="sex" value="男" required>男
+                <input type="radio" name="sex" value="女" required>女
+                <input type="radio" name="sex" value="其他" required>其他
+            </div>
+            <div>
+                <div class="question">您的年龄段是</div>
+                <input type="radio" name="age" value="18以下" required>18以下
+                <input type="radio" name="age" value="18~30" required>18~30
+                <input type="radio" name="age" value="30~50" required>30~50
+                <input type="radio" name="age" value="50以上" required>50以上
+            </div>
+            <div>
+                <div class="question">您的学历是</div>
+                <input type="radio" name="education" value="初中" required>初中
+                <input type="radio" name="education" value="高中" required>高中
+                <input type="radio" name="education" value="大专" required>大专
+                <input type="radio" name="education" value="本科" required>本科
+                <input type="radio" name="education" value="硕士研究生" required>硕士研究生
+            </div>
+            <div>
+                <div class="question">您当前的工作是</div>
+                <input type="radio" name="work" value="无业游民" required>无业游民
+                <input type="radio" name="work" value="学生" required>学生
+                <input type="radio" name="work" value="工人" required>工人
+                <input type="radio" name="work" value="商人" required>商人
+                <input type="radio" name="work" value="总裁" required>总裁
+            </div>
+            <div>
+                <div class="question">您的兴趣爱好是</div>
+                <input type="checkbox" name="interest" class="allChecked">全选
+                <input type="checkbox" name="interest" value="篮球">篮球
+                <input type="checkbox" name="interest" value="足球">足球
+                <input type="checkbox" name="interest" value="羽毛球">羽毛球
+                <input type="checkbox" name="interest" value="乒乓球">乒乓球
+                <input type="checkbox" name="interest" value="原神">原神!
+                <br>
+                <input type="checkbox" name="interest" value="王者荣耀">王者荣耀!
+                <input type="checkbox" name="interest" value="星穹铁道">星穹铁道!
+                <input type="checkbox" name="interest" value="火影忍者">火影忍者!
+                <label>其他:<input type="text" name="interest"></label>
+            </div>
+            <label><b>您的姓名:</b><input type="text" name="name"></label>
+            <br>
+            <label><b>您的电话:</b><input type="tel" name="tel"></label>
+            <br>
+            <label><b>您的邮箱:</b><input type="email" name="email"></label>
+            <br>
+            <textarea cols="80" rows="6" class="plan" placeholder="请写下您对未来的规划"></textarea>
+            <br>
+            <button type="reset">重置</button>
+            <button type="submit" onclick="sub()">提交</button>
+        </form>
+    </div>
+    <script>
+
+        // 设置全选功能
+        var boxs = document.querySelector('.allChecked');
+        var siblingElements = boxs.parentElement.querySelectorAll('input');
+        boxs.onclick = function () {
+            for (var j = 1; j < siblingElements.length; j++) {
+                siblingElements[j].checked = this.checked;
+            }
+        };
+
+        var siblingElements = boxs.parentElement.querySelectorAll('input');  
+        for (let j = 1; j < siblingElements.length - 1; j++) {  
+            siblingElements[j].onclick = function () {  
+                var flag = true;  
+                for (let m = 1; m < siblingElements.length - 1; m++) {  
+                    if (!siblingElements[m].checked) {  
+                        flag = false;  
+                        break;  
+                    }  
+                    console.log(siblingElements[m].checked);
+                }  
+                
+                boxs.checked = flag;  
+            }  
+        }  
+        // 检查选择题是否完成
+        function checkBox(name){
+			var j=0;
+			var checkbox=document.getElementsByName(name);
+			for(var i=0; i<checkbox.length;i++){
+				if(checkbox[i].checked){
+					j++;
+					break;
+				}
+			}
+			if(j==0)return false;
+			return true;
+		}	
+        // 检查填空题是否完成
+        function checkBoxInner(name) { 
+            var checkbox=document.getElementsByName(name)[0];
+            return checkbox.value  == '' ? false : true;
+         }
+         // 设置提交函数
+        function sub() { 
+            var sex = checkBox('sex');
+            var age = checkBox('age');
+            var education = checkBox('education');
+            var name = checkBoxInner('name');
+            var tel = checkBoxInner('tel');
+            var email = checkBoxInner('email');
+            if(sex&&age&&education&&name&&tel&&email){
+                alert("提交成功");
+            }else{
+                alert("您还有未完成的题目喔");
+            }
+        }
+        
+    </script>
+</body>
+
+</html>
