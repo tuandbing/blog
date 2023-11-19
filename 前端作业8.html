@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        td{
+            width: 50px;
+            height: 50px;
+        }
+        table{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #map{
+            width: 620px;
+            height: 620px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" cellspacing="0">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <div id="map">
+
+    </div>
+    <hr>
+    <h1>SCORE:0</h1>
+    <script>
+        var score = 0;
+        var arr=[];
+        //刷新页面时随机生成两个div
+        var map = document.getElementById("map");
+        function createDiv(color){
+            //设置div属性
+            var div = document.createElement("div");
+            div.style.width="52px";
+            div.style.height="52px";
+            div.style.position="absolute";
+            //位置生成
+            div.style.left=parseInt(Math.random()*10)*52-1+"px";
+            div.style.top=parseInt(Math.random()*10)*52-1+"px";
+            div.style.backgroundColor=color;
+            map.appendChild(div);
+            return div;
+        }
+        var head = createDiv("red");//蛇头
+        var food = createDiv("blue");//食物
+        //移动蛇头
+        head.value="上";
+        arr.push(head);
+        function move(){
+            switch(head.value){
+                case "左":
+                    head.style.left=parseInt(head.style.left)-52+"px";
+                    break;
+                case "右":
+                    head.style.left=parseInt(head.style.left)+52+"px";
+                    break;
+                case "上":
+                    head.style.top=parseInt(head.style.top)-52+"px";
+                    break;
+                case "下":
+                    head.style.top=parseInt(head.style.top)+52+"px";
+                    break;
+            }
+            //碰撞检测，身体生成
+            if(head.style.left==food.style.left && head.style.top==food.style.top){
+                //先产生身体
+                var body = createDiv("yellow");
+                var last = arr[0];
+                console.log(last);
+                //对身体进行定位
+                switch(last.value){
+                    case "左":
+                        body.style.left = last.style.left+52+"px";
+                        body.style.top = last.style.top + 'px';
+                        break;
+                    case "右":
+                        body.style.left = last.style.left-52+"px";
+                        body.style.top = last.style.top + 'px';
+                        break;
+                    case "上":
+                        body.style.top = last.style.top+52+"px";
+                        body.style.left = last.style.left + 'px';
+                        break;
+                    case "下":
+                        body.style.top = last.style.top-52+"px";
+                        body.style.left = last.style.left + 'px';
+                        break;
+                }
+                body.value = last.value;
+                arr.unshift(body);
+                //再生成食物
+                food.style.left=parseInt(Math.random()*10)*52-1+"px";
+                food.style.top=parseInt(Math.random()*10)*52-1+"px";
+                score++;
+            }
+        }
+        var t = setInterval(move,250);
+        //通过键盘的按键改变方向
+        document.onkeydown=function(e){
+            switch(e.keyCode){
+                case 37:
+                    head.value = "左";
+                    break;
+                case 38:
+                    head.value = "上";
+                    break;
+                case 39:
+                    head.value = "右";
+                    break;
+                case 40:
+                    head.value = "下";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

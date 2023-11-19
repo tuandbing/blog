@@ -1,0 +1,847 @@
+<!--人机有点智障-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link type="text/css" rel="stylesheet" href="./index.css">
+
+    </link> -->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #Game {
+            position: absolute;
+            left: 52%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #Black_Time,
+        #White_Time {
+            position: absolute;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 200px;
+            height: 100px;
+            color: deeppink;
+            border: 3px solid black;
+        }
+
+        #Black_Time {
+            background-color: rgb(255, 166, 0);
+            left: 200px;
+            top: 200px;
+        }
+
+        #White_Time {
+            background-color: rgb(255, 238, 0);
+            left: 1050px;
+            top: 200px;
+        }
+
+        .Name {
+            font-size: 20px;
+        }
+
+        #Black_AllTime,
+        #Black_StepTime,
+        #White_AllTime,
+        #White_StepTime {
+            font-size: 25px;
+        }
+
+        #Score {
+            position: absolute;
+            left: 50%;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            transform: translateX(-50%);
+            top: 50px;
+            border: 2px solid rgb(142, 5, 5);
+            font-size: 25px;
+        }
+
+        #Players,
+        #Automatic,
+        #Pause,
+        #Give_Up,
+        #Summation,
+        #Regret,
+        #Start {
+            border-radius: 50%;
+            width: 100px;
+            height: 50px;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+            border: 2px solid blanchedalmond;
+            background-color: blanchedalmond;
+            cursor: pointer;
+        }
+
+        #Operate {
+            position: absolute;
+            display: flex;
+            width: 650px;
+            top: 650px;
+            left: 400px;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        #Players {
+            position: absolute;
+            top: 600px;
+            left: 300px;
+            display: none;
+        }
+
+        #Automatic {
+            position: absolute;
+            top: 700px;
+            left: 300px;
+            display: none;
+        }
+
+        #White_Piece,
+        #Black_Piece,
+        #Count_White,
+        #Count_Black {
+            position: absolute;
+            width: 200px;
+            font-size: 30px;
+            font-weight: bold;
+            height: 50px;
+            top: 150px;
+        }
+
+        #Black_Piece {
+            left: 200px;
+        }
+
+        #White_Piece {
+            left: 1050px;
+        }
+
+        #Count_Black {
+            left: 375px;
+        }
+
+        #Count_White {
+            left: 1225px;
+        }
+
+        #Total_Regret {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            font-size: 20px;
+            height: 100px;
+            width: 120px;
+            background-color: bisque;
+            border: 3px solid black;
+            text-align: center;
+        }
+
+        #myCanvas {
+            position: absolute;
+            left: 475px;
+            top: 125px;
+            box-shadow: 0 0 50px black;
+            background-color: #946136;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="Game">五子棋游戏</div>
+
+    <!--本处说明黑白棋子的剩余时间-->
+    <div id="Black_Time">
+        <div class="Name">黑子</div>
+        <div id="Black_AllTime">局时:15分0秒</div>
+        <div id="Black_StepTime">步时:2分0秒</div>
+    </div>
+    <div id="White_Time">
+        <div class="Name">白子</div>
+        <div id="White_AllTime">局时:15分0秒</div>
+        <div id="White_StepTime">步时:2分0秒</div>
+    </div>
+    <div id="Score">黑棋 0:0 白棋</div>
+
+    <button id="Players">人人对战</button>
+    <button id="Automatic">人机对战</button>
+
+    <div id="Operate">
+        <button id="Start">开始游戏</button>
+        <button id="Pause" onclick="Pause(event)">暂停游戏</button>
+        <button id="Regret" onclick="Regret()">悔棋</button>
+        <button id="Give_Up" onclick="Give_Up()">认输</button>
+        <button id="Summation">求和</button>
+    </div>
+
+    <div id="White_Piece">白子落子数:</div>
+    <div id="Black_Piece">黑子落子数:</div>
+    <div id="Count_White">0</div>
+    <div id="Count_Black">0</div>
+
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <div id="Total_Regret">所剩悔棋次数
+        <div id="Black_Regret">黑棋:3次</div>
+        <div id="White_Regret">白棋:3次</div>
+    </div>
+
+    <script>
+        // 计时器
+        let Black_Timer = 0;
+        let White_Timer = 0;
+
+        // 记录黑白子的步时
+        let Black_Step_Second = 0;
+        let White_Step_Second = 0;
+        let Black_Step_Minute = 2;
+        let White_Step_Minute = 2;
+
+        // 记录黑白子的局时
+        let Black_Second = 0;
+        let White_Second = 0;
+        let Black_Minute = 15;
+        let White_Minute = 15;
+
+        // 记录黑白子的落子数
+        let Black_Count = 0;
+        let White_Count = 0;
+
+        // 记录黑白子的悔棋次数
+        let Black_Regret_Count = 0;
+        let White_Regret_Count = 0;
+
+        // 记录黑白子的分数
+        let Black_Score = 0;
+        let White_Score = 0;
+
+        let Black_Regret = document.querySelector('#Black_Regret');
+        let White_Regret = document.querySelector('#White_Regret')
+        let Count_White = document.querySelector('#Count_White');
+        let Count_Black = document.querySelector('#Count_Black');
+        let White_AllTime = document.querySelector('#White_AllTime');
+        let White_StepTime = document.querySelector('#White_StepTime');
+        let Score = document.querySelector('#Score');
+
+        let Black_AllTime = document.querySelector('#Black_AllTime');
+        let Black_StepTime = document.querySelector('#Black_StepTime');
+        let c = document.querySelector('#myCanvas');
+        this.ctx = c.getContext('2d');
+
+        var chesscolor = ['BLACK', 'WHITE'];//落子颜色
+        // var step = 0;//记录当前步数
+        var flag = false;//记录游戏状态
+
+        var dx = 0;
+        var dy = 0;
+        //检测棋子方向
+        var mode = [
+            [1, 0],//水平
+            [0, 1],//垂直 
+            [1, 1],//左上右下
+            [1, -1]//右上左下
+        ];
+
+        var color = 'WHITE';
+        let chessX = [];
+        let chessY = [];
+        let step = 0;
+        // 绘制棋盘
+        function Draw_Board() {
+            ctx.beginPath();
+            ctx.lineWidth = "2";
+            var a = 25;
+            while (a <= 475) {
+                ctx.moveTo(25, a);
+                ctx.lineTo(475, a);
+                a = a + 30;
+            }
+            a = 25;
+            while (a <= 475) {
+                ctx.moveTo(a, 25);
+                ctx.lineTo(a, 475);
+                a = a + 30;
+            }
+            ctx.stroke();
+            // ctx.closePath();
+            ctx.beginPath();
+        }
+
+
+        // 点击开始游戏以后选择模式
+        let start = document.querySelector('#Start');
+        let automatic = document.querySelector('#Automatic');
+        let players = document.querySelector('#Players');
+
+        start.addEventListener('click', function () {
+            start.textContent = '模式选择';
+            automatic.style.display = 'block';
+            players.style.display = 'block';
+        })
+
+        // 在点击具体操作后，隐藏并将“开始游戏改成重新开始”
+        players.addEventListener('click', Start1);
+        automatic.addEventListener('click', Start2);
+
+        // 双人对局
+        function Start1() {
+            automatic.style.display = 'none';
+            players.style.display = 'none';
+            start.textContent = '重新开始';
+            cleanChessBoard();
+            Draw_Board();
+            reStart();
+            cases = 1;
+            flag = true;
+            Black_Step_Minute = 2;
+            Black_Step_Second = 0;
+            Black_Timer = setInterval(Player0, 1000);
+        }
+
+        // 人机对局
+        function Start2() {
+            automatic.style.display = 'none';
+            players.style.display = 'none';
+            start.textContent = '重新开始';
+            cleanChessBoard();
+            Draw_Board();
+            reStart();
+            cases = 0;
+            flag = true;
+            Black_Step_Minute = 2;
+            Black_Step_Second = 0;
+            Black_Timer = setInterval(Player0, 1000);
+        }
+        // 将整个地图存储在数组中
+        let map = new Array(16);
+        for (let i = 0; i < 16; i++) {
+            map[i] = new Array(16);
+            // 全部置为0
+            for (let j = 0; j < 16; j++) {
+                map[i][j] = 0;
+            }
+        }
+
+
+
+        // 实现下棋功能
+        c.addEventListener('click', function (e) {
+            if (flag) {
+                // 棋子坐标
+                var px = Math.floor((e.offsetX + 25) / 30) - 1;
+                var py = Math.floor((e.offsetY + 25) / 30) - 1;
+
+                // 判断游戏是否结束
+                if (!flag) {
+                    alert("Game Over!", 40, 235);;
+                    return;
+                }
+                // 检测是否在棋盘上落子
+                if ((px + 1) * 30 == 0 || (py + 1) * 30 == 0 || (px + 1) * 30 == 500 || (py + 1) * 30 == 500) {
+                    return;
+                }
+
+                if (map[px][py] == 0) {
+                    // 落子
+                    drawchess((px + 1) * 30 - 5, (py + 1) * 30 - 5, chesscolor[step % 2]);
+                    // 记录落子颜色
+                    map[px][py] = chesscolor[step % 2];
+                    // 检测哪方胜负
+                    for (var i = 0; i < mode.length; i++) {
+                        checkwin(px, py, chesscolor[step % 2], mode[i]);
+                    }
+                    chessX[step] = px;
+                    chessY[step] = py;
+                    step++;
+                    if (step % 2) {
+                        clearInterval(Black_Timer);
+                        Black_Count++;
+                        Count_Black.innerHTML = Black_Count;
+                        Black_StepTime.innerHTML = '步时:2分0秒';
+                        if (cases) {
+                            White_Step_Minute = 2;
+                            White_Step_Second = 0;
+                            White_Timer = setInterval(Player1, 1000);
+                        } else {
+                            AI();
+                        }
+                    } else {
+                        clearInterval(White_Timer);
+                        White_Count++;
+                        Count_White.innerHTML = White_Count;
+                        Black_Step_Minute = 2;
+                        Black_Step_Second = 0;
+                        Black_Timer = setInterval(Player0, 1000);
+                        White_StepTime.innerHTML = '步时:2分0秒';
+                    }
+                }
+            }
+
+
+        });
+
+        //绘制棋子
+        function drawchess(x, y, color) {//传入颜色,位置,绘制棋子
+            ctx.fillStyle = color;//填充颜色
+            ctx.arc(x, y, 15, 0, Math.PI * 2, false);//画圆: 圆心 半径 弧度 逆时针
+            ctx.fill();//填充
+            ctx.stroke();
+            ctx.beginPath();//提笔	
+        }
+
+        //输赢机制
+        function checkwin(x, y, color, mode) {//状态: 黑 白 没赢	
+            var count = 0;//记录个数
+            for (var i = 1; i < 5; i++) {
+                if (map[x + i * mode[0]]) {
+                    if (map[x + i * mode[0]][y + i * mode[1]] == color) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+
+            }
+            for (var i = 1; i < 5; i++) {
+                if (map[x - i * mode[0]]) {
+                    if (map[x - i * mode[0]][y - i * mode[1]] == color) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            //判断个数是否达到胜利个数	
+            if (count >= 4) {
+                alert(color + " WIN! ");
+                ctx.font = "70px Arial";
+                ctx.fillText("Game Over!", 40, 235);
+                flag = false;//游戏结束
+                if (color == 'WHITE') {
+                    White_Score++;
+                } else {
+                    Black_Score++;
+                }
+                Score.innerHTML = '黑棋' + Black_Score + ':' + White_Score + '白棋'
+            }
+
+        }
+
+        // 黑子方
+        function Player0() {
+            Black_Second--;
+            Black_Step_Second--;
+            if (Black_Second < 0) {
+                Black_Second += 60;
+                Black_Minute--;
+            }
+            if (Black_Step_Second < 0) {
+                Black_Step_Second += 60;
+                Black_Step_Minute--;
+            }
+            if (Black_Minute < 0 || Black_Step_Minute < 0) {
+                flag = false;
+                clearInterval(Black_Timer);
+                alert('Your Time is Over');
+            }
+
+            Black_AllTime.innerHTML = ('局时: ' + Black_Minute + '分' + Black_Second + '秒');
+            Black_StepTime.innerHTML = ('步时: ' + Black_Step_Minute + '分' + Black_Step_Second + '秒');
+        }
+
+        // 人人对局，白子方
+        function Player1() {
+            White_Second--;
+            White_Step_Second--;
+            if (White_Second < 0) {
+                White_Second += 60;
+                White_Minute--;
+            }
+            if (White_Step_Second < 0) {
+                White_Step_Second += 60;
+                White_Step_Minute--;
+            }
+            if (White_Minute < 0 || White_Step_Minute < 0) {
+                flag = false;
+                clearInterval(White_Timer);
+                alert('Your Time is Over');
+            }
+
+            White_AllTime.innerHTML = ('局时: ' + White_Minute + '分' + White_Second + '秒');
+            White_StepTime.innerHTML = ('步时: ' + White_Step_Minute + '分' + White_Step_Second + '秒');
+        }
+
+
+        // 暂停游戏功能
+        function Pause(ev) {
+            // 判断当前游戏是否正常进行
+            if (flag) {
+                // 由于暂停游戏，所以无法落子
+                flag = false;
+
+                // 判断当前落子方颜色
+                if (step % 2) {
+                    clearInterval(White_Timer);
+                } else {
+                    clearInterval(Black_Timer);
+                }
+                ev.target.innerHTML = '继续游戏';
+            } else {
+                flag = true;
+                if (step % 2) {
+                    White_Timer = setInterval(Player1, 1000);
+                } else {
+                    Black_Timer = setInterval(Player0, 1000);
+                }
+                ev.target.innerHTML = '暂停游戏';
+            }
+        }
+
+        // 投降
+        function Give_Up() {
+            if (flag) {
+                if (step % 2) {
+                    clearInterval(White_Timer);
+                    alert("The Winner is Black!");
+                } else {
+                    clearInterval(Black_Timer);
+                    alert("The Winner is White!");
+                }
+                flag = false;
+            }
+        }
+
+        //清除棋盘
+        function cleanChessBoard() {
+            ctx.fillStyle = '#946136';
+            ctx.fillRect(0, 0, c.width, c.height);
+        }
+
+        //悔棋机制
+        function Regret() {
+            // 判断是否落子过
+            if (flag) {
+                if (step) {
+                    if (Allow_Regret()) {
+                        cleanChessBoard();
+                        Draw_Board();
+                        let flag_1 = true;
+                        let flag_2 = true;
+                        //修改棋盘状态
+                        if (cases) {
+                            for (let x = 0; x < 16; x++) {
+                                for (let y = 0; y < 16; y++) {
+                                    if (map[x][y]) {
+                                        if (x == chessX[step - 1] && y == chessY[step - 1] && flag_2) {
+                                            map[x][y] = 0;
+                                            step--;
+                                            flag_2 = false;
+                                            continue;
+                                        }
+                                        drawchess((x + 1) * 30 - 5, (y + 1) * 30 - 5, map[x][y]);
+                                    }
+                                }
+                            }
+                            if ((step + 1) % 2) {
+                                Black_Count--;
+                                Black_Regret_Count++;
+                                Black_Regret.innerHTML = '黑棋:' + (3 - Black_Regret_Count) + '次';
+                                Count_Black.innerHTML = Black_Count;
+                                clearInterval(White_Timer);
+                                Black_Step_Minute = 2;
+                                Black_Step_Second = 0;
+                                Black_Timer = setInterval(Player0, 1000);
+                            } else {
+                                White_Count--;
+                                White_Regret_Count++;
+                                White_Regret.innerHTML = '白棋:' + (3 - White_Regret_Count) + '次';
+                                Count_White.innerHTML = White_Count;
+                                clearInterval(Black_Timer);
+                                White_Step_Minute = 2;
+                                White_Step_Second = 0;
+                                White_Timer = setInterval(Player1, 1000);
+                            }
+                        } else {
+                            for (let x = 0; x < 16; x++) {
+                                for (let y = 0; y < 16; y++) {
+                                    if (map[x][y]) {
+                                        if ((x == chessX[step - 1] && y == chessY[step - 1])) {
+                                            map[x][y] = 0;
+                                            continue;
+                                        }
+                                        if (x == chessX[step - 2] && y == chessY[step - 2]) {
+                                            map[x][y] = 0;
+                                            continue;
+                                        }
+                                        drawchess((x + 1) * 30 - 5, (y + 1) * 30 - 5, map[x][y]);
+                                    }
+                                }
+                            }
+                            step -= 2;
+                            Black_Count--;
+                            Black_Regret_Count++;
+                            Black_Regret.innerHTML = '黑棋:' + (3 - Black_Regret_Count) + '次';
+                            Count_Black.innerHTML = Black_Count;
+                            clearInterval(Black_Timer);
+                            Black_Step_Minute = 2;
+                            Black_Step_Second = 0;
+                            Black_Timer = setInterval(Player0, 1000);
+                        }
+                    } else {
+                        alert('您已不能悔棋');
+                    }
+                } else {
+                    alert('没有可悔棋的棋子');
+                }
+            } else {
+                alert('游戏已结束');
+            }
+        }
+
+        // 判断是否允许悔棋
+        function Allow_Regret() {
+            if (cases) {
+                if (step % 2) {
+                    if (Black_Regret_Count < 3) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    if (White_Regret_Count < 3) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                if (Black_Regret_Count < 3) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        function alterAITurn() {
+            var maxWeight = 0;
+            var xToPut = 0;
+            var yToPut = 0;
+            var posTemp;
+            var weight;
+            color = 'WHITE';
+            for (var i = 0; i < 16; ++i) {
+                for (var j = 0; j < 16; ++j) {
+                    posTemp = {
+                        x: i,
+                        y: j
+                    }
+                    if (!map[i][j] && isInBound(posTemp) && (weight = getAIPosToPut(posTemp)) > maxWeight) {
+                        maxWeight = weight;
+                        xToPut = i;
+                        yToPut = j;
+                    }
+                }
+            }
+
+            color = 'BLACK';
+            for (var i = 0; i < 16; ++i) {
+                for (var j = 0; j < 16; ++j) {
+                    posTemp = {
+                        x: i,
+                        y: j
+                    }
+                    if (!map[i][j] && isInBound(posTemp) && (weight = getAIPosToPut(posTemp)) > maxWeight) {
+                        maxWeight = weight;
+                        xToPut = i;
+                        yToPut = j;
+                    }
+                }
+            }
+
+
+            chessX[step] = xToPut;
+            chessY[step] = yToPut;
+            step++;
+            drawchess((xToPut + 1) * 30 - 5, (yToPut + 1) * 30 - 5, 'WHITE');
+            map[xToPut][yToPut] = 'WHITE';
+            White_Count++;
+            Count_White.innerHTML = White_Count;
+            Black_Step_Minute = 2;
+            Black_Step_Second = 0;
+            Black_Timer = setInterval(Player0, 1000);
+            White_StepTime.innerHTML = '步时:2分0秒';
+            for (var i = 0; i < mode.length; i++) {
+                checkwin(xToPut, yToPut, 'WHITE', mode[i]);
+            }
+        }
+
+        //计算回溯的下一个格点的坐标
+        function nextPos(curPos, direction) {
+            var i, j;
+            switch (direction) {
+                case "left":
+                    i = -1, j = 0;
+                    break;
+                case "right":
+                    i = 1, j = 0;
+                    break;
+                case "up":
+                    i = 0, j = -1;
+                    break;
+                case "down":
+                    i = 0, j = 1;
+                    break;
+                case "leftUp":
+                    i = -1, j = -1;
+                    break;
+                case "rightUp":
+                    i = 1, j = -1;
+                    break;
+                case "leftDown":
+                    i = -1, j = 1;
+                    break;
+                case "rightDown":
+                    i = 1, j = 1;
+                    break;
+                    defalut:
+                    i = 0, j = 0;
+            }
+            return {
+                x: curPos.x + i,
+                y: curPos.y + j
+            }
+        }
+
+        function isGameOverCore(curPos, direction, lastStatus) {
+            if (!isInBound(curPos)) return 0;
+            var curStatus = map[curPos.x][curPos.y];
+            if (curStatus != lastStatus) return 0;
+
+            var count = 0;
+
+            switch (direction) {
+                case "left":
+                    count = isGameOverCore(nextPos(curPos, "left"), "left", curStatus);
+                    break;
+                case "right":
+                    count = isGameOverCore(nextPos(curPos, "right"), "right", curStatus);
+                    break;
+                case "up":
+                    count = isGameOverCore(nextPos(curPos, "up"), "up", curStatus);
+                    break;
+                case "down":
+                    count = isGameOverCore(nextPos(curPos, "down"), "down", curStatus);
+                    break;
+                case "leftUp":
+                    count = isGameOverCore(nextPos(curPos, "leftUp"), "leftUp", curStatus);
+                    break;
+                case "rightUp":
+                    count = isGameOverCore(nextPos(curPos, "rightUp"), "rightUp", curStatus);
+                    break;
+                case "leftDown":
+                    count = isGameOverCore(nextPos(curPos, "leftDown"), "leftDown", curStatus);
+                    break;
+                case "rightDown":
+                    count = isGameOverCore(nextPos(curPos, "rightDown"), "rightDown", curStatus);
+                    break;
+                    defalut:
+                    count = 0;
+            }
+            return count + 1;
+        }
+        function getAIPosToPut(pos) {
+            var curStatus = color;
+            var count = new Array(4);
+            count[0] = isGameOverCore(nextPos(pos, "left"), "left", curStatus) + isGameOverCore(nextPos(pos, "right"), "right", curStatus);
+
+            count[1] = isGameOverCore(nextPos(pos, "up"), "up", curStatus) + isGameOverCore(nextPos(pos, "down"), "down", curStatus);
+
+            count[2] = isGameOverCore(nextPos(pos, "leftUp"), "leftUp", curStatus) + isGameOverCore(nextPos(pos, "rightDown"), "rightDown", curStatus);
+
+            count[3] = isGameOverCore(nextPos(pos, "rightUp"), "rightUp", curStatus) + isGameOverCore(nextPos(pos, "leftDown"), "leftDown", curStatus);
+            var weight = 0;
+            for (var i = 0; i < 4; i++) {
+                if (count[i] == 1) {		//周围有1个相同的
+                    weight += 2;
+                } else if (count[i] == 2) {
+                    weight += 5;
+                } else if (count[i] == 3) {
+                    weight += 20;
+                } else if (count[i] == 4) {
+                    weight += 100;
+                }
+            }
+            return weight;
+        }
+        function AI() {
+            alterAITurn();
+            clearInterval(Black_Timer);
+            // clearInterval(White_Timer);
+            if (flag) {
+                Black_Step_Minute = 2;
+                Black_Step_Second = 0;
+                Black_Timer = setInterval(Player0, 1000);
+            }
+        }
+        //判断棋子是否在棋盘范围内
+        function isInBound(pos) {
+            var x = (pos.x + 1) * 30;
+            var y = (pos.y + 1) * 30;
+            if (x > 0 && x < 500 && y > 0 && y < 500) {
+                return true;
+            }
+            return false;
+        }
+
+        function reStart() {
+            Black_AllTime.innerHTML = '局时:15分0秒';
+            Black_Minute = 15;
+            White_AllTime.innerHTML = '局时:15分0秒';
+            White_Minute = 15;
+            Black_StepTime.innerHTML = '步时:2分0秒';
+            White_StepTime.innerHTML = '步时:2分0秒';
+            Count_White.innerHTML = 0;
+            Count_Black.innerHTML = 0;
+            White_Count = 0;
+            Black_Count = 0;
+            Black_Regret_Count = 0;
+            White_Regret_Count = 0;
+            Black_Second = 0;
+            White_Second = 0;
+            Black_Step_Second = 0;
+            White_Step_Second = 0;
+            step = 0;
+            for (let i = 0; i < 16; i++) {
+                for (let j = 0; j < 16; j++) {
+                    map[i][j] = 0;
+                }
+            }
+            chessX = [];
+            chessY = [];
+        }
+    </script>
+
+</body>
+
+</html>

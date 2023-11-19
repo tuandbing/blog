@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="./index.css">
+
+    </link>
+</head>
+
+<body>
+    <div id="Game">五子棋游戏</div>
+
+    <!--本处说明黑白棋子的剩余时间-->
+    <div id="Black_Time">
+        <div class="Name">黑子</div>
+        <div id="Black_AllTime">局时:15分0秒</div>
+        <div id="Black_StepTime">步时:2分0秒</div>
+    </div>
+    <div id="White_Time">
+        <div class="Name">白子</div>
+        <div id="White_AllTime">局时:15分0秒</div>
+        <div id="White_StepTime">步时:2分0秒</div>
+    </div>
+    <div id="Score">黑棋 0:0 白棋</div>
+
+    <button id="Players">人人对战</button>
+    <button id="Automatic">人机对战</button>
+
+    <div id="Operate">
+        <button id="Start">开始游戏</button>
+        <button id="Pause">暂停游戏</button>
+        <button id="Regret">悔棋</button>
+        <button id="Give_Up">认输</button>
+        <button id="Summation">求和</button>
+    </div>
+
+    <div id="White_Piece">白子落子数:</div>
+    <div id="Black_Piece">黑子落子数:</div>
+    <div id="Count_White">0</div>
+    <div id="Count_Black">0</div>
+
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <div id="Total_Regret">所剩悔棋次数
+        <div id="Black_Regret">黑棋:3次</div>
+        <div id="White_Regret">白棋:3次</div>
+    </div>
+
+    <script src="./js/checkerboard.js"></script>
+    <script src="./js/Operate.js"></script>
+    <script src="./js/Player.js"></script>
+    <script src="./js/Game.js"></script>
+    <script>
+        // 选手的所有棋子所在处
+        let map = new Array(16);
+        for (let i = 0; i < 16; i++) {
+            map[i] = new Array(16);
+        }
+        // 全部置为0
+        for (let i = 0; i < 16; i++) {
+            for (let j = 0; j < 16; j++) {
+                map[i][j] = 0;
+            }
+        }
+        let game = new Game(map);
+    </script>
+</body>
+
+</html>

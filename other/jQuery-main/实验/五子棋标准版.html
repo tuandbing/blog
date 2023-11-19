@@ -4,7 +4,7 @@
         <title>五子棋</title>
         <style>
             body{
-            background-image:url(zhuomian.jpg);
+            /* background-image:url(zhuomian.jpg); */
 			background-attachment: fixed;
 			background-size:100%;
         }
@@ -13,7 +13,7 @@
                 top: 80px;
                 left: 380px;
                 border: 2px solid black;
-                background-image: url("qipan.jpg");
+                /* background-image: url("qipan.jpg"); */
                 box-shadow: 5px 5px 5px black;
             }
             #huihe{
@@ -74,7 +74,7 @@
                 top:200px;
                 height: 300px;
                 width: 200px;
-                background-image: url("zuo.png");
+                /* background-image: url("zuo.png"); */
                 background-size:100%;
             }
             .you{
@@ -83,7 +83,7 @@
                 top:200px;
                 height: 300px;
                 width: 200px;
-                background-image: url("you.png");
+                /* background-image: url("you.png"); */
                 background-size:100%;
             }
             #yinyue{
@@ -246,9 +246,9 @@
         <div id="heiqi">0</div>
         <div id="bifen">黑棋 0:0 白棋</div>
         <canvas id="myCanvas" width="500" height="500" onclick="XiaQi(event)"></canvas>
-        <audio id="music1"><source src="5390.mp3"></audio>
+        <!-- <audio id="music1"><source src="5390.mp3"></audio>
         <audio id="music2"><source src="14230.mp3"></audio>
-        <audio id="music3" src="10018.mp3" autoplay="autoplay" loop="loop"></audio>
+        <audio id="music3" src="10018.mp3" autoplay="autoplay" loop="loop"></audio> -->
         <script>
             var c=document.getElementById("myCanvas");
             var ctx=c.getContext("2d");
@@ -276,6 +276,8 @@
             var bumiaoone=0;
             var bufentwo=2;
             var bumiaotwo=0;
+
+            // 重置对局时长
             function resetTimerone(){
                 clearInterval(clockone);
                 fenone=20;
@@ -288,6 +290,8 @@
                 miaotwo=0;
                 twotime.innerHTML="局时:"+fentwo+"分"+miaotwo+"秒";
             }
+
+            // 每轮开始计时
             function startTimerone(){
                 clockone=setInterval(timerone,1000);
                 bufenone=2;
@@ -341,8 +345,9 @@
                 twobu.innerHTML="步时:"+bufentwo+"分"+bumiaotwo+"秒";
             }
 
+            // 绘制棋盘
             function HuaQiPan(){
-                c.height=c.height;
+                // c.height=c.height;
                 ctx.beginPath();
                 ctx.lineWidth="2";
                 var a=25;
@@ -368,6 +373,8 @@
                 for(j=0;j<=15;j++)
                 xycount[i][j]=0;
             }
+
+
             var aicount=new Array();
             var i=0;
             var j=0;
@@ -389,8 +396,7 @@
             var pass=0;
             function ChongZhi(){
                 for(i=0;i<=15;i++)
-                for(j=0;j<=15;j++)
-                {
+                for(j=0;j<=15;j++){
                     xycount[i][j]=0;
                     aicount[i][j]=0;
                 }
@@ -432,8 +438,8 @@
                     resetTimerone();
                     resetTimertwo();
                     startTimerone();
-                    var blackhuiqi=3;
-                    var whitehuiqi=3;
+                    blackhuiqi=3;
+                    whitehuiqi=3;
                     start=1;
                     mode=1;
                     jud=1;
@@ -452,8 +458,8 @@
                     resetTimerone();
                     resetTimertwo();
                     startTimerone();
-                    var blackhuiqi=3;
-                    var whitehuiqi=3;
+                    blackhuiqi=3;
+                    whitehuiqi=3;
                     start=1;
                     mode=2;
                     jud=1;
@@ -660,19 +666,6 @@
                     for(aiy=0;aiy<=15;aiy++)
                         if(xycount[aix][aiy]==0)
                         {   
-                            
-
-
-
-
-
-
-
-
-
-
-
-
                             //白左四
                             if(aix-4>=0){
                                 if(xycount[aix-4][aiy]==2&&xycount[aix-3][aiy]==2&&xycount[aix-2][aiy]==2&&xycount[aix-1][aiy]==2) {maxnow=500;
