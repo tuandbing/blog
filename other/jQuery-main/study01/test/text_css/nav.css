@@ -57,7 +57,7 @@
     background-color: grey;
     border: 1px solid transparent;
     transform: rotateZ(45deg);
-    border-color: white;
+    border-color: gray;
     border-top: grey;
     border-left: grey;
     display: inline-block;

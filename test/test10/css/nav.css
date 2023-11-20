@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#Site_Nav{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    background-color: gray;
+    font-size: 12.5px;
+}
+#Sign{
+    width: 12%;
+    position: absolute;
+    left: 150px;
+}
+#Site_Nav_2{
+    position: absolute;
+    left: 50%;
+    width: 35%;
+}
+
+#Site_Nav_2>li{
+    width: 80px;
+}
+li{
+    list-style: none;
+    float: left;
+    margin-left: 20px;
+}
+a{
+    left: 20px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+a:hover{
+    color: deeppink;
+}
+.triangle {
+    width: 5px;
+    height: 5px;
+    background-color: grey;
+    border: 1px solid transparent;
+    transform: rotateZ(45deg);
+    border-color: white;
+    border-top: grey;
+    border-left: grey;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 3px;
+    transition: all 0.5s ease;
+}
+
+
+
+.classes{
+    display: none;
+    position: absolute;
+    top: 20px;
+}
+
+#purchased{
+    width: 80px;
+}
+
+#footprint{
+    width: 80px;
+    top: 40px;
+}
+
+#Menswear,
+#Womenswear,
+#Electronics,
+#Supplies,
+#Jewelry,
+#Shoe{
+    width: 80px;
+    position: absolute;
+    left: 61%;
+    top: 20px;
+}
+
+#collect_market,
+#collect_commodity{
+    width: 80px;
+    position: absolute;
+    left: 42%;
+    top: 20px;
+}
+#collect_commodity{
+    top: 40px;
+}
+
+#Feedback,
+#Service{
+    width: 80px;
+    position: absolute;
+    left: 80%;
+    top: 20px;
+}
+
+#Service{
+    top: 40px;
+}
+
+#Site_Nav_3{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    left: 90%;
+    background-color: #fff;
+}
