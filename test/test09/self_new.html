@@ -75,6 +75,7 @@
             font-size: 25px;
         }
 
+        #play,
         #Players,
         #Automatic,
         #Pause,
@@ -163,13 +164,63 @@
             top: 125px;
             box-shadow: 0 0 50px black;
             background-color: #946136;
+            opacity: 0.8;
+        }
+
+        #bg,
+        #tip {
+            width: 250px;
+            height: 150px;
+            background-color: rgba(255, 192, 203, .8);
+            margin-left: 600px;
+            margin-top: 200px;
+        }
+
+        #bg::backdrop,
+        #tip::backdrop {
+            background-color: rgb(96, 111, 119);
+            backdrop-filter: blur(1px);
+        }
+
+        #know {
+            margin-left: 90px;
+            margin-top: 10px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        #tips {
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        #play {
+            position: absolute;
+            left: 45.3%;
+            top: 700px;
+        }
+
+        #bg {
+            width: 850px;
+            margin-left: 300px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        #bg>img {
+            width: 200px;
+            height: 100px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
     <div id="Game">五子棋游戏</div>
-
+    <button id="play">播放音乐</button>
+    <audio src="./music/小田叔 - 三国杀背景音乐.mp3" id="music"></audio>
     <!--本处说明黑白棋子的剩余时间-->
     <div id="Black_Time">
         <div class="Name">黑子</div>
@@ -204,7 +255,31 @@
         <div id="Black_Regret">黑棋:3次</div>
         <div id="White_Regret">白棋:3次</div>
     </div>
+    <dialog id="tip">
+        <div id="tips">
+            游戏规则
+        </div>
+        <div>
+            1.点击"开始游戏"后选择模式
+        </div>
+        <div>
+            2.游戏设置对局时长15min,其中步长为2min
+        </div>
+        <div>
+            3.当棋盘上连成五子后自动结束
+        </div>
+        <button id="know">我了解了</button>
+    </dialog>
 
+    <dialog id="bg">
+        <div id="bg_tip">
+            请选择游戏背景图片
+        </div>
+        <img src="./img/f70b0602860233160502f5ad02f07ed5.jpg">
+        <img src="./img/R-C.jpg">
+        <img src="./img/OIP-C.jpg">
+        <img src="./img/true.jpg">
+    </dialog>
     <script>
         // 计时器
         let Black_Timer = 0;
@@ -770,15 +845,13 @@
             }
             return count + 1;
         }
+
         function getAIPosToPut(pos) {
             var curStatus = color;
             var count = new Array(4);
             count[0] = isGameOverCore(nextPos(pos, "left"), "left", curStatus) + isGameOverCore(nextPos(pos, "right"), "right", curStatus);
-
             count[1] = isGameOverCore(nextPos(pos, "up"), "up", curStatus) + isGameOverCore(nextPos(pos, "down"), "down", curStatus);
-
             count[2] = isGameOverCore(nextPos(pos, "leftUp"), "leftUp", curStatus) + isGameOverCore(nextPos(pos, "rightDown"), "rightDown", curStatus);
-
             count[3] = isGameOverCore(nextPos(pos, "rightUp"), "rightUp", curStatus) + isGameOverCore(nextPos(pos, "leftDown"), "leftDown", curStatus);
             var weight = 0;
             for (var i = 0; i < 4; i++) {
@@ -794,6 +867,7 @@
             }
             return weight;
         }
+
         function AI() {
             alterAITurn();
             clearInterval(Black_Timer);
@@ -814,6 +888,7 @@
             return false;
         }
 
+        // 游戏重开
         function reStart() {
             Black_AllTime.innerHTML = '局时:15分0秒';
             Black_Minute = 15;
@@ -839,6 +914,39 @@
             }
             chessX = [];
             chessY = [];
+        }
+
+        // 背景音乐的设置
+        let Music = document.querySelector('#play');
+        let video = document.querySelector('audio');
+        Music.addEventListener('click', function () {
+            if (video.paused) {
+                Music.innerHTML = '暂停音乐';
+                video.play();
+            } else {
+
+                Music.innerHTML = '播放音乐';
+                video.pause();
+            }
+        })
+
+
+        document.querySelector('#tip').showModal();
+        let bg = document.querySelector('#bg');
+        document.querySelector('#know').addEventListener('click', function () {
+            document.querySelector('#tip').close()
+            bg.showModal();
+        })
+
+        // 背景图片的选择
+        let imgs = bg.querySelectorAll('img');
+        for(let i = 0;i<imgs.length;i++){
+            imgs[i].addEventListener('click',function(){
+            bg.close();
+            document.body.style.backgroundImage = 'url('+this.src+')';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        })
         }
     </script>
 
