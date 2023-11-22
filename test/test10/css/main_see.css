@@ -1,6 +1,6 @@
 #Container{
     width: 100%;
-    height: 700px;
+    height: 400px;
     background-color: darkgray;
     display: inline-block;
 }
@@ -32,6 +32,7 @@
     float: left;
 }
 #main_box_firimg{
+    width: 710px;
     height: 400px;
     float: left;
 }
@@ -43,6 +44,34 @@
     margin-left: 10px;
     position: relative;
 }
+#middle_box_ul li img:hover{
+    animation: Box_Ul 1s forwards;
+    box-shadow: 0 0 25px black;
+}
+
+#middle_box_ul li img:not(hover){
+    animation: Not_Box_Ul 1s forwards;
+    box-shadow: 0 0 25px black;
+}
+
+@keyframes Box_Ul{
+    0%{
+        scale: 1;
+    }
+    100%{
+        scale: 1.25;
+    }
+}
+
+@keyframes Not_Box_Ul{
+    0%{
+        scale: 1.25;
+    }
+    100%{
+        scale: 1;
+    }
+}
+
 #middle_box_ul li img{
     height: 100px;
     margin-top: 30px;
@@ -60,8 +89,10 @@
     float: left;
 }
 #Right_Box_Head_Img{
-    padding-left: 75px;
+    margin-left: 75px;
+    width: 40px;
     height: 40px;
+    border-radius: 50%;
 }
 #Right_Box_Head:hover{
     cursor: pointer;

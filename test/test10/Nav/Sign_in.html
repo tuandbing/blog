@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign_In</title>
+    <style>
+        form {
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        #Sign_in {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        hr {
+            border-color: aqua;
+            box-shadow: 5px 5px 5px skyblue;
+        }
+
+        #Reset {
+            float: left;
+            margin-top: 20px;
+        }
+
+        #Submit {
+            float: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <h4 id="Sign_in">
+            登录
+        </h4>
+        <hr>
+        <div>
+            请输入用户名
+        </div>
+        <input type="text" id="Username">
+        <pre></pre>
+        <div>
+            请输入密码
+        </div>
+        <input type="password" id="Password">
+        <button type="reset" id="Reset">
+            重置
+        </button>
+        <button type="button" id="Submit">
+            登录
+        </button>
+    </form>
+
+    <script>
+        
+        let sub = document.querySelector('#Submit');
+        sub.addEventListener('click', function () {
+            let username = document.querySelector('#Username').value;
+            let password = document.querySelector('#Password').value;
+            if (localStorage.getItem(username) && localStorage.getItem(username) == password) {
+                let name = encodeURIComponent(username);
+                let pw = encodeURIComponent(password);
+                window.location.href = '../index.html?'+name+'='+pw;
+            }else{
+                alert('登录失败')
+            }
+        })
+    </script>
+</body>
+
+</html>

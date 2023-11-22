@@ -4,88 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .menu-container{
-            width: 700px;
-            height: 500px;
-            background-color: aquamarine;
-            position: relative;
-            top: 150px;
-            left: 300px;
-        }
-        .item{
-            height: 120px;
-            text-align: center;
-            font-size: 30px;
-        }
-
-        .item:hover {
-            animation: scaleUp 1s forwards;
-            text-shadow: -1px -1px white,1px 1px #333;
-            /* box-shadow: 3px 3px 5px black; */
-            cursor: pointer;
-        }
-
-        .order{
-            height: 120px;
-            line-height: 120px;
-            background-color: red;
-        }
-        .remove{
-            width: 400px;
-            height: 200px;
-            line-height: 200px;
-            background-color: rgb(185, 127, 255);
-        }
-        .pay{
-            position: absolute;
-            left: 400px;
-            top: 120px;
-            width: 300px;
-            height: 380px;
-            line-height: 380px;
-            background-color: blue;
-        }
-
-        .comment{
-            position: absolute;
-            top: 320px;
-            width: 400px;
-            height: 180px;
-            line-height: 180px;
-            background-color: green;
-        }
-        @keyframes scaleUp {
-            0% {
-                transform: scale(1);
-                /* transform-origin: 50% 50%; */
-                transform-origin: 0 0;
-                color: black;
-            }
-
-            100% {
-                color: chocolate;
-                
-                transform: scale(1.3);
-            }
-        }
-    </style>
 </head>
 <body>
-    <div class="menu-container">
-        <div class="order">
-            <div class="item">点菜</div>
-        </div>
-        <div class="remove">
-            <div class="item">取消</div>
-        </div>
-        <div class="pay">
-            <div class="item">支付</div>
-        </div>
-        <div class="comment">
-            <div class="item">评价</div>
-        </div>
-        
-    </div>
+    <input type="text">
+    <button>确认</button>
+    <script>
+        let input = document.querySelector('input');
+        let but = document.querySelector('button');
+        but.addEventListener('click',function(){
+            let value = encodeURIComponent(input.value);
+            window.location.href = './temp2.html?'+value;
+        })
+    </script>
 </body>
 </html>

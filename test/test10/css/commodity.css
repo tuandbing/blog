@@ -1,0 +1,46 @@
+#Commodity{
+    height: 720px;
+    background-color: gray;
+}
+
+.pic_boxs{
+    position: absolute;
+    width: 480px;
+    height: 350px;
+    color: white;
+}
+
+.describe{
+    position: absolute;
+    background-color: black;
+    left: 300px;
+    top: 25px;
+    width: 150px;
+    height: 80px;
+}
+
+#Pic_1,
+#Pic_2,
+#Pic_3,
+#Pic_4,
+#Pic_5,
+#Pic_6{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: 25px;
+    top: 25px;
+}
+.pic_boxs:hover{
+    border: 2px solid red;
+}
+
+.price{
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    left: 300px;
+    top: 200px;
+    width: 150px;
+    height: 80px;
+}

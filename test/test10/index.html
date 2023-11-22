@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="./css/nav.css">
     <link type="text/css" rel="stylesheet" href="./css/search_tip.css">
     <link type="text/css" rel="stylesheet" href="./css/main_see.css">
+    <link type="text/css" rel="stylesheet" href="./css/commodity.css">
 </head>
 
 <body>
@@ -24,6 +25,9 @@
                     免费注册
                 </a>
             </li>
+            <li id="Already_Sign_In">
+                <a id="Exit"></a>
+            </li>
         </ul>
         <ul id="Site_Nav_2">
             <li id="Shopping"><a href="./Nav/Shopping.html">我的购物<div class="triangle"></div></a>
@@ -39,12 +43,12 @@
             </li>
 
             <li id="Sort"><a href="./Nav/Sort.html">商品分类<div class="triangle"></div></a>
-                <a href="" class="classes" id="Menswear">男装</a>
-                <a href="" class="classes" id="Womenswear">女装</a>
+                <a href="" class="classes" id="Menswear">服饰</a>
+                <a href="" class="classes" id="Womenswear">食品</a>
                 <a href="" class="classes" id="Electronics">电子产品</a>
                 <a href="" class="classes" id="Supplies">学习用品</a>
                 <a href="" class="classes" id="Jewelry">饰品</a>
-                <a href="" class="classes" id="Shoe">鞋子</a>
+                <a href="" class="classes" id="Shoe">水果</a>
             </li>
             <li id="Call"><a href="./Nav/Call.html">联系客服<div class="triangle"></div></a>
                 <a href="" class="classes" id="Feedback">意见反馈</a>
@@ -52,9 +56,29 @@
             </li>
         </ul>
         <ul id="Site_Nav_3">
-            <a href="./Nav/mySelf.html">
+            <div id="Show_Self">
                 我的
-            </a>
+                <div id="Me">
+                    <a id="Grade">
+                        我的等级:
+                        <div id="Grade_Num"></div>
+                    </a>
+                    <a id="Integral">
+                        我的积分:
+                        <div id="Integral_Num"></div>
+                    </a>
+                    <a id="Account">
+                        我的账号
+                    </a>
+                    <a id="Change">
+                        更换账号
+                    </a>
+                    <a id="Quit">
+                        退出登录
+                    </a>
+                </div>
+            </div>
+            
         </ul>
     </div>
 
@@ -68,7 +92,7 @@
             <ul id="List_Tips">
                 <li><a class="Tip">男鞋</a></li>
                 <li><a class="Tip">卫衣</a></li>
-                <li><a class="Tip">女鞋</a></li>
+                <li><a class="Tip">食物</a></li>
                 <li><a class="Tip">围巾</a></li>
                 <li><a class="Tip">手套</a></li>
                 <li><a class="Tip">裤子</a></li>
@@ -98,11 +122,14 @@
 
         <div id="Middle_Box">
             <div id="Middle_Box_Mainimg">
-                <img src="picture/infinity-11509882.jpg" id="main_box_firimg">
-                <div id="Previous_Img"><</div>
-                <div id="Next_Img"> > </div>
+                <img src="picture/food.jpg" id="main_box_firimg">
+                <div id="Previous_Img">&lt</div>
+                <div id="Next_Img">></div>
                 <!--五张图片轮播-->
                 <ul id="Middle_Box_Mainimg_List">
+                    <li></li>
+                    <li></li>
+                    <li></li>
                     <li></li>
                     <li></li>
                     <li></li>
@@ -126,7 +153,7 @@
 
         <div id="Right_Box">
             <div id="Right_Box_Head">
-                <img src="picture/jingdong.jpg" id="Right_Box_Head_Img">
+                <img src="picture/Me.jpg" id="Right_Box_Head_Img">
                 <div id="Right_Box_Head_Text">hi~欢迎来逛馒头小店!</div>
             </div>
             <div class="Plus_vip">
@@ -218,8 +245,62 @@
             </div>
         </div>
     </div>
+
+    <!--商品以及优惠等展示，部分-->
+    <div id="Commodity">
+        <a class="items">
+            <div class="pic_boxs">
+                <img src="./picture/Show_Pic/Show_1.webp" id="Pic_1">
+                <div class="describe">特步女鞋板鞋2023新款冬季运动休闲鞋官方正品低帮百搭平底小白鞋</div>
+                <div class="comments"></div>
+                <div class="price">￥139</div>
+            </div>
+        </a>
+        <a class="items">
+            <div class="pic_boxs">
+                <img src="./picture/Show_Pic/Show_2.webp" id="Pic_2">
+                <div class="describe">珊瑚牛奶绒床垫软垫家用冬季加厚垫背床褥垫保暖法兰绒毛毯褥垫子</div>
+                <div class="comments"></div>
+                <div class="price">￥110</div>
+            </div>
+        </a>
+        <a class="items">
+            <div class="pic_boxs">
+                <img src="./picture/Show_Pic/Show_3.webp" id="Pic_3">
+                <div class="describe">皮毛一体男外套海宁皮草2023冬季新款加厚皮夹克男潮牌欧美机车服</div>
+                <div class="comments"></div>
+                <div class="price">￥1860</div>
+            </div>
+        </a>
+        <a class="items">
+            <div class="pic_boxs">
+                <img src="./picture/Show_Pic/Show_4.webp" id="Pic_4">
+                <div class="describe">波克小羊公仔毛绒玩具娃娃睡觉感恩治愈系节玩偶保证生日礼物女生</div>
+                <div class="comments"></div>
+                <div class="price">￥18.6</div>
+            </div>
+        </a>
+        <a class="items">
+            <div class="pic_boxs">
+                <img src="./picture/Show_Pic/Show_5.webp" id="Pic_5">
+                <div class="describe">特步男鞋2023新款冬季青少年潮流休闲鞋子男款皮面防水男士运动</div>
+                <div class="comments"></div>
+                <div class="price">￥199</div>
+            </div>
+        </a>
+        <a class="items">
+            <div class="pic_boxs">
+                <img src="./picture/Show_Pic/Show_6.webp" id="Pic_6">
+                <div class="describe">电动车头盔冬季女3c认证四季通用电瓶摩托车男安全帽冬天防寒半盔</div>
+                <div class="comments"></div>
+                <div class="price">￥62.8</div>
+            </div>
+        </a>
+    </div>
     <script src="./js/Site_Nav.js"></script>
     <script src="./js/search_tip.js"></script>
+    <script src="./js/main_see.js"></script>
+    <script src="./js/commodity.js"></script>
 </body>
 
 </html>

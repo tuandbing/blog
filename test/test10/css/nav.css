@@ -15,12 +15,21 @@
     position: absolute;
     left: 150px;
 }
+
+#Already_Sign_In{
+    color: blue;
+    cursor: pointer;
+}
+
 #Site_Nav_2{
     position: absolute;
     left: 50%;
     width: 35%;
 }
 
+#Exit{
+    display: none;
+}
 #Site_Nav_2>li{
     width: 80px;
 }
@@ -53,8 +62,18 @@ a:hover{
     margin-bottom: 3px;
     transition: all 0.5s ease;
 }
-
-
+#Show_Self{
+    cursor: pointer;
+}
+#Me{
+    width: 200px;
+    height: 100px;
+    background-color: #fff;
+    position: absolute;
+    left: -80px;
+    opacity: 0.7;
+    display: none;
+}
 
 .classes{
     display: none;
@@ -115,4 +134,34 @@ a:hover{
     position: absolute;
     left: 90%;
     background-color: #fff;
+}
+
+
+#Grade{
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+
+#Account{
+    position: absolute;
+    left: 130px;
+    top: 10px;
+}
+
+#Integral{
+    position: absolute;
+    top: 40px;
+}
+
+#Quit{
+    position: absolute;
+    left: 130px;
+    top: 70px;
+}
+
+#Change{
+    position: absolute;
+    left: 20px;
+    top: 70px;
 }
