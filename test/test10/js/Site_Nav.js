@@ -113,6 +113,6 @@ if (window.location.href.includes('?')) {
         me.style.display = 'none';
     })
 } else {
-    console.log('false');
+    TODO
 }
 
