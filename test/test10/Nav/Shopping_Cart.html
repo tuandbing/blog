@@ -108,7 +108,7 @@
     <script>
         let show = document.querySelector('#Show');
         let money = 0;
-        for(let i = 1;i<=6;i++){
+        for(let i = 1;i<=7;i++){
             let str = 'Show_' + i;
             if(localStorage.getItem(str)){
                 money += parseFloat(localStorage.getItem(str));
@@ -142,8 +142,14 @@
                 div_price.innerHTML ='￥' + localStorage.getItem(str);
                 div_price.className = 'price';
                 div.className = 'container';
-                img.className = 'pictures'
-                img.src = '../picture/Show_Pic/' + str + '.webp';
+                img.className = 'pictures';
+                if(i< 7){
+                    img.src = '../picture/Show_Pic/' + str + '.webp';
+                }else if(i>= 7 && i <27){
+                    img.src = '../picture/Phone/' + str + '.webp';
+                }
+                img.style.width = 300 + 'px';
+                img.style.height = 300 + 'px';
                 div_num.appendChild(button1);
                 div_num.appendChild(button2);
                 div_num.appendChild(num);
