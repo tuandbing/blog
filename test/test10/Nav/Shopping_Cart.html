@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <style>
+        #Show{
+            background-color: aqua;
+            width: 100%;
+            line-height: 100px;
+            font-style: 35px;
+        }
+
+        .container{
+            position: relative;
+        }
+        .price{
+            position: absolute;
+            left: 350px;
+            top: 205px;
+            width: 60px;
+            height: 20px;
+        }
+
+        .div_num{
+            position: relative;
+            width: 50px;
+            height: 20px;
+            /* background-color: pink; */
+            left: 450px;
+            top: 250px;
+        }
+
+        .down,
+        .up,
+        .num{
+            position: absolute;
+            /* top: 250px; */
+            width: 15px;
+            height: 15px;
+        }
+
+        .down{
+            line-height: 10px;
+            /* left: 400px; */
+            padding-left: 3px;
+        }
+
+        .num{
+            border: 0;
+            left: 16px;
+            /* left: 416px; */
+            text-align: center;
+            border-radius: 25%;
+        }
+
+        .up{
+            left: 35px;
+            line-height: 10px;
+            /* left: 435px; */
+            padding-left: 2px;
+        }
+
+        #Count{
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            background-color: pink;
+            width: 9%;
+            height: 50px;
+            left: 90%;
+            font-size: 20px;
+            line-height: 50px;
+        }
+
+        #Pay{
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            background-color: pink;
+            width: 9%;
+            height: 50px;
+            left: 90%;
+            line-height: 50px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 25px;
+            z-index: 1;
+        }
+        .describe{
+            position: absolute;
+            left: 380px;
+            top: 25px;
+            width: 120px;
+            height: 200px;
+            line-height: 20px;
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="Show">
+        <div id="Count">总计:<br></div>
+        <div id="Pay">确认支付</div>
+    </div>
+    
+    <script>
+        let show = document.querySelector('#Show');
+        let money = 0;
+        for(let i = 1;i<=6;i++){
+            let str = 'Show_' + i;
+            if(localStorage.getItem(str)){
+                money += parseFloat(localStorage.getItem(str));
+                let img = document.createElement('img');
+                let div = document.createElement('div');
+                let div_price = document.createElement('div');
+
+                let div_num = document.createElement('div');
+
+                let button1 = document.createElement('button');
+                let button2 = document.createElement('button');
+                let num = document.createElement('input');
+
+                let str2 = str + '_describe';
+                let describe = localStorage.getItem(str2);
+
+                let div_describe = document.createElement('div');
+                div_describe.className = 'describe';
+                div_describe.innerHTML = describe;
+
+                button1.innerHTML = '-';
+                button2.innerHTML = '+';
+                num.value = '1';
+
+                num.type = 'text';
+                num.className = 'num';
+                button1.className = 'down';
+                button2.className = 'up';
+                div_num.className = 'div_num';
+
+                div_price.innerHTML ='￥' + localStorage.getItem(str);
+                div_price.className = 'price';
+                div.className = 'container';
+                img.className = 'pictures'
+                img.src = '../picture/Show_Pic/' + str + '.webp';
+                div_num.appendChild(button1);
+                div_num.appendChild(button2);
+                div_num.appendChild(num);
+
+                div.appendChild(div_describe);
+                div.appendChild(div_num);
+                div.appendChild(img);
+                div.appendChild(div_price);
+                show.appendChild(div);
+            }
+        }
+        let downs = document.querySelectorAll('.down');
+        let ups = document.querySelectorAll('.up');
+        let nums = document.querySelectorAll('.num');
+
+        for(let i = 0;i<ups.length;i++){
+            downs[i].addEventListener('click',function(){
+                if(parseInt(nums[i].value) > 0){
+                    nums[i].value = parseInt(nums[i].value) - 1;
+                    changeMoney();
+                }
+            })
+
+            ups[i].addEventListener('click',function(){
+                nums[i].value = parseInt(nums[i].value) + 1;
+                changeMoney();
+            })
+        }
+
+        let count = document.querySelector('#Count');
+        let pay = document.querySelector('#Pay');
+        count.style.top = downs.length * 300 + 30 + 'px';
+        pay.style.top = downs.length * 300 + 85 + 'px';
+
+        for(let i = 0;i<nums.length;i++){
+            nums[i].addEventListener('input',function(){
+                changeMoney();
+            })
+        }
+        function changeMoney(){
+            money = 0;
+            let containers = document.querySelectorAll('.container')
+            for(let i = 0;i<containers.length;i++){
+                let num = containers[i].querySelector('.div_num').querySelector('.num').value;
+                let price = containers[i].querySelector('.price').innerHTML.toString().split('￥')[1];
+                if(isNaN(parseInt(num))){
+                    money += 0;
+                }else{
+                    money += (parseInt(num) * parseFloat(price));
+                }
+            }
+            count.innerHTML = '总计:' + money.toFixed(2) + '元';
+        }
+        count.innerHTML = '总计:' + money.toFixed(2) + '元';
+    </script>
+</body>
+</html>

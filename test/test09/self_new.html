@@ -6,9 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link type="text/css" rel="stylesheet" href="./index.css">
-
-    </link> -->
     <style>
         * {
             padding: 0;
@@ -417,7 +414,6 @@
         }
 
 
-
         // 实现下棋功能
         c.addEventListener('click', function (e) {
             if (flag) {
@@ -441,9 +437,11 @@
                     // 记录落子颜色
                     map[px][py] = chesscolor[step % 2];
                     // 检测哪方胜负
-                    for (var i = 0; i < mode.length; i++) {
+
+                        for (var i = 0; i < mode.length; i++) {
                         checkwin(px, py, chesscolor[step % 2], mode[i]);
                     }
+
                     chessX[step] = px;
                     chessY[step] = py;
                     step++;
@@ -484,7 +482,7 @@
         }
 
         //输赢机制
-        function checkwin(x, y, color, mode) {//状态: 黑 白 没赢	
+        function checkwin(x, y, color, mode) {	
             var count = 0;//记录个数
             for (var i = 1; i < 5; i++) {
                 if (map[x + i * mode[0]]) {
@@ -774,9 +772,11 @@
             Black_Step_Second = 0;
             // Black_Timer = setInterval(Player0, 1000);
             // White_StepTime.innerHTML = '步时:2分0秒';
-            for (var i = 0; i < mode.length; i++) {
+
+                for (var i = 0; i < mode.length; i++) {
                 checkwin(xToPut, yToPut, 'WHITE', mode[i]);
             }
+
         }
 
         //计算回溯的下一个格点的坐标
