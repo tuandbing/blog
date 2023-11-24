@@ -1,5 +1,5 @@
 // let pictures = ['../test10/picture/food.jpg','../test10/picture/doll.jpg','../test10/picture/drink.jpg','../test10/picture/background.jpg'];
-let pictures = ['file:///D:/headend/test/test10/picture/food.jpg','file:///D:/headend/test/test10/picture/doll.jpg','file:///D:/headend/test/test10/picture/drink.jpg','file:///D:/headend/test/test10/picture/background.jpg','file:///D:/headend/test/test10/picture/shoe.jpg','file:///D:/headend/test/test10/picture/Main_Show6.png','file:///D:/headend/test/test10/picture/Main_Show7.jpg','file:///D:/headend/test/test10/picture/Main_Show8.png'];
+let pictures = ['file:///D:/headend/test/test10/picture/main_see/food.jpg','file:///D:/headend/test/test10/picture/main_see/doll.jpg','file:///D:/headend/test/test10/picture/main_see/drink.jpg','file:///D:/headend/test/test10/picture/background.jpg','file:///D:/headend/test/test10/picture/main_see/shoe.jpg','file:///D:/headend/test/test10/picture/Main_Show6.png','file:///D:/headend/test/test10/picture/main_see/Main_Show7.jpg','file:///D:/headend/test/test10/picture/main_see/Main_Show8.png'];
 let show_picture = document.querySelector('#main_box_firimg');
 
 let prev_btn = document.querySelector('#Previous_Img');
