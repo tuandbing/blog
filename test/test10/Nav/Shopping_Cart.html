@@ -15,7 +15,9 @@
         }
 
         .container {
-            position: relative;
+            position: absolute;
+            width: 600px;
+            height: 450px;
         }
 
         .price {
@@ -24,6 +26,7 @@
             top: 205px;
             width: 60px;
             height: 20px;
+            color: red;
         }
 
         .div_num {
@@ -97,15 +100,22 @@
             left: 380px;
             top: 25px;
             width: 120px;
-            height: 200px;
+            /* height: 200px; */
             line-height: 20px;
             text-indent: 2em;
+        }
+        .describe:hover{
+            cursor: pointer;
+            color: red;
         }
         a{
             font-size: 20px;
             position: absolute;
             left: 75%;
             top: 45px;
+        }
+        img{
+            box-shadow: 5px 5px 10px black;
         }
     </style>
 </head>
@@ -120,7 +130,7 @@
         let show = document.querySelector('#Show');
         let money = 0;
         let flag = false;
-        for (let i = 1; i <= 7; i++) {
+        for (let i = 1; i <= 66; i++) {
             let str = 'Show_' + i;
             if (localStorage.getItem(str)) {
                 flag = true;
@@ -160,6 +170,10 @@
                     img.src = '../picture/Show_Pic/' + str + '.webp';
                 } else if (i >= 7 && i < 27) {
                     img.src = '../picture/Phone/' + str + '.webp';
+                }else if(i>=27 && i < 47){
+                    img.src = '../picture/Menswear/' + str + '.webp';
+                }else if(i >= 47 && i < 67){
+                    img.src = '../picture/Food/' + str + '.webp';
                 }
                 img.style.width = 300 + 'px';
                 img.style.height = 300 + 'px';
@@ -202,14 +216,24 @@
         if (flag) {
             let count = document.querySelector('#Count');
             let pay = document.querySelector('#Pay');
+            let containers = document.querySelectorAll('.container');
             let top_View;
-            if (downs[0]) {
-                top_View = downs.length * 300;
-            } else {
-                top_View = 0;
+            // if (downs[0]) {
+            //     top_View = downs.length * 300;
+            // } else {
+            //     top_View = 0;
+            // }
+            count.style.top = downs.length * 175 + 30 + 'px';
+            pay.style.top = downs.length * 175 + 85 + 'px';
+            let counts = -1;
+            for(let i = 0;i<containers.length;i++){
+                
+                if(i % 2 == 0){
+                    counts++;
+                }
+                containers[i].style.left = 600 * (i % 2) + 200 + 'px';
+                containers[i].style.top = 350 * counts + 'px';
             }
-            count.style.top = top_View + 30 + 'px';
-            pay.style.top = top_View + 85 + 'px';
 
             for (let i = 0; i < nums.length; i++) {
                 nums[i].addEventListener('input', function () {
@@ -218,7 +242,6 @@
             }
             function changeMoney() {
                 money = 0;
-                let containers = document.querySelectorAll('.container')
                 for (let i = 0; i < containers.length; i++) {
                     let num = containers[i].querySelector('.div_num').querySelector('.num').value;
                     let price = containers[i].querySelector('.price').innerHTML.toString().split('￥')[1];
@@ -234,7 +257,7 @@
 
             pay.addEventListener('click', function () {
                 alert('购买成功');
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i < 67; i++) {
                     let str = 'Show_' + i;
                     if (localStorage.getItem(str)) {
                         localStorage.removeItem(str);

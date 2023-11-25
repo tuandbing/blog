@@ -39,7 +39,7 @@
             background-color: brown;
             border-radius: 35%;
             left: 300px;
-            top: 120px;
+            top: 190px;
             font-size: 12.5px;
         }
 
@@ -74,10 +74,19 @@
             cursor: pointer;
             box-shadow: 5px 5px 10px black;
         }
+        #back{
+            background-color: dimgrey;
+        }
+        a{
+            text-decoration: none;
+            color: blue;
+            margin-left: 100px;
+        }
     </style>
 </head>
 
 <body>
+    <div id="back"><a href="../index.html">回到主页</a></div>
     <div id="container">
         <div class="pic_boxs">
             <img src="../picture/Phone/show_7.webp" id="Show_7">
@@ -229,7 +238,7 @@
                 count++;
             }
             boxs[i].style.left = (i % 3) * (window.innerWidth / 3) + 'px';
-            boxs[i].style.top = count * 310 + 'px';
+            boxs[i].style.top = count * 310 + 30 + 'px';
         }
         let buys = document.querySelectorAll('.BuyIt');
         for(let i = 0;i<buys.length;i++){
