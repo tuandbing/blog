@@ -104,17 +104,20 @@
             line-height: 20px;
             text-indent: 2em;
         }
-        .describe:hover{
+
+        .describe:hover {
             cursor: pointer;
             color: red;
         }
-        a{
+
+        a {
             font-size: 20px;
             position: absolute;
             left: 75%;
             top: 45px;
         }
-        img{
+
+        img {
             box-shadow: 5px 5px 10px black;
         }
     </style>
@@ -130,7 +133,7 @@
         let show = document.querySelector('#Show');
         let money = 0;
         let flag = false;
-        for (let i = 1; i <= 66; i++) {
+        for (let i = 1; i < 107; i++) {
             let str = 'Show_' + i;
             if (localStorage.getItem(str)) {
                 flag = true;
@@ -170,10 +173,14 @@
                     img.src = '../picture/Show_Pic/' + str + '.webp';
                 } else if (i >= 7 && i < 27) {
                     img.src = '../picture/Phone/' + str + '.webp';
-                }else if(i>=27 && i < 47){
+                } else if (i >= 27 && i < 47) {
                     img.src = '../picture/Menswear/' + str + '.webp';
-                }else if(i >= 47 && i < 67){
+                } else if (i >= 47 && i < 67) {
                     img.src = '../picture/Food/' + str + '.webp';
+                } else if (i >= 67 && i < 87) {
+                    img.src = '../picture/Medicine/' + str + '.webp';
+                }else if(i >= 87 && i < 107){
+                    img.src = '../picture/Makeup/' + str + '.webp';
                 }
                 img.style.width = 300 + 'px';
                 img.style.height = 300 + 'px';
@@ -226,9 +233,9 @@
             count.style.top = downs.length * 175 + 30 + 'px';
             pay.style.top = downs.length * 175 + 85 + 'px';
             let counts = -1;
-            for(let i = 0;i<containers.length;i++){
-                
-                if(i % 2 == 0){
+            for (let i = 0; i < containers.length; i++) {
+
+                if (i % 2 == 0) {
                     counts++;
                 }
                 containers[i].style.left = 600 * (i % 2) + 200 + 'px';
@@ -257,7 +264,7 @@
 
             pay.addEventListener('click', function () {
                 alert('购买成功');
-                for (let i = 0; i < 67; i++) {
+                for (let i = 0; i < 107; i++) {
                     let str = 'Show_' + i;
                     if (localStorage.getItem(str)) {
                         localStorage.removeItem(str);
