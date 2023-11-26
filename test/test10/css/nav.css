@@ -91,11 +91,11 @@ a:hover{
 }
 
 #Menswear,
-#Womenswear,
-#Electronics,
-#Supplies,
-#Jewelry,
-#Shoe{
+#Food,
+#Phone,
+#Department,
+#Makeup,
+#Medicine{
     width: 80px;
     position: absolute;
     left: 61%;

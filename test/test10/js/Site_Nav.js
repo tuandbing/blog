@@ -8,11 +8,11 @@ let collect_market = document.querySelector('#collect_market');
 
 let sort = document.querySelector('#Sort');
 let menswear = document.querySelector('#Menswear');
-let womenswear = document.querySelector('#Womenswear');
-let electronics = document.querySelector('#Electronics');
-let supplies = document.querySelector('#Supplies');
-let jewelry = document.querySelector('#Jewelry');
-let shoe = document.querySelector('#Shoe');
+let food = document.querySelector('#Food');
+let phone = document.querySelector('#Phone');
+let department = document.querySelector('#Department');
+let makeup = document.querySelector('#Makeup');
+let medicine = document.querySelector('#Medicine');
 
 let call = document.querySelector('#Call');
 let feedback = document.querySelector('#Feedback');
@@ -54,21 +54,21 @@ shopping.addEventListener('mouseout', function () {
 
 sort.addEventListener('mouseover', function () {
     menswear.style.display = 'block';
-    womenswear.style.display = 'block';
-    electronics.style.display = 'block';
-    supplies.style.display = 'block';
-    shoe.style.display = 'block';
-    jewelry.style.display = 'block';
+    food.style.display = 'block';
+    phone.style.display = 'block';
+    department.style.display = 'block';
+    medicine.style.display = 'block';
+    makeup.style.display = 'block';
     triangles[2].style.transform = 'rotateZ(225deg)';
     triangles[2].style.transformOrigin = '50% 80%';
 })
 sort.addEventListener('mouseout', function () {
     menswear.style.display = 'none';
-    womenswear.style.display = 'none';
-    electronics.style.display = 'none';
-    supplies.style.display = 'none';
-    shoe.style.display = 'none';
-    jewelry.style.display = 'none';
+    food.style.display = 'none';
+    phone.style.display = 'none';
+    department.style.display = 'none';
+    medicine.style.display = 'none';
+    makeup.style.display = 'none';
     triangles[2].style.transform = 'rotateZ(45deg)';
 })
 
@@ -89,7 +89,8 @@ for (let i = 1; i < as.length; i++) {
     as[i].style.top = i * 20 + 'px';
 }
 
-if (window.location.href.includes('?')) {
+let flag = window.location.href.includes('?');
+if (flag) {
     sign.innerHTML = '<li id="Already_Sign_In">你好!' + decodeURIComponent(window.location.href.split('?')[1].split('=')[0]) + '<a id="Exit">退出登录</a></li>';
     already = document.querySelector('#Already_Sign_In');
     already.addEventListener('mouseover', function () {
@@ -98,7 +99,7 @@ if (window.location.href.includes('?')) {
         exit.addEventListener('click', function () {
             window.location.href = './index.html';
         })
-        
+
     })
 
     already.addEventListener('mouseout', function () {
@@ -113,6 +114,6 @@ if (window.location.href.includes('?')) {
         me.style.display = 'none';
     })
 } else {
-    TODO
+
 }
 

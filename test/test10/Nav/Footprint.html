@@ -125,8 +125,6 @@
 
 <body>
     <div id="Show">
-        <div id="Count">总计:</div>
-        <div id="Pay">确认支付</div>
     </div>
 
     <script>
@@ -142,28 +140,12 @@
                 let div = document.createElement('div');
                 let div_price = document.createElement('div');
 
-                let div_num = document.createElement('div');
-
-                let button1 = document.createElement('button');
-                let button2 = document.createElement('button');
-                let num = document.createElement('input');
-
                 let str2 = str + '_describe';
                 let describe = localStorage.getItem(str2);
 
                 let div_describe = document.createElement('div');
                 div_describe.className = 'describe';
                 div_describe.innerHTML = describe;
-
-                button1.innerHTML = '-';
-                button2.innerHTML = '+';
-                num.value = '1';
-
-                num.type = 'text';
-                num.className = 'num';
-                button1.className = 'down';
-                button2.className = 'up';
-                div_num.className = 'div_num';
 
                 div_price.innerHTML = '￥' + localStorage.getItem(str);
                 div_price.className = 'price';
@@ -181,52 +163,29 @@
                     img.src = '../picture/Medicine/' + str + '.webp';
                 }else if(i >= 87 && i < 107){
                     img.src = '../picture/Makeup/' + str + '.webp';
-                }else if(i >= 107 && i < 127){
-                    img.src = '../picture/Department/' + str + '.webp';
                 }
                 img.style.width = 300 + 'px';
                 img.style.height = 300 + 'px';
-                div_num.appendChild(button1);
-                div_num.appendChild(button2);
-                div_num.appendChild(num);
 
                 div.appendChild(div_describe);
-                div.appendChild(div_num);
                 div.appendChild(img);
                 div.appendChild(div_price);
                 show.appendChild(div);
             }
         }
-        let downs = document.querySelectorAll('.down');
-        let ups = document.querySelectorAll('.up');
-        let nums = document.querySelectorAll('.num');
+
         if (!flag) {
             show.style.fontSize = 35 + 'px';
             show.style.textAlign = 'center';
-            show.innerHTML = '您的购物车当前空空如也喔~<br><div><a href="../index.html">点击前往首页</a></div>';
+            show.innerHTML = '您的浏览记录当前空空如也喔~<br><div><a href="../index.html">点击前往首页</a></div>';
         } else {
             show.style.textAlign = 'left';
             show.style.fontSize = 15 + 'px';
         }
-        for (let i = 0; i < ups.length; i++) {
-            downs[i].addEventListener('click', function () {
-                if (parseInt(nums[i].value) > 0) {
-                    nums[i].value = parseInt(nums[i].value) - 1;
-                    changeMoney();
-                }
-            })
-
-            ups[i].addEventListener('click', function () {
-                nums[i].value = parseInt(nums[i].value) + 1;
-                changeMoney();
-            })
-        }
-
+        
         if (flag) {
-            let count = document.querySelector('#Count');
-            let pay = document.querySelector('#Pay');
+
             let containers = document.querySelectorAll('.container');
-            let top_View;
             count.style.top = downs.length * 175 + 30 + 'px';
             pay.style.top = downs.length * 175 + 85 + 'px';
             let counts = -1;
@@ -239,38 +198,7 @@
                 containers[i].style.top = 350 * counts + 'px';
             }
 
-            for (let i = 0; i < nums.length; i++) {
-                nums[i].addEventListener('input', function () {
-                    changeMoney();
-                })
-            }
-            function changeMoney() {
-                money = 0;
-                for (let i = 0; i < containers.length; i++) {
-                    let num = containers[i].querySelector('.div_num').querySelector('.num').value;
-                    let price = containers[i].querySelector('.price').innerHTML.toString().split('￥')[1];
-                    if (isNaN(parseInt(num))) {
-                        money += 0;
-                    } else {
-                        money += (parseInt(num) * parseFloat(price));
-                    }
-                }
-                count.innerHTML = '总计:' + money.toFixed(2) + '元';
-            }
-            count.innerHTML = '总计:' + money.toFixed(2) + '元';
-
-            pay.addEventListener('click', function () {
-                alert('购买成功');
-                for (let i = 0; i < 107; i++) {
-                    let str = 'Show_' + i;
-                    if (localStorage.getItem(str)) {
-                        localStorage.removeItem(str);
-                        let str2 = str + '_describe';
-                        localStorage.removeItem(str2);
-                    }
-                }
-                window.location.reload();
-            })
+           
         }
     </script>
 </body>
