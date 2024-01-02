@@ -22,6 +22,7 @@ let triangles = document.querySelectorAll('.triangle');
 
 let sign = document.querySelector('#Sign');
 
+let go_shoppingCart = document.querySelector("#Go_Shopping_Cart");
 let already;
 let exit;
 
@@ -90,6 +91,8 @@ for (let i = 1; i < as.length; i++) {
 }
 
 let flag = window.location.href.includes('?');
+window.localStorage.setItem('flag',flag);
+
 if (flag) {
     sign.innerHTML = '<li id="Already_Sign_In">你好!' + decodeURIComponent(window.location.href.split('?')[1].split('=')[0]) + '<a id="Exit">退出登录</a></li>';
     already = document.querySelector('#Already_Sign_In');
@@ -99,7 +102,6 @@ if (flag) {
         exit.addEventListener('click', function () {
             window.location.href = './index.html';
         })
-
     })
 
     already.addEventListener('mouseout', function () {
@@ -113,7 +115,12 @@ if (flag) {
     show_self.addEventListener('mouseout', function () {
         me.style.display = 'none';
     })
+    go_shoppingCart.addEventListener('click',function(){
+        window.location.href = './Nav/Shopping_Cart.html'
+    })
 } else {
-
+    go_shoppingCart.addEventListener('click',function(){
+        alert('您还未登录，请先登录后再查看购物车');
+    })
 }
 

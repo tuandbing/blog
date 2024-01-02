@@ -133,7 +133,7 @@
         let show = document.querySelector('#Show');
         let money = 0;
         let flag = false;
-        for (let i = 1; i < 107; i++) {
+        for (let i = 1; i < 127; i++) {
             let str = 'Show_' + i;
             if (localStorage.getItem(str)) {
                 flag = true;
@@ -261,8 +261,9 @@
 
             pay.addEventListener('click', function () {
                 alert('购买成功');
-                for (let i = 0; i < 107; i++) {
+                for (let i = 0; i < 127; i++) {
                     let str = 'Show_' + i;
+                    
                     if (localStorage.getItem(str)) {
                         localStorage.removeItem(str);
                         let str2 = str + '_describe';

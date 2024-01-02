@@ -1,0 +1,231 @@
+#Container{
+    width: 100%;
+    height: 400px;
+    background-color: darkgray;
+    display: inline-block;
+}
+#Left_Box{
+    width: 200px;
+    height: 400px;
+    margin-left: 5%;
+    background-color: aliceblue;
+    border: 1px solid;
+    border-color: white;
+    float: left;
+}
+
+#Left_Box_List{
+    list-style: none;
+    margin-left: 10px;
+}
+#Left_Box_List li{
+    margin-top: 10px;
+}
+#Left_Box_List li:hover{
+    cursor: pointer;
+    color: red;
+}
+#Middle_Box{
+    margin-left: 20px;
+    width: 850px;
+    height: 400px;
+    float: left;
+}
+#main_box_firimg{
+    width: 710px;
+    height: 400px;
+    float: left;
+}
+#main_box_firimg:hover{
+    cursor: pointer;
+}
+#middle_box_ul{
+    list-style: none;
+    margin-left: 10px;
+    position: relative;
+}
+#middle_box_ul li img:hover{
+    animation: Box_Ul 1s forwards;
+    box-shadow: 0 0 25px black;
+}
+
+#middle_box_ul li img:not(hover){
+    animation: Not_Box_Ul 1s forwards;
+    box-shadow: 0 0 25px black;
+}
+
+@keyframes Box_Ul{
+    0%{
+        scale: 1;
+    }
+    100%{
+        scale: 1.25;
+    }
+}
+
+@keyframes Not_Box_Ul{
+    0%{
+        scale: 1.25;
+    }
+    100%{
+        scale: 1;
+    }
+}
+
+#middle_box_ul li img{
+    height: 100px;
+    margin-top: 30px;
+}
+#middle_box_ul li img:hover{
+    cursor: pointer;
+}
+#Right_Box{
+    width: 200px;
+    height: 400px;
+    margin-right: 5%;
+    background-color: aliceblue;
+    border: 1px solid;
+    border-color: white;
+    float: left;
+}
+#Right_Box_Head_Img{
+    margin-left: 75px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+#Right_Box_Head:hover{
+    cursor: pointer;
+    color: red;
+}
+#Right_Box_Head_Text{
+    padding-left: 40px;
+    font-size: small;
+    font-weight: 100;
+}
+.com_vip_show,
+.Plus_vip_show{
+    padding-top: 8px;
+    margin-left: 5px;
+    display: inline-block;
+    font-weight: 700;
+}
+.com_vip_deb,
+.Plus_vip_deb{
+    padding-top: 8px;
+    display: inline-block;
+    margin-left: 15px;
+}
+.com_vip_deb:hover{
+    color: red;
+}
+.Plus_vip_deb:hover{
+    color: red;
+}
+.com_vip,
+.Plus_vip{
+    margin-left: 10px;
+    background-color: yellow;
+    height: 50px;
+    border: 1px solid yellow;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+.com_vip:hover{
+    cursor: pointer;
+}
+.Plus_vip:hover{
+    cursor: pointer;
+}
+.com_vip{
+    background-color: skyblue;
+    border-color: skyblue;
+}
+.com_vip_text,
+.Plus_vip_text{
+    font-size: small;
+    font-weight: 200;
+    padding-left: 8px;
+    padding-top: 5px;
+}
+#Right_Box_Imgs{
+    margin-top: 10px;
+    float: left;
+    height: 200px;
+}
+.Right_Box_Img{
+    float: left;
+    height: 30px;
+    margin-left: 20px;
+}
+.Right_Box_Text{
+    float: left;
+    font-size: small;
+    font-weight: 200;
+    margin-left: 20px;
+}
+.Right_Box_For_Img{
+    width: 60px;
+    float: left;
+}
+.Right_Box_For_Img:hover{
+    cursor: pointer;
+    color: red;
+}
+#Middle_Box_Mainimg_List{
+    float: left;
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    list-style: none;
+    top: 90%;
+}
+#Middle_Box_Mainimg_List li{
+    width: 10px;
+    height: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    float: left;
+    margin-left: 5px;
+    z-index: 1;
+}
+#Middle_Box_Mainimg_List li:hover{
+    cursor: pointer;
+    background-color: red;
+}
+#Middle_Box_Mainimg{
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+
+#Previous_Img,
+#Next_Img{
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border: 1px solid white;
+    top: 45%;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    opacity: 0.5;
+    
+}
+#Previous_Img{
+    text-indent: 35px;
+    text-align: left;
+    left: -35px;
+}
+#Next_Img{
+    text-indent: 5px;
+    text-align: left;
+    left: 695px;
+}
+#Previous_Img:hover{
+    background-color: gray;
+}
+#Next_Img:hover{
+    background-color: gray;
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <style>
+        #Show {
+            background-color: aqua;
+            width: 100%;
+            /* text-align: center; */
+            line-height: 100px;
+            font-size: 15px;
+        }
+
+        .container {
+            position: absolute;
+            width: 600px;
+            height: 450px;
+        }
+
+        .price {
+            position: absolute;
+            left: 350px;
+            top: 205px;
+            width: 60px;
+            height: 20px;
+            color: red;
+        }
+
+        .div_num {
+            position: relative;
+            width: 50px;
+            height: 20px;
+            /* background-color: pink; */
+            left: 450px;
+            top: 250px;
+        }
+
+        .down,
+        .up,
+        .num {
+            position: absolute;
+            /* top: 250px; */
+            width: 15px;
+            height: 15px;
+        }
+
+        .down {
+            line-height: 10px;
+            /* left: 400px; */
+            padding-left: 3px;
+        }
+
+        .num {
+            border: 0;
+            left: 16px;
+            /* left: 416px; */
+            text-align: center;
+            border-radius: 25%;
+        }
+
+        .up {
+            left: 35px;
+            line-height: 10px;
+            /* left: 435px; */
+            padding-left: 2px;
+        }
+
+        #Count {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            background-color: pink;
+            width: 9%;
+            height: 50px;
+            left: 90%;
+            font-size: 20px;
+            line-height: 50px;
+        }
+
+        #Pay {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            background-color: pink;
+            width: 9%;
+            height: 50px;
+            left: 90%;
+            line-height: 50px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 25px;
+            z-index: 1;
+        }
+
+        .describe {
+            position: absolute;
+            left: 380px;
+            top: 25px;
+            width: 120px;
+            /* height: 200px; */
+            line-height: 20px;
+            text-indent: 2em;
+        }
+
+        .describe:hover {
+            cursor: pointer;
+            color: red;
+        }
+
+        a {
+            font-size: 20px;
+            position: absolute;
+            left: 75%;
+            top: 45px;
+        }
+
+        img {
+            box-shadow: 5px 5px 10px black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="Show">
+    </div>
+
+    <script>
+        let show = document.querySelector('#Show');
+        let money = 0;
+        let flag = false;
+        for (let i = 1; i < 107; i++) {
+            let str = 'Show_' + i;
+            if (localStorage.getItem(str)) {
+                flag = true;
+                money += parseFloat(localStorage.getItem(str));
+                let img = document.createElement('img');
+                let div = document.createElement('div');
+                let div_price = document.createElement('div');
+
+                let str2 = str + '_describe';
+                let describe = localStorage.getItem(str2);
+
+                let div_describe = document.createElement('div');
+                div_describe.className = 'describe';
+                div_describe.innerHTML = describe;
+
+                div_price.innerHTML = '￥' + localStorage.getItem(str);
+                div_price.className = 'price';
+                div.className = 'container';
+                img.className = 'pictures';
+                if (i < 7) {
+                    img.src = '../picture/Show_Pic/' + str + '.webp';
+                } else if (i >= 7 && i < 27) {
+                    img.src = '../picture/Phone/' + str + '.webp';
+                } else if (i >= 27 && i < 47) {
+                    img.src = '../picture/Menswear/' + str + '.webp';
+                } else if (i >= 47 && i < 67) {
+                    img.src = '../picture/Food/' + str + '.webp';
+                } else if (i >= 67 && i < 87) {
+                    img.src = '../picture/Medicine/' + str + '.webp';
+                }else if(i >= 87 && i < 107){
+                    img.src = '../picture/Makeup/' + str + '.webp';
+                }
+                img.style.width = 300 + 'px';
+                img.style.height = 300 + 'px';
+
+                div.appendChild(div_describe);
+                div.appendChild(img);
+                div.appendChild(div_price);
+                show.appendChild(div);
+            }
+        }
+
+        if (!flag) {
+            show.style.fontSize = 35 + 'px';
+            show.style.textAlign = 'center';
+            show.innerHTML = '您的浏览记录当前空空如也喔~<br><div><a href="../index.html">点击前往首页</a></div>';
+        } else {
+            show.style.textAlign = 'left';
+            show.style.fontSize = 15 + 'px';
+        }
+        
+        if (flag) {
+
+            let containers = document.querySelectorAll('.container');
+            count.style.top = downs.length * 175 + 30 + 'px';
+            pay.style.top = downs.length * 175 + 85 + 'px';
+            let counts = -1;
+            for (let i = 0; i < containers.length; i++) {
+
+                if (i % 2 == 0) {
+                    counts++;
+                }
+                containers[i].style.left = 600 * (i % 2) + 200 + 'px';
+                containers[i].style.top = 350 * counts + 'px';
+            }
+
+           
+        }
+    </script>
+</body>
+
+</html>

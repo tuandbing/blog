@@ -86,7 +86,7 @@ function main() {
     //1.食物的坐标是随机的
     //2.食物不能生成在container的边界上及以外
     //3.食物不能生成在蛇的身体上蛇的头上
-    //TODO：
+
     while (true) {
       //构成一个死循环 直到生成符合要求的食物坐标 才能退出循环
       var isRepeat = false

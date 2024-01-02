@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign_In</title>
     <style>
+        body{
+            background: url(../picture/Sign.jpg) no-repeat;
+            background-size: cover;
+        }
         form {
             position: absolute;
             left: 50%;
             top: 20%;
             transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
+            width: 400px;
+            height: 300px;
             border: 1px solid black;
         }
 
         #Sign_Up {
+            font-size: 25px;
             text-align: center;
             margin-top: 10px;
             margin-bottom: 0;
@@ -29,12 +34,37 @@
 
         #Reset {
             float: left;
-            margin-top: 20px;
         }
 
         #Submit {
             float: right;
+        }
+        #Reset,
+        #Submit{
+            width: 80px;
+            height: 40px;
+            margin-top: 30px;
+        }
+        .Input{
+            font-size: 20px;
             margin-top: 20px;
+        }
+
+        #Username,
+        #Password{
+            width: 300px;
+            height: 30px;
+            font-size: 20px;
+        }
+        #Turn{
+            font-size: 15px;
+            list-style: none;
+            text-decoration: none;
+            color: white;
+            opacity: 0.5;
+        }
+        #Turn:hover{
+            color: red;
         }
     </style>
 </head>
@@ -45,15 +75,21 @@
             注册
         </h4>
         <hr>
-        <div>
+        <div class="Input">
             请输入用户名
         </div>
         <input type="text" id="Username">
         <pre></pre>
-        <div>
+        <div class="Input">
             请输入密码
         </div>
         <input type="password" id="Password">
+        <br>
+        <div>
+            <a href="./Sign_in.html" id="Turn">
+                已有账号?前往登录
+            </a>
+        </div>
         <button type="reset" id="Reset">
             重置
         </button>
@@ -68,7 +104,8 @@
         sub.addEventListener('click', function () {
             let username = document.querySelector('#Username');
             let password = document.querySelector('#Password');
-            if (localStorage.getItem(username.value)) {
+            if(username.value && password.value){
+                if (localStorage.getItem(username.value)) {
                 alert('该用户名已存在');
             } else {
                 if (username && password) {
@@ -78,6 +115,10 @@
                     window.location.href = '../index.html?'+name+'='+pw;
                 }
             }
+            }else{
+                alert("用户名和密码不得为空");
+            }
+            
         })
     </script>
 </body>

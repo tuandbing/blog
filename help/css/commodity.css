@@ -1,0 +1,74 @@
+#Commodity{
+    height: 720px;
+    background-color: gray;
+}
+
+.pic_boxs{
+    position: absolute;
+    width: 480px;
+    height: 350px;
+    color: white;
+}
+
+.describe{
+    position: absolute;
+    left: 300px;
+    top: 25px;
+    width: 150px;
+    height: 80px;
+}
+
+.describe:hover{
+    color: red;
+}
+
+#Pic_1,
+#Pic_2,
+#Pic_3,
+#Pic_4,
+#Pic_5,
+#Pic_6{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: 25px;
+    top: 25px;
+}
+.pic_boxs:hover{
+    border: 2px solid red;
+}
+
+.price{
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    left: 300px;
+    top: 250px;
+    width: 150px;
+    height: 80px;
+}
+
+.comments{
+    position: absolute;
+    background-color: brown;
+    border-radius: 35%;
+    left: 300px;
+    top: 120px;
+    font-size: 12.5px;
+}
+
+.BuyIt{
+    position: absolute;
+    background-color: red;
+    width: 100px;
+    height: 50px;
+    left: 360px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 25px;
+    top: 220px;
+}
+
+.BuyIt:hover{
+    box-shadow: 5px 5px 10px black;
+}

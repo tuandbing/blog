@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign_In</title>
+    <style>
+        body{
+            background: url(../picture/Sign.jpg) no-repeat;
+            background-size: cover;
+        }
+        form {
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 300px;
+            border: 1px solid black;
+        }
+
+        #Sign_Up {
+            font-size: 25px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        hr {
+            border-color: aqua;
+            box-shadow: 5px 5px 5px skyblue;
+        }
+
+        #Reset {
+            float: left;
+        }
+
+        #Submit {
+            float: right;
+        }
+        #Reset,
+        #Submit{
+            width: 80px;
+            height: 40px;
+            margin-top: 30px;
+        }
+        .Input{
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        #Username,
+        #Password{
+            width: 300px;
+            height: 30px;
+            font-size: 20px;
+        }
+        #Turn{
+            font-size: 15px;
+            list-style: none;
+            text-decoration: none;
+            color: white;
+            opacity: 0.5;
+        }
+        #Turn:hover{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <h4 id="Sign_Up">
+            注册
+        </h4>
+        <hr>
+        <div class="Input">
+            请输入用户名
+        </div>
+        <input type="text" id="Username">
+        <pre></pre>
+        <div class="Input">
+            请输入密码
+        </div>
+        <input type="password" id="Password">
+        <br>
+        <div>
+            <a href="./Sign_in.html" id="Turn">
+                已有账号?前往登录
+            </a>
+        </div>
+        <button type="reset" id="Reset">
+            重置
+        </button>
+        <button type="button" id="Submit">
+            注册
+        </button>
+    </form>
+
+    <script>
+        
+        let sub = document.querySelector('#Submit');
+        sub.addEventListener('click', function () {
+            let username = document.querySelector('#Username');
+            let password = document.querySelector('#Password');
+            if(username.value && password.value){
+                if (localStorage.getItem(username.value)) {
+                alert('该用户名已存在');
+            } else {
+                if (username && password) {
+                    localStorage.setItem(username.value, password.value);
+                    let name = encodeURIComponent(username.value);
+                    let pw = encodeURIComponent(password.value);
+                    
+                    sessionStorage.setItem("Curusername",name);
+                    window.location.href = '../index.html';
+                }
+            }
+            }else{
+                alert("用户名和密码不得为空");
+            }
+            
+        })
+    </script>
+</body>
+
+</html>

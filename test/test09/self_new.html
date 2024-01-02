@@ -366,7 +366,7 @@
 
         start.addEventListener('click', function () {
             start.textContent = '模式选择';
-            automatic.style.display = 'block';
+            automatic.style.display = 'block'; 
             players.style.display = 'block';
         })
 
@@ -444,6 +444,7 @@
 
                     chessX[step] = px;
                     chessY[step] = py;
+                    
                     step++;
                     if (step % 2) {
                         clearInterval(Black_Timer);
