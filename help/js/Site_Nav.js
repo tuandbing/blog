@@ -102,6 +102,7 @@ if (flag) {
         exit = document.querySelector('#Exit');
         exit.style.display = 'block';
         exit.addEventListener('click', function () {
+            sessionStorage.removeItem("Curusername");
             window.location.href = './index.html';
         })
     })

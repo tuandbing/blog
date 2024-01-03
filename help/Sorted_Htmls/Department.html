@@ -233,7 +233,7 @@
     </div>
 
     <script>
-        let flag = window.localStorage.getItem('flag');
+        let flag = sessionStorage.getItem("Curusername");
         let boxs = document.querySelectorAll('.pic_boxs');
         let count = -1;
         for (let i = 0; i < boxs.length; i++) {
@@ -247,7 +247,7 @@
 
         for (let i = 0; i < buys.length; i++) {
             buys[i].addEventListener('click', function (e) {
-                if (flag == 'true') {
+                if (flag) {
                     let name = e.target.parentNode.querySelector('img').id;
                     let price = parseFloat(e.target.parentNode.querySelector('.price').innerHTML.toString().split('￥')[1]);
                     let str = name + '_describe'
